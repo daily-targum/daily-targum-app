@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleCard /> medium card renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+        "width": 190,
+      }
+    }
+  >
+    <Image
+      resizeMethod="resize"
+      source={
+        Object {
+          "uri": "https://google.com?h=260&w=400&fit=crop&crop=faces,center",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 1.5,
+          "borderRadius": 10,
+          "width": "100%",
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "padding": 10.5,
+        }
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Object {
+              "color": "#999",
+              "fontSize": 14,
+              "paddingBottom": 7,
+            },
+          ]
+        }
+      >
+        Jan 18
+      </Text>
+      <Text
+        numberOfLines={3}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Object {
+              "fontSize": 14,
+              "fontWeight": "700",
+            },
+          ]
+        }
+      >
+        About
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`<ArticleCard /> small card renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 10.5,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <Image
+      resizeMethod="resize"
+      source={
+        Object {
+          "uri": "https://google.com?h=200&w=300&fit=crop&crop=faces,center",
+        }
+      }
+      style={
+        Object {
+          "aspectRatio": 1.5,
+          "borderRadius": 10,
+          "flex": 1,
+          "maxWidth": "40%",
+          "width": "40%",
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "paddingBottom": 0,
+          "paddingLeft": 10.5,
+          "paddingRight": 0,
+          "paddingTop": 7,
+        }
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Object {
+              "color": "#999",
+              "fontSize": 14,
+              "paddingBottom": 7,
+            },
+          ]
+        }
+      >
+        Jan 18
+      </Text>
+      <Text
+        numberOfLines={3}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "textAlign": "left",
+            },
+            Object {
+              "fontSize": 14,
+              "fontWeight": "700",
+            },
+          ]
+        }
+      >
+        About
+      </Text>
+    </View>
+  </View>
+</View>
+`;

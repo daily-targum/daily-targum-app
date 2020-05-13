@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> button renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#eee",
+      "borderRadius": 10,
+      "flexDirection": "row",
+      "opacity": 1,
+      "padding": 3.5,
+      "paddingLeft": 21,
+      "paddingRight": 21,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#f70737",
+        "fontSize": 14,
+        "fontWeight": "700",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Click Me!
+  </Text>
+</View>
+`;
+
+exports[`<Button /> button renders correctly with ReactNode child 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#eee",
+      "borderRadius": 10,
+      "flexDirection": "row",
+      "opacity": 1,
+      "padding": 3.5,
+      "paddingLeft": 21,
+      "paddingRight": 21,
+    }
+  }
+>
+  <Text>
+    Click Me!
+  </Text>
+</View>
+`;
+
+exports[`<Button /> text button renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#f70737",
+        "fontSize": 17,
+        "fontWeight": "500",
+      }
+    }
+  >
+    Click Me!
+  </Text>
+</View>
+`;

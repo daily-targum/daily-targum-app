@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header <ScrollSpacer /> 1`] = `
+<View
+  style={
+    Object {
+      "height": 0,
+    }
+  }
+/>
+`;
