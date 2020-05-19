@@ -3,7 +3,7 @@ import { View, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { newsActions } from '../store/ducks/news';
 import { Theme, ActivityIndicator, ArticleCard } from '../components';
-import { Article } from '../types';
+import { GetArticle } from '../shared/src/client';
 import { useRoute } from '@react-navigation/core';
 import { useScrollToTop } from '@react-navigation/native';
 import Header from '../navigation/Header';
@@ -66,7 +66,7 @@ function ArticleCategory() {
         style={styles.list}
         ref={ref}
         data={articles}
-        keyExtractor={(item: Article, index) => item.title.toString() + index}
+        keyExtractor={(item: GetArticle, index) => item.title.toString() + index}
         refreshControl={
           <RefreshControl
             onRefresh={() => {

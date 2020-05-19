@@ -1,7 +1,7 @@
 import * as logger from './logger';
 import { Linking } from 'expo';
 import * as WebBrowser from 'expo-web-browser';
-import { Article } from '../types';
+import { GetArticle } from '../shared/src/client';
 
 /**
  * @param url 
@@ -44,7 +44,7 @@ export async function openLinkFromArticle({
   article
 }: {
   url: string,
-  article: Article
+  article: GetArticle
 }) {
   const openedSuccessfully = await openLink({url});
   if(openedSuccessfully) {
@@ -54,7 +54,7 @@ export async function openLinkFromArticle({
         url: url,
         articleId: article.id,
         title: article.title,
-        author: article.author
+        author: article.authors.join(', ')
       }
     });
   }

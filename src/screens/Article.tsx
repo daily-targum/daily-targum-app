@@ -4,11 +4,11 @@ import HTMLView from 'react-native-htmlview';
 import { Text } from 'react-native-paper';
 import { logEvent } from '../utils/logger';
 import { useNavigation } from '@react-navigation/core';
-import { formatDate, shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '../utils';
+import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '../utils';
+import { formatDate } from '../shared/src/utils';
 import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import { Article as ArticleType } from '../types';
-import { actions } from '../shared/src/client';
+import { actions, GetArticle } from '../shared/src/client';
 import { drafts } from '../clients/contentful/client';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import NotFoundScreen from './NotFoundScreen';
@@ -22,7 +22,7 @@ function Article({
   article,
   image
 }: {
-  article: ArticleType | null | undefined,
+  article: GetArticle | null | undefined,
   image: React.ReactNode
 }) {
 
@@ -59,12 +59,13 @@ function Article({
         props: {
           id: article.id,
           title: article.title,
-          author: article.author
+          author: article.authors.join(', ')
         }
       });
     }
   }
 
+  const wasUpdated = article ? article.updatedAt > article.publishDate : false;
   return (
     <View 
       style={styles.container}
@@ -82,15 +83,15 @@ function Article({
           <Section style={styles.article}>
             <Text style={styles.title}>{article.title}</Text>
             <View style={styles.spacer}/>
-            <Text style={styles.author}>{article.author}</Text>
-            <Text style={styles.date}>{formatDate(article.date)}</Text>
+            <Text style={styles.author}>{article.authors.join(', ')}</Text>
+            <Text style={styles.date}>{wasUpdated ? ('Updated '+formatDate(article.updatedAt)) : formatDate(article.publishDate)}</Text>
             <View style={styles.spacer}/>
             <HTMLView
               addLineBreaks={false}
               onLinkPress={(url) => openLinkFromArticle({url, article})}
               onLinkLongPress={shareUrl}
               stylesheet={styles}
-              value={article.content}
+              value={article.body}
             />
           </Section>
           <Section innerStyle={styles.shareSection}>
@@ -233,7 +234,7 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 0,
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(2) + theme.insets.bottom,
   }, 
   buttonText: {
     fontSize: 18,
@@ -253,7 +254,7 @@ function GraphQL({
   route: any
 }) {
   const {id} = route.params;
-  const [article, setArticle] = useState<ArticleType | null | undefined>();
+  const [article, setArticle] = useState<GetArticle | null | undefined>();
   const styles = Theme.useStyleCreator(styleCreator);
 
   useFreshContent(() => {
@@ -276,7 +277,7 @@ function GraphQL({
       article={article}
       image={(article && article.media) ? (
         <Image
-          source={{uri: article.media}}
+          source={{uri: article.media[0]}}
           style={styles.image}
           resizeMethod="resize"
         />
@@ -291,7 +292,7 @@ function Contentful({
   route: any
 }) {
   const {id} = route.params;
-  const [article, setArticle] = useState<ArticleType | null | undefined>(undefined);
+  const [article, setArticle] = useState<GetArticle | null | undefined>(undefined);
   const [image, setImage] = useState<any>();
   const {insets} = Theme.useTheme();
   const styles = Theme.useStyleCreator(styleCreator, 1);
@@ -306,17 +307,17 @@ function Contentful({
       const {fields} = res;
       setArticle({
         id,
+        slug: '',
         title: fields.title,
-        date: fields.publishDate,
-        media: '',
+        category: '',
+        publishDate: fields.publishDate,
+        updatedAt: fields.publishDate,
+        media: [''],
         // TODO: pass authors as array once we switch to contentful
-        author: fields.authors.map((a: any, i: number) => (
-          ((fields.authors.length > 2 && i < fields.authors.length - 1) ? ', ' : '') +
-          ((fields.authors.length > 1 && i === fields.authors.length - 1) ? ' and ' : '') +
+        authors: fields.authors.map((a: any, i: number) => (
           a.fields.displayName
         )),
-        content: documentToHtmlString(fields.body),
-        url: ''
+        body: documentToHtmlString(fields.body)
       });
       setImage(fields.image);
     })

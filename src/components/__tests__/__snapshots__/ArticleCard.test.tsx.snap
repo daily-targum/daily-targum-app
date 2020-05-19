@@ -30,7 +30,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
       resizeMethod="resize"
       source={
         Object {
-          "uri": "https://google.com?h=260&w=400&fit=crop&crop=faces,center",
+          "uri": "https://snworksceo.imgix.net/rdt/bb7e35ca-1fbf-4b4e-8b9b-c4daa6d0ce33.sized-1000x1000.JPG?h=260&w=400&fit=crop&crop=faces,center",
         }
       }
       style={
@@ -67,7 +67,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
           ]
         }
       >
-        Jan 18
+        May 4
       </Text>
       <Text
         numberOfLines={3}
@@ -86,7 +86,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
           ]
         }
       >
-        About
+        Rutgers' NCAA Tournament hopes depend on team-wide performance
       </Text>
     </View>
   </View>
@@ -125,7 +125,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
       resizeMethod="resize"
       source={
         Object {
-          "uri": "https://google.com?h=200&w=300&fit=crop&crop=faces,center",
+          "uri": "https://snworksceo.imgix.net/rdt/bb7e35ca-1fbf-4b4e-8b9b-c4daa6d0ce33.sized-1000x1000.JPG?h=200&w=300&fit=crop&crop=faces,center",
         }
       }
       style={
@@ -167,7 +167,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
           ]
         }
       >
-        Jan 18
+        May 4
       </Text>
       <Text
         numberOfLines={3}
@@ -186,7 +186,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
           ]
         }
       >
-        About
+        Rutgers' NCAA Tournament hopes depend on team-wide performance
       </Text>
     </View>
   </View>

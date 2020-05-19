@@ -10,23 +10,13 @@ jest.mock('@react-navigation/core', () => {
 jest.mock('../Theme');
 
 import React from 'react';
-import { Article } from '../../types';
 import ArticleCard from '../ArticleCard';
 import rederer from 'react-test-renderer';
 import { useNavigation } from '@react-navigation/core'
 import { TouchableOpacity } from 'react-native';
+import { ARTICLE } from '../../shared/src/client/actions/__mocks__/articles';
 import * as share from '../../utils/share';
 jest.spyOn(share, 'shareArticle');
-
-const ARTICLE: Article = {
-  id: '982-af8ojpjoiadfp83498',
-  title: 'About',
-  media: 'https://google.com',
-  author: 'Jon Doe',
-  date: '01-18-2020',
-  content: '',
-  url: 'https://google.com'
-};
 
 describe('<ArticleCard />', () => {
 

@@ -16,19 +16,9 @@ jest.mock('expo-web-browser', () => ({
 import { openLink, openLinkFromArticle } from '../link';
 import { Linking } from 'expo';
 import * as WebBrowser from 'expo-web-browser';
-import { Article } from '../../types';
+import { ARTICLE } from '../../shared/src/client/actions/__mocks__/articles';
 import * as logger from '../logger';
 jest.spyOn(logger, 'logEvent');
-
-const ARTICLE: Article = {
-  id: '982-af8ojpjoiadfp83498',
-  title: 'Super Catchy Title',
-  media: '',
-  author: 'Jon Doe',
-  date: '01-18-2020',
-  content: '',
-  url: 'https://google.com'
-};
 
 describe('link', () => {
 
@@ -83,7 +73,7 @@ describe('link', () => {
         url: URL,
         articleId: ARTICLE.id,
         title: ARTICLE.title,
-        author: ARTICLE.author 
+        author: ARTICLE.authors.join(', ') 
       }
     });
   });
@@ -107,7 +97,7 @@ describe('link', () => {
         url: URL,
         articleId: ARTICLE.id,
         title: ARTICLE.title,
-        author: ARTICLE.author
+        author: ARTICLE.authors.join(', ')
       }
     });
   });

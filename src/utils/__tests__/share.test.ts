@@ -20,19 +20,9 @@ import { shareArticle, shareUrl } from '../share';
 import * as logger from '../logger';
 import { Share } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { Article } from '../../types';
+import { ARTICLE } from '../../shared/src/client/actions/__mocks__/articles';
 jest.spyOn(Share, 'share');
 jest.spyOn(logger, 'logEvent');
-
-const ARTICLE: Article = {
-  id: '982-af8ojpjoiadfp83498',
-  title: 'Super Catchy Title',
-  media: '',
-  author: 'Jon Doe',
-  date: '01-18-2020',
-  content: '',
-  url: 'https://google.com'
-};
 
 describe('share', () => {
 
@@ -68,7 +58,7 @@ describe('share', () => {
     expect(Haptics.impactAsync).toHaveBeenCalledTimes(1);
     expect(Share.share).toHaveBeenCalledTimes(1);
     expect(Share.share).toHaveBeenCalledWith({
-      url: ARTICLE.url
+      url: 'https://dailytargum.com/'+ARTICLE.slug
     });
     expect(logger.logEvent).toHaveBeenCalledTimes(1);
     expect(logger.logEvent).toHaveBeenCalledWith({
@@ -76,7 +66,7 @@ describe('share', () => {
       props: {
         id: ARTICLE.id,
         title: ARTICLE.title,
-        author: ARTICLE.author
+        author: ARTICLE.authors.join(', ')
       }
     });
   });

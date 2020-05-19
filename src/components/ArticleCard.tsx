@@ -2,9 +2,10 @@ import React from 'react';
 import Theme from '../components/Theme';
 import { View, Image, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import { Article } from '../types';
+import { GetArticle } from '../shared/src/client';
 import { useNavigation } from '@react-navigation/core';
-import { formatDateAbriviated, shareArticle } from '../utils';
+import { formatDateAbriviated } from '../shared/src/utils';
+import { shareArticle } from '../utils';
 import { LinearGradient } from 'expo-linear-gradient';
 
 function Large({
@@ -12,7 +13,7 @@ function Large({
   width,
   style
 }: {
-  article: Article,
+  article: GetArticle,
   width: number | string,
   style?: any
 }) {
@@ -46,7 +47,7 @@ function Large({
           }}
         />
         <View style={styles.cardLargeContent}>
-          <Text numberOfLines={1} style={styles.cardSubtitleLarge}>{formatDateAbriviated(article.date)}</Text>
+          <Text numberOfLines={1} style={styles.cardSubtitleLarge}>{formatDateAbriviated(article.publishDate)}</Text>
           <Text numberOfLines={2} style={styles.cardTitleLarge}>{article.title}</Text>
         </View>
       </View>
@@ -58,7 +59,7 @@ function Medium({
   article,
   style
 }: {
-  article: Article,
+  article: GetArticle,
   style?: any
 }) {
   const styles = Theme.useStyleCreator(styleCreator);
@@ -85,7 +86,7 @@ function Medium({
           />
         ) : null}
         <View style={styles.cardMediumContent}>
-          <Text numberOfLines={1} style={styles.cardSubtitle}>{formatDateAbriviated(article.date)}</Text>
+          <Text numberOfLines={1} style={styles.cardSubtitle}>{formatDateAbriviated(article.publishDate)}</Text>
           <Text numberOfLines={3} style={styles.cardTitle}>{article.title}</Text>
         </View>
       </View>
@@ -98,7 +99,7 @@ function Small({
   width,
   style
 }: {
-  article: Article,
+  article: GetArticle,
   width: number | string,
   style?: any
 }) {
@@ -127,7 +128,7 @@ function Small({
           />
         ) : null}
         <View style={styles.cardSmallContent}>
-          <Text numberOfLines={1} style={styles.cardSubtitle}>{formatDateAbriviated(article.date)}</Text>
+          <Text numberOfLines={1} style={styles.cardSubtitle}>{formatDateAbriviated(article.publishDate)}</Text>
           <Text numberOfLines={3} style={styles.cardTitle}>{article.title}</Text>
         </View>
       </View>

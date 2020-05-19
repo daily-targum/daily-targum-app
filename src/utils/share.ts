@@ -2,25 +2,25 @@
 import * as logger from './logger';
 import { Platform, Share } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { Article } from '../types';
+import { GetArticle } from '../shared/src/client';
 
 export function shareArticle({
   article,
   feedback = true
 }: {
-  article: Article,
+  article: GetArticle,
   feedback?: boolean
 }) {
   if(feedback && Platform.OS === 'ios') {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
   }
-  Share.share({url: article.url});
+  Share.share({url: 'https://dailytargum.com/'+article.slug});
   logger.logEvent({
     event: 'OpenedShareSheet',
     props: {
       id: article.id,
       title: article.title,
-      author: article.author
+      author: article.authors.join(', ')
     }
   });
 }

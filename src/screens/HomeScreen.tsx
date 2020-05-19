@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, Button, ArticleCard, ActivityIndicator } from '../components';
 import { View, RefreshControl, Platform, TouchableWithoutFeedback, LayoutChangeEvent } from 'react-native';
 import { Text } from 'react-native-paper';
-import { Article } from '../types';
+import { GetArticle } from '../shared/src/client';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';
@@ -52,7 +52,7 @@ function ArticleSection({
   cols
 }: {
   title: string,
-  items?: Article[] | null,
+  items?: GetArticle[] | null,
   category: string,
   cols: number
 }) {

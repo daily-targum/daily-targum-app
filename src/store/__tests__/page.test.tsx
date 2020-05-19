@@ -1,5 +1,3 @@
-import { Article } from '../../types';
-
 jest.mock('../../utils', () => ({
   logger: {
     logError: jest.fn()
@@ -7,7 +5,7 @@ jest.mock('../../utils', () => ({
 }));
 
 jest.mock('../../clients/contentful', () => {
-  const ARTICLE: Article = {
+  const ARTICLE = {
     id: '982-af8ojpjoiadfp83498',
     title: 'About',
     media: '',
