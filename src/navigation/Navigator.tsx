@@ -30,13 +30,15 @@ import {
 const HomeStack = createStackNavigator();
 const HomeStackNavigator = () => {
   return (
-    <HomeStack.Navigator screenOptions={{
-      headerTransparent: true,
-      header: (props) => <Header {...props}/>,
-      cardStyle: {
-        flex: 1
-      }
-    }}>
+    <HomeStack.Navigator 
+      screenOptions={{
+        headerTransparent: true,
+        header: (props) => <Header {...props}/>,
+        cardStyle: {
+          flex: 1
+        }
+      }}
+    >
       <HomeStack.Screen 
         name="Home" 
         component={HomeScreen}
@@ -129,15 +131,11 @@ const AppStackNavigator = () => {
   return (
     <AppStack.Navigator
       screenOptions={{
-        header: () => null,
-        // ...TransitionPresets.ScaleFromCenterAndroid,
-        // THIS IS A HACK
-        // see https://github.com/react-navigation/react-navigation/issues/7848
-        gestureEnabled: Platform.OS !== 'android',
         cardStyle: {
           backgroundColor: colors.background
         }
       }}
+      headerMode='none'
       mode='modal'
     >
       <AppStack.Screen name="App" component={DrawerNavigator}/>

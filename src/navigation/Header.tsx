@@ -14,7 +14,6 @@ export const HEIGHT: number = Platform.select({
 
 function Header(props: StackHeaderProps) {
   const {colors} = Theme.useTheme();
-
   return (
     <View testID='Header'>
       <DefaultHeader
