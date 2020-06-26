@@ -11,7 +11,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'android',
     'web'
   ],
-  version: '2.12.1',
+  version: '2.13.0',
   icon: './src/assets/images/icon.png',
   splash: {
     'image': './src/assets/images/splash.png',
@@ -30,10 +30,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     requireFullScreen: false,
     supportsTablet: true,
-    buildNumber: '4',
+    buildNumber: '3',
     bundleIdentifier: 'com.targum.daily',
     associatedDomains: [
-      'applinks:daily-targum-website.now.sh'
+      'applinks:dailytargum.now.sh'
     ],
     infoPlist: {
       LSApplicationQueriesSchemes: [
@@ -44,7 +44,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: 'dailytargum',
   android: {
     package: 'com.dailytargum.dailytargum',
-    versionCode: 28,
+    versionCode: 39,
     permissions: [
       'NOTIFICATIONS'
     ],
@@ -58,7 +58,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         action: 'VIEW',
         data: {
           scheme: 'https',
-          host: 'daily-targum-website.now.sh'
+          host: 'dailytargum.now.sh'
         },
         category: [
           'BROWSABLE',
@@ -69,7 +69,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         action: 'VIEW',
         data: {
           scheme: 'dailytargum',
-          host: 'daily-targum-website.now.sh'
+          host: 'dailytargum.now.sh'
         },
         category: [
           'BROWSABLE',

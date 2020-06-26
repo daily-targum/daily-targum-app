@@ -8,6 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon, Theme, ActivityIndicator } from '../components';
 import { logger } from '../utils';
 import { navigation } from '../constants';
+import { hyphenatedToCapitalized } from '../shared/src/utils';
 
 // custom navigation components
 import BottomTabBar from './BottomTabBar';
@@ -19,7 +20,7 @@ import {
   SettingsScreen,
   ArticleScreen,
   CalendarScreen,
-  ContentfulScreen,
+  PageScreen,
   DeveloperScreen,
   HomeScreen,
   ArticleCategory
@@ -49,12 +50,13 @@ const HomeStackNavigator = () => {
         }}
       />
       <HomeStack.Screen name="Settings" component={SettingsScreen}/>
-      <HomeStack.Screen name="Contact" children={() => (
-        <ContentfulScreen title="Contact"/>
-      )}/>
-      <HomeStack.Screen name="About" children={() => (
-        <ContentfulScreen title="About"/>
-      )}/>
+      <HomeStack.Screen 
+        name="Page" 
+        component={PageScreen}
+        options={({ route }: { route: any }) => ({ 
+          title: hyphenatedToCapitalized(route.params.slug) 
+        })}
+      />
       <HomeStack.Screen name="Developer" component={DeveloperScreen}/>
       <HomeStack.Screen 
         name="ArticleCategory" 
@@ -150,7 +152,7 @@ const AppStackNavigator = () => {
 const prefixes = [
   Linking.makeUrl('/'),
   Linking.makeUrl(''),
-  'https://daily-targum-website.now.sh'
+  'https://dailytargum.now.sh'
 ];
 
 export default () => {
@@ -167,6 +169,20 @@ export default () => {
             path: 'preview/:id',
             parse: {
               id: String,
+            },
+          },
+          Article: {
+            path: 'article/:year/:month/:slug',
+            parse: {
+              year: String,
+              month: String,
+              slug: String
+            },
+          },
+          Page: {
+            path: 'page/:slug',
+            parse: {
+              slug: String,
             },
           }
         }

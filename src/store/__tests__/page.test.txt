@@ -4,36 +4,13 @@ jest.mock('../../utils', () => ({
   }
 }));
 
-jest.mock('../../clients/contentful', () => {
-  const ARTICLE = {
-    id: '982-af8ojpjoiadfp83498',
-    title: 'About',
-    media: '',
-    author: 'Jon Doe',
-    date: '01-18-2020',
-    content: '',
-    url: 'https://google.com'
-  };
-  return {
-    client: {
-      getEntries: (options: any) => {
-        const title = options['fields.title[match]'];
-        const items = title === 'About' ?  [ARTICLE] : [];
-        return { items };
-      }
-    },
-    ARTICLE
-  };
-});
-
 import React from 'react';
 import pageReducer, { pageActions, usePageSelector } from '../ducks/page';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-// @ts-ignore
-import { ARTICLE } from '../../clients/contentful';
+
 
 describe('page', () => {
 
@@ -50,7 +27,7 @@ describe('page', () => {
       done();
     });
     store.dispatch(pageActions.loadPage({
-      title: 'About'
+      slug: 'about'
     }));
   });
 
@@ -65,7 +42,7 @@ describe('page', () => {
       done();
     });
     store.dispatch(pageActions.loadPage({
-      title: 'ThisPageDoesNotExist'
+      slug: 'this-page-does-not-exsist'
     }));
   });
 

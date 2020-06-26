@@ -1,25 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, View } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import { ActivityIndicator, Theme, Section } from '../components';
 import { openLink, shareUrl, useConnection } from '../utils';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { useDispatch } from 'react-redux';
 import { pageActions, usePageSelector } from '../store/ducks/page';
 import NotFoundScreen from './NotFoundScreen';
+import { useRoute } from '@react-navigation/core';
+import { PageRouteProp } from '../navigation/types';
 
 
-function ContentfulScreen({
-  title
-}: {
-  title: string
-}) {
+function PageScreen() {
+  const slug = useRoute<PageRouteProp>().params?.slug;
   const dispatch = useDispatch();
   const styles = Theme.useStyleCreator(styleCreator);
   const {dark} = Theme.useTheme();
-  const page = usePageSelector(s => s.items[title]);
+  const page = usePageSelector(s => s.items[slug]);
 
   const contentInsets = {
     top: Header.useHeight({ safe: false }),
@@ -27,18 +25,16 @@ function ContentfulScreen({
   };
 
   useConnection(() => {
-    dispatch(pageActions.loadPage({ title }));
+    dispatch(pageActions.loadPage({ slug }));
   }, []);
 
   if(page === undefined) return <ActivityIndicator.Screen/>;
   if(page === null) return <NotFoundScreen/>;
 
-  const { fields } = page;
-
   return (
     <View
       style={styles.container}
-      testID={`ContentfulScreen-${title}`}
+      testID={`ContentfulScreen-${slug}`}
     >
       <Header.ScrollSpacer/>
       <ScrollView
@@ -58,7 +54,7 @@ function ContentfulScreen({
             onLinkPress={url => openLink({url})}
             onLinkLongPress={url => shareUrl(url)}
             stylesheet={styles}
-            value={documentToHtmlString(fields.body)}
+            value={page.content?.replace(/>\s+/g, '>') || ''}
             addLineBreaks={false}
           />
         </Section>
@@ -81,6 +77,8 @@ const styleCreator = Theme.makeStyleCreator((theme) => ({
     fontSize: 32,
     lineHeight: 36,
     marginBottom: theme.spacing(2),
+    padding: 0,
+    margin: 0,
     color: theme.colors.text
   },
   h2: {
@@ -123,7 +121,10 @@ const styleCreator = Theme.makeStyleCreator((theme) => ({
     marginBottom: theme.spacing(2),
     color: theme.colors.accent,
     textDecorationLine: 'underline'
+  },
+  b: {
+    fontWeight: 'bold'
   }
 }));
 
-export default ContentfulScreen;
+export default PageScreen;

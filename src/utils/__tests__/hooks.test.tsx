@@ -4,7 +4,7 @@ import { useInterval, useDate } from '../hooks';
 import dayjs from 'dayjs';
 
 // Percent of renders that date is allowed to be inaccurate
-const DATE_ALLOWED_ERROR_PERCENT = 0.01;
+const DATE_ALLOWED_ERROR_PERCENT = 0.02;
 const DATE_ITTERATIONS = 100;
 
 jest.useFakeTimers();

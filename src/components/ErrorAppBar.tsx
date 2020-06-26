@@ -22,6 +22,7 @@ function ErrorSnackbar() {
 
   const visible = error !== null;
   const height = useRef(new Animated.Value(0)).current;
+  
   useEffect(() => {
     Animated.timing(height, {
       toValue: +visible,

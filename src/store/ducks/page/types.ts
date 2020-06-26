@@ -1,3 +1,5 @@
+import { GetPage } from '../../../shared/src/client';
+
 const LOAD_PAGE = 'LOAD_PAGE';
 const SET_NOT_FOUND = 'SET_NOT_FOUND';
 
@@ -8,9 +10,6 @@ export default {
 
 export interface State {
   items: {
-    [key in string]: {
-      // TODO: import types from client
-      [key in string]: any
-    }
+    [key in string]: GetPage
   }
 }

@@ -5,7 +5,7 @@ import { CalendarList } from 'react-native-calendars';
 import Footer from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';
 import dayjs from 'dayjs';
-import { client } from '../clients/contentful/client';
+// import { client } from '../clients/contentful/client';
 import { FlatList } from 'react-native-gesture-handler';
 import { WithStyleCreator } from 'react-context-theming/lib/native';
 
@@ -101,36 +101,36 @@ class CalendarScreen extends Component<WithStyleCreator, any> {
   }
 
   componentDidMount() {
-    client.getEntries({
-      'content_type': 'event',
-      'order': 'fields.start'
-    })
-    .then(res => {
-      const {items}: {items: Event[]} = res as any;
-      const computedItems: (Event | DividerProps)[] = [];
-      const dividerIndices: number[] = [];
-      const prevDay = null;
+    // client.getEntries({
+    //   'content_type': 'event',
+    //   'order': 'fields.start'
+    // })
+    // .then(res => {
+    //   const {items}: {items: Event[]} = res as any;
+    //   const computedItems: (Event | DividerProps)[] = [];
+    //   const dividerIndices: number[] = [];
+    //   const prevDay = null;
 
-      items.forEach(item => {
-        if(dayjs().isAfter(item.fields.end)) return;
-        const dateString = dayjs(item.fields.start).format('YYYY-MM-DD');
-        if(dateString !== prevDay) {
-          computedItems.push({
-            isDivider: true,
-            date: item.fields.start
-          });
-        }
-        dividerIndices.push(computedItems.length - 1);
-        computedItems.push({
-          ...item
-        });
-      });
+    //   items.forEach(item => {
+    //     if(dayjs().isAfter(item.fields.end)) return;
+    //     const dateString = dayjs(item.fields.start).format('YYYY-MM-DD');
+    //     if(dateString !== prevDay) {
+    //       computedItems.push({
+    //         isDivider: true,
+    //         date: item.fields.start
+    //       });
+    //     }
+    //     dividerIndices.push(computedItems.length - 1);
+    //     computedItems.push({
+    //       ...item
+    //     });
+    //   });
 
-      this.setState({
-        events: computedItems,
-        stickyHeaderIndices: dividerIndices
-      });
-    });
+    //   this.setState({
+    //     events: computedItems,
+    //     stickyHeaderIndices: dividerIndices
+    //   });
+    // });
   }
 
   componentWillUnmount() {

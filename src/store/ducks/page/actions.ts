@@ -1,22 +1,21 @@
 import types, { State } from './types';
 import errorTypes from '../error/types';
-import { client } from '../../../clients/contentful';
 import { logger } from '../../../utils';
+import { getPage } from '../../../shared/src/client';
 
-function loadPage({ title }: {
-  title: string
+function loadPage({ slug }: {
+  slug: string
 }): any {
   return async (dispatch: any) => {
-    const {items} = await client.getEntries({
-      'content_type': 'page',
-      'fields.title[match]': title
+    const page = await getPage({
+      slug
     });
 
-    if(items.length === 0) {
+    if(!page) {
       dispatch({
         type: types.SET_NOT_FOUND,
         payload: {
-          title
+          slug
         }
       });
       // dispatch({
@@ -30,9 +29,9 @@ function loadPage({ title }: {
       dispatch({
         type: types.LOAD_PAGE,
         payload: {
-          title,
+          slug,
           data: {
-            ...items[0],
+            ...page,
             updatedCacheAt: Date.now()
           }
         }

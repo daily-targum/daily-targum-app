@@ -8,7 +8,7 @@ import { formatDate } from '../shared/src/utils';
 import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
-import { drafts } from '../clients/contentful/client';
+// import { drafts } from '../clients/contentful/client';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import NotFoundScreen from './NotFoundScreen';
 import { FontAwesome } from '@expo/vector-icons';
@@ -252,13 +252,17 @@ function GraphQL({
 }: {
   route: any
 }) {
-  const {id} = route.params;
-  const [article, setArticle] = useState<GetArticle | null | undefined>();
+  const params = route.params;
+  const [ article, setArticle ] = useState<GetArticle | null | undefined>();
   const styles = Theme.useStyleCreator(styleCreator);
+  const slug = `article/${params.year}/${params.month}/${params.slug}`;
 
   useFreshContent(() => {
     let isCancled = false;
-    actions.getArticle({id})
+    actions.getArticle({
+      id: params.id, 
+      slug
+    })
     .then(res => {
       // res will be null if
       // the page isn't found
@@ -269,7 +273,7 @@ function GraphQL({
     return () => {
       isCancled = true;
     }
-  }, [id]);
+  }, [params.id, slug]);
 
   return (
     <Article
@@ -290,63 +294,50 @@ function Contentful({
 }: {
   route: any
 }) {
-  const {id} = route.params;
-  const [article, setArticle] = useState<GetArticle | null | undefined>(undefined);
-  const [image, setImage] = useState<any>();
-  const {insets} = Theme.useTheme();
-  const styles = Theme.useStyleCreator(styleCreator, 1);
+  const params = route.params;
+  const [ article, setArticle ] = useState<GetArticle | null | undefined>();
+  const styles = Theme.useStyleCreator(styleCreator);
   const {colors} = Theme.useTheme();
-  const [refreshing, setRefreshing] = useState(false);
 
   function refreshContent() {
-    if(refreshing) return;
-    setRefreshing(true);
-    drafts.getEntry(id)
-    .then((res: any) => {
-      const {fields} = res;
-      setArticle({
-        id,
-        slug: '',
-        title: fields.title,
-        category: '',
-        publishDate: fields.publishDate,
-        updatedAt: fields.publishDate,
-        media: [''],
-        // TODO: pass authors as array once we switch to contentful
-        authors: fields.authors.map((a: any, i: number) => (
-          a.fields.displayName
-        )),
-        body: documentToHtmlString(fields.body)
-      });
-      setImage(fields.image);
+    actions.getArticlePreview({
+      id: params.id
     })
-    .catch(() => setArticle(null))
-    .finally(() => setRefreshing(false));
+    .then(res => {
+      // res will be null if
+      // the page isn't found
+      setArticle(res);
+    });
   }
+
+  useFreshContent(() => {
+    actions.getArticlePreview({
+      id: params.id
+    })
+    .then(res => {
+      refreshContent()
+    });
+  }, [params.id]);
 
   useEffect(() => {
     refreshContent();
-  }, [id]);
+  }, [params.id]);
 
   return (
     <View style={{flex: 1}}>
       <Article
         article={article}
-        image={(!image || !image.fields.image) ? null : (
-          <FocalPointImage
-            src={`https:${image.fields.image.fields.file.url}`}
-            focalPoint={image.fields.focalPoint.focalPoint}
-            size={image.fields.image.fields.file.details.image}
+        image={(article && article.media) ? (
+          <Image
+            source={{uri: article.media[0]}}
             style={styles.image}
-            offset={{
-              top: insets.top
-            }}
+            resizeMethod="resize"
           />
-        )}
+        ): null}
       />
       {article ? (
         <View style={styles.previewBackdrop} pointerEvents='box-none'>
-          <Surface style={styles.preview}>
+          <Surface style={styles.preview} tint='dark'>
             <TouchableHighlight
               underlayColor={colors.touchableHighlight}
               onPress={refreshContent}

@@ -4,17 +4,20 @@ import { View, TouchableHighlight, Platform } from 'react-native';
 import { Theme, Icon, Divider, Text } from '../components';
 import { FontAwesome } from '@expo/vector-icons';
 import * as Linking from 'expo-linking'
+import {} from './types';
 
 function Link({
   to,
   children,
   icon,
-  testID
+  testID,
+  params
 }: {
   to: string,
   children: string,
   icon: string,
-  testID: string
+  testID: string,
+  params?: any
 }) {
   const {colors} = Theme.useTheme();
   const navigation = useNavigation();
@@ -25,7 +28,7 @@ function Link({
         padding: 3,
         paddingLeft: 10
       }}
-      onPress={() => navigation.navigate(to)}
+      onPress={() => navigation.navigate(to, params)}
       underlayColor='#333'
       testID={testID}
     >
@@ -73,9 +76,31 @@ function Drawer() {
       }}
       testID='Drawer'
     >
-      <Link to='About' testID='Drawer-About' icon='about'>About</Link>
-      <Link to='Contact' testID='Drawer-Contact' icon='contact'>Contact</Link>
-      <Link to='Settings' testID='Drawer-Settings' icon='settings'>Settings</Link>
+      <Link 
+        to='Page' 
+        testID='Drawer-About' 
+        icon='about'
+        params={{slug: 'about'}}
+      >
+        About
+      </Link>
+
+      <Link 
+        to='Page' 
+        testID='Drawer-Contact' 
+        icon='contact'
+        params={{slug: 'contact'}}
+      >
+        Contact
+      </Link>
+
+      <Link 
+        to='Settings' 
+        testID='Drawer-Settings' 
+        icon='settings'
+      >
+        Settings
+      </Link>
 
       <View style={{flex: 1}}/>
 
