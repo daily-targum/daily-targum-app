@@ -4,7 +4,6 @@ import { View, TouchableHighlight, Platform } from 'react-native';
 import { Theme, Icon, Divider, Text } from '../components';
 import { FontAwesome } from '@expo/vector-icons';
 import * as Linking from 'expo-linking'
-import {} from './types';
 
 function Link({
   to,

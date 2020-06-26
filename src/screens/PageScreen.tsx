@@ -34,7 +34,7 @@ function PageScreen() {
   return (
     <View
       style={styles.container}
-      testID={`ContentfulScreen-${slug}`}
+      testID={`PageScreen-${slug}`}
     >
       <Header.ScrollSpacer/>
       <ScrollView
