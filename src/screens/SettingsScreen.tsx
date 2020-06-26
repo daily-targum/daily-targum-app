@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Text, Switch } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { themeActions, useThemeSelector } from '../store/ducks/theme';
 import { notificationActions, useNotificationsSelector } from '../store/ducks/notifications';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
-import { Theme, ConsecutiveTouchable, Section, Divider } from '../components';
+import { Theme, ConsecutiveTouchable, Section, Divider, Text, Switch } from '../components';
 import { isBeta } from '../utils';
 
 function SettingsScreen() {

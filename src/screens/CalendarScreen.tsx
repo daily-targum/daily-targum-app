@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, ViewToken, Platform } from 'react-native';
-import { Text } from 'react-native-paper';
-import { Theme, Surface } from '../components';
+import { Theme, Surface, Text } from '../components';
 import { CalendarList } from 'react-native-calendars';
 import Footer from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';

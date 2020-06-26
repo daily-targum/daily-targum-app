@@ -1,9 +1,8 @@
 import React, {useRef} from 'react';
 import { View, ScrollView, Clipboard, Alert } from 'react-native';
-import { Text } from 'react-native-paper';
 import Constants from 'expo-constants';
 import { useNotificationsSelector } from '../store/ducks/notifications';
-import { Theme, Section } from '../components';
+import { Theme, Section, Text } from '../components';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { useScrollToTop } from '@react-navigation/native';

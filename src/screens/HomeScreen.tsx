@@ -1,7 +1,6 @@
 import React from 'react';
-import { Theme, Button, ArticleCard, ActivityIndicator } from '../components';
+import { Theme, Button, ArticleCard, ActivityIndicator, Text } from '../components';
 import { View, RefreshControl, Platform, TouchableWithoutFeedback, LayoutChangeEvent } from 'react-native';
-import { Text } from 'react-native-paper';
 import { GetArticle } from '../shared/src/client';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';

@@ -4,7 +4,6 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -54,10 +53,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
+              "color": "#000",
             },
             Object {
               "color": "#999",
@@ -74,10 +70,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
+              "color": "#000",
             },
             Object {
               "fontSize": 14,
@@ -97,7 +90,6 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -154,10 +146,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
+              "color": "#000",
             },
             Object {
               "color": "#999",
@@ -174,10 +163,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-              "textAlign": "left",
+              "color": "#000",
             },
             Object {
               "fontSize": 14,

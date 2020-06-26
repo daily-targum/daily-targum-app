@@ -12,3 +12,5 @@ export { default as Button } from './Button';
 export { default as ArticleCard } from './ArticleCard';
 export { default as Icon } from './Icon';
 export { default as VideoCard } from './VideoCard';
+export * from './Text';
+export * from './Switch';

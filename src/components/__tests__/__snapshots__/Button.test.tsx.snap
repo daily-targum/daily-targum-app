@@ -4,7 +4,6 @@ exports[`<Button /> button renders correctly 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -44,7 +43,6 @@ exports[`<Button /> button renders correctly with ReactNode child 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -75,7 +73,6 @@ exports[`<Button /> text button renders correctly 1`] = `
 <View
   accessible={true}
   focusable={true}
-  isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Linking } from 'expo';
+import * as Linking from 'expo-linking'
 import { Platform } from 'react-native';
 import { NavigationContainer, useLinking, NavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -162,11 +162,13 @@ export default () => {
     const {getInitialState}: {getInitialState: () => any} = useLinking(ref, {
       prefixes,
       config: {
-        Preview: {
-          path: 'preview/:id',
-          parse: {
-            id: String,
-          },
+        screens: {
+          Preview: {
+            path: 'preview/:id',
+            parse: {
+              id: String,
+            },
+          }
         }
       },
     });

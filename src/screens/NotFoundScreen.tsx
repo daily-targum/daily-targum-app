@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Theme } from '../components';
-import { Text } from 'react-native-paper';
+import { Theme, Text } from '../components';
 
 function NotFound() {
   const styles = Theme.useStyleCreator(styleCreator);

@@ -4,11 +4,12 @@ import Theme from '../components/Theme';
 import Constants from 'expo-constants';
 const iosOldScrollMode = parseFloat(Constants.platform?.ios?.systemVersion || '13') < 13;
 
-interface ScrollViewWithHeaderProps extends ScrollViewProps {
+interface ScrollViewWithHeaderProps extends Animated.AnimatedProps<ScrollViewProps> {
   children: React.ReactNode,
   Header: React.ReactNode,
   headerHeight: number
 }
+
 
 export function ScrollViewWithHeader({
   children,

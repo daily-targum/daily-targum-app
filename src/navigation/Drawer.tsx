@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { View, TouchableHighlight, Platform } from 'react-native';
-import { Text } from 'react-native-paper';
-import { Theme, Icon, Divider } from '../components';
+import { Theme, Icon, Divider, Text } from '../components';
 import { FontAwesome } from '@expo/vector-icons';
-import { Linking } from 'expo';
+import * as Linking from 'expo-linking'
 
 function Link({
   to,
@@ -13,7 +12,7 @@ function Link({
   testID
 }: {
   to: string,
-  children: React.ReactNode,
+  children: string,
   icon: string,
   testID: string
 }) {

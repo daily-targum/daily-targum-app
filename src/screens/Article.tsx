@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StatusBar, NativeScrollEvent, Image, Platform } from 'react-native';
 import HTMLView from 'react-native-htmlview';
-import { Text } from 'react-native-paper';
 import { logEvent } from '../utils/logger';
 import { useNavigation } from '@react-navigation/core';
 import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '../utils';
 import { formatDate } from '../shared/src/utils';
-import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button } from '../components';
+import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
 import { drafts } from '../clients/contentful/client';

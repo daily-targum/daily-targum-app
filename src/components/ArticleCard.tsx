@@ -1,7 +1,7 @@
 import React from 'react';
-import Theme from '../components/Theme';
+import Theme from './Theme';
+import Text from './Text';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-paper';
 import { GetArticle } from '../shared/src/client';
 import { useNavigation } from '@react-navigation/core';
 import { formatDateAbriviated } from '../shared/src/utils';
@@ -47,7 +47,12 @@ function Large({
           }}
         />
         <View style={styles.cardLargeContent}>
-          <Text numberOfLines={1} style={styles.cardSubtitleLarge}>{formatDateAbriviated(article.publishDate)}</Text>
+          <Text 
+            numberOfLines={1} 
+            style={styles.cardSubtitleLarge}
+          >
+            {formatDateAbriviated(article.publishDate)}
+          </Text>
           <Text numberOfLines={2} style={styles.cardTitleLarge}>{article.title}</Text>
         </View>
       </View>
@@ -201,7 +206,7 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   // All Cards
   cardTitle: {
     fontSize: 14,
-    fontWeight: '700'
+    fontWeight: '700',
   },
   cardSubtitle: {
     fontSize: 14,

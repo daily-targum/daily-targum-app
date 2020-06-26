@@ -1,5 +1,5 @@
 import * as logger from './logger';
-import { Linking } from 'expo';
+import * as Linking from 'expo-linking'
 import * as WebBrowser from 'expo-web-browser';
 import { GetArticle } from '../shared/src/client';
 

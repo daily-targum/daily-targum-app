@@ -1,12 +1,10 @@
-jest.mock('expo', () => {
+jest.mock('expo-linking', () => {
   let enabled = true;
   return ({
-    Linking: {
-      enabled: true,
-      setEnabled: (val: boolean) => enabled = val,
-      canOpenURL: jest.fn(() => enabled),
-      openURL: jest.fn()
-    }
+    enabled: true,
+    setEnabled: (val: boolean) => enabled = val,
+    canOpenURL: jest.fn(() => enabled),
+    openURL: jest.fn()
   });
 });
 jest.mock('expo-web-browser', () => ({
@@ -14,7 +12,7 @@ jest.mock('expo-web-browser', () => ({
 }));
 
 import { openLink, openLinkFromArticle } from '../link';
-import { Linking } from 'expo';
+import * as Linking from 'expo-linking'
 import * as WebBrowser from 'expo-web-browser';
 import { ARTICLE } from '../../shared/src/client/actions/__mocks__/articles';
 import * as logger from '../logger';
