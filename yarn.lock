@@ -8743,10 +8743,10 @@ expo-blur@~8.1.2:
   dependencies:
     prop-types "^15.6.0"
 
-expo-cli@3.21.12:
-  version "3.21.12"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.21.12.tgz#03b1e4f31a7a085bba7ebd5b3fd419967620aabb"
-  integrity sha512-zo334+HJSVFR49exbZ/ktC92M4kooEM51nOQyss3+PXYa9cwOJ/FdqbqtH/0oeHr+pt1ZaaQP1AaD4ZEp6jAaw==
+expo-cli@^3.21.13:
+  version "3.21.13"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.21.13.tgz#94e7b0f117f17df24679691a2763bad4b5ac4d61"
+  integrity sha512-kOk1a+mi7R8fOJaBEsjAtFJcLGBWeoJY/Pv6z0JESCZjnkkys2k3RoKaSImpxLf8jZl0ASaqkHCzd7x8Zim+CA==
   dependencies:
     "@expo/build-tools" "0.1.8"
     "@expo/bunyan" "3.0.2"

@@ -129,7 +129,6 @@ jobs:
           AWS_APPSYNC_REGION: ${{ secrets.AWS_APPSYNC_REGION }}
           AWS_APPSYNC_API_KEY: ${{ secrets.AWS_APPSYNC_API_KEY }}
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
-          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
           CONTENTFUL_ACCESS_TOKEN_DRAFTS: ${{ secrets.CONTENTFUL_ACCESS_TOKEN_DRAFTS }}
       - name: Coveralls
         uses: coverallsapp/github-action@master
@@ -188,6 +187,5 @@ jobs:
           AWS_APPSYNC_REGION: ${{ secrets.AWS_APPSYNC_REGION }}
           AWS_APPSYNC_API_KEY: ${{ secrets.AWS_APPSYNC_API_KEY }}
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
-          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
           CONTENTFUL_ACCESS_TOKEN_DRAFTS: ${{ secrets.CONTENTFUL_ACCESS_TOKEN_DRAFTS }}
         timeout-minutes: 25
