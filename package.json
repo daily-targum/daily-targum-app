@@ -7,7 +7,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll=true --setupFiles ./dotenv.js",
-    "e2e": "concurrently -k --success first 'wait-port -t 60000 19000 && detox test' 'expo start >/dev/null'",
+    "e2e": "concurrently -k --success first 'wait-port -t 60000 19000 && detox test' 'expo start --tunnel'",
     "typescript": "tsc --noEmit",
     "build:ios:prod": "expo build:ios --release-channel='production'",
     "build:ios:beta": "expo build:ios --release-channel='default'",

@@ -171,8 +171,13 @@ jobs:
         run: |
           mkdir e2e/Exponent.app
           cd e2e/Exponent.app
-          curl https://dpq5q02fu5f55.cloudfront.net/Exponent-2.15.4.tar.gz --output Exponent.tar.gz
+          curl https://dpq5q02fu5f55.cloudfront.net/Exponent-2.16.0.tar.gz --output Exponent.tar.gz
           tar -xzvf Exponent.tar.gz
+      - name: Expo Login
+        run: yarn expo login --non-interactive -u $EXPO_CLI_USERNAME
+        env:
+          EXPO_CLI_PASSWORD: ${{ secrets.EXPO_CLI_PASSWORD }}
+          EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
       - name: Run Detox Tests
         run: yarn e2e
         env:
