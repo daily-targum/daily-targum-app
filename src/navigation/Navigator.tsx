@@ -160,11 +160,14 @@ export default () => {
       prefixes,
       config: {
         screens: {
+          initialRouteName: 'DrawerNavigator',
           DrawerNavigator: {
             screens: {
               BottomTabNavigator: {
+                initialRouteName: 'HomeNavigator',
                 screens: {
                   HomeNavigator: {
+                    initialRouteName: 'Home',
                     screens: {
                       ArticleCategory: {
                         path: 'section/:category',
