@@ -188,6 +188,7 @@ exports[`Drawer renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
@@ -289,6 +290,7 @@ exports[`Drawer renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
@@ -390,6 +392,7 @@ exports[`Drawer renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,

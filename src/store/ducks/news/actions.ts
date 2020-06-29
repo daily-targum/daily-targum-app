@@ -22,7 +22,11 @@ function loadCategory({
       }
     });
 
-    const feed = await actions.getArticles({category, nextToken});
+    const feed = await actions.getArticles({
+      category, 
+      nextToken
+    });
+
     const rssItems = feed.items;
     const nextNextToken = feed.nextToken;
 

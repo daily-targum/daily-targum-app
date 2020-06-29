@@ -10,13 +10,20 @@ import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { FlatList } from 'react-native-gesture-handler';
 import { logger } from '../utils';
+import { ArticleCategoryPageProp } from '../navigation/types';
 
+const idMap: any = {
+  news: 'News',
+  sports: 'Sports',
+  opinions: 'Opinions',
+  'inside-beat': 'inside-beat'
+};
 
 function ArticleCategory() {
   const [ firstActivity, setFirstActivity ] = useState(false);
-  const { colors, dark, spacing } = Theme.useTheme();
-  const route = useRoute();
-  const {category} = route.params as any;
+  const { colors, dark } = Theme.useTheme();
+  const route = useRoute<ArticleCategoryPageProp>();
+  const category = idMap[route.params.category] || route.params.category;
   const dispatch = useDispatch();
   const feed = useSelector((s: any) => s.news.feed);
   const styles = Theme.useStyleCreator(styleCreator);

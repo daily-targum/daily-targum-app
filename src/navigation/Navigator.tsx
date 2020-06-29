@@ -16,15 +16,7 @@ import Header from './Header';
 import CustomDrawer from './Drawer';
 
 // screens
-import {
-  SettingsScreen,
-  ArticleScreen,
-  CalendarScreen,
-  PageScreen,
-  DeveloperScreen,
-  HomeScreen,
-  ArticleCategory
-} from '../screens';
+import * as Screens from '../screens';
 
 
 
@@ -42,27 +34,30 @@ const HomeStackNavigator = () => {
     >
       <HomeStack.Screen 
         name="Home" 
-        component={HomeScreen}
+        component={Screens.HomeScreen}
         options={{
           headerRight: () => <CustomDrawer.Button/>,
           title: 'Home',
           header: () => null
         }}
       />
-      <HomeStack.Screen name="Settings" component={SettingsScreen}/>
+      <HomeStack.Screen name="Settings" component={Screens.SettingsScreen}/>
       <HomeStack.Screen 
         name="Page" 
-        component={PageScreen}
+        component={Screens.PageScreen}
         options={({ route }: { route: any }) => ({ 
           title: hyphenatedToCapitalized(route.params.slug) 
         })}
       />
-      <HomeStack.Screen name="Developer" component={DeveloperScreen}/>
+      <HomeStack.Screen name="Developer" component={Screens.DeveloperScreen}/>
       <HomeStack.Screen 
         name="ArticleCategory" 
-        component={ArticleCategory} 
-        options={({ route }: { route: any }) => ({ title: route.params.title })}
+        component={Screens.ArticleCategory} 
+        options={({ route }: { route: any }) => ({ 
+          title: hyphenatedToCapitalized(route.params.category) 
+        })}
       />
+      <AppStack.Screen name="NotFound" component={Screens.NotFound}/>
     </HomeStack.Navigator>
   );
 }
@@ -77,7 +72,7 @@ const CalendarStackNavigator = () => {
         headerTransparent: true 
       }}
     >
-      <CalendarStack.Screen name="Calendar" component={CalendarScreen}/>
+      <CalendarStack.Screen name="Calendar" component={Screens.CalendarScreen}/>
     </CalendarStack.Navigator>
   );
 }
@@ -90,7 +85,7 @@ const BottomTabNavigator = () => {
   return (
     <BottomTab.Navigator tabBar={(props) => <BottomTabBar {...props}/>}>
       <BottomTab.Screen
-        name="Home"
+        name="HomeNavigator"
         component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ focused, size }) => (
@@ -99,7 +94,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        name="Calendar"
+        name="CalendarNavigator"
         component={CalendarStackNavigator}
         options={{
           tabBarIcon: ({ focused, size }) => (
@@ -120,7 +115,7 @@ const DrawerNavigator = () => {
       drawerType={navigation.drawer.type}
       drawerContent={() => <CustomDrawer/>}
     >
-      <Drawer.Screen name="App" component={BottomTabNavigator} />
+      <Drawer.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
     </Drawer.Navigator>
   );
 }
@@ -140,9 +135,9 @@ const AppStackNavigator = () => {
       headerMode='none'
       mode='modal'
     >
-      <AppStack.Screen name="App" component={DrawerNavigator}/>
-      <AppStack.Screen name="Article" component={ArticleScreen.GraphQL}/>
-      <AppStack.Screen name="Preview" component={ArticleScreen.Contentful}/>
+      <AppStack.Screen name="DrawerNavigator" component={DrawerNavigator}/>
+      <AppStack.Screen name="Article" component={Screens.ArticleScreen.GraphQL}/>
+      <AppStack.Screen name="Preview" component={Screens.ArticleScreen.Contentful}/>
     </AppStack.Navigator>
   );
 }
@@ -161,10 +156,35 @@ export default () => {
   const [initialState, setInitialState] = React.useState();
 
   if(Platform.OS !== 'web') {
-    const {getInitialState}: {getInitialState: () => any} = useLinking(ref, {
+    const { getInitialState } = useLinking(ref, {
       prefixes,
       config: {
         screens: {
+          DrawerNavigator: {
+            screens: {
+              BottomTabNavigator: {
+                screens: {
+                  HomeNavigator: {
+                    screens: {
+                      ArticleCategory: {
+                        path: 'section/:category',
+                        parse: {
+                          category: String
+                        },
+                      },
+                      Page: {
+                        path: 'page/:slug',
+                        parse: {
+                          slug: String,
+                        },
+                      },
+                      NotFound: '*'
+                    }
+                  }
+                }
+              }
+            }
+          },
           Preview: {
             path: 'preview/:id',
             parse: {
@@ -178,12 +198,6 @@ export default () => {
               month: String,
               slug: String
             },
-          },
-          Page: {
-            path: 'page/:slug',
-            parse: {
-              slug: String,
-            },
           }
         }
       },
@@ -192,9 +206,6 @@ export default () => {
     React.useEffect(() => {
       let isCancled = false;
       getInitialState()
-      .catch((err: any) => {
-        logger.logError(err);
-      })
       .then((state: any) => {
         if(!isCancled) {
           if (state !== undefined) {

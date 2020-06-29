@@ -10,8 +10,6 @@ import { useDate } from '../utils';
 import Animated from 'react-native-reanimated';
 import { newsActions, useNewsSelector } from '../store/ducks/news';
 import { useScrollToTop, useNavigation } from '@react-navigation/native';
-// @ts-ignore
-// import { parseString } from 'react-native-xml2js';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const HEADER_HEIGHT = 96;
@@ -68,12 +66,12 @@ function ArticleSection({
       start={{x: 0.5, y: 0}}
       end={{x: 1, y: 1}}
     >
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleCategory', {title, category})}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleCategory', {category})}>
         <View style={styles.sectionTitleRow}>
           <Text style={styles.sectionTitle}>{title}</Text>
           <Button.Text 
             style={styles.button}
-            onPress={() => navigation.navigate('ArticleCategory', {title, category})}
+            onPress={() => navigation.navigate('ArticleCategory', {category})}
           >More</Button.Text>
         </View>
       </TouchableWithoutFeedback>
@@ -103,59 +101,6 @@ function ArticleSection({
     </LinearGradient>
   );
 }
-
-// function VideoSection({
-//   title
-// }: {
-//   title: string
-// }) {
-//   const styles = Theme.useStyleCreator(styleCreator);
-//   const [videos, setVideos] = React.useState([]);
-//   const {spacing} = Theme.useTheme();
-//   useConnection(() => {
-//     let isCancled = false;
-//     fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCVdMnI6Tee6NgHCAYD9VXlg')
-//     .then((response) => response.text())
-//     .then((content) => {
-//       parseString(content, (err: any, res: any) => {
-//         if(err) {
-//           logger.logError(err);
-//         } else {
-//           if(!isCancled) {
-//             setVideos(res.feed.entry);
-//           }
-//         }
-//       });
-//       return () => {
-//         isCancled = true;
-//       }
-//     });
-//   }, []);
-//   if(!videos) return null;
-//   return (
-//     <View>
-//       <View style={styles.sectionTitleRow}>
-//         <Text style={styles.sectionTitle}>{title}</Text>
-//         <Button.Text 
-//           style={styles.button}
-//           onPress={() => openLink({url: 'https://www.youtube.com/user/TargumMultimedia/videos'})}
-//         >More</Button.Text>
-//       </View>
-//       <FlatList
-//         windowSize={4}
-//         showsHorizontalScrollIndicator={false}
-//         horizontal={true}
-//         data={videos}
-//         renderItem={({item}: {item: any}) => (
-//           <VideoCard width={width} video={item}/>
-//         )}
-//         keyExtractor={item => item.id[0]}
-//         contentContainerStyle={styles.sectionBody}
-//         ItemSeparatorComponent={() => <View style={styles.cardSpacer}/>}
-//       />
-//     </View>
-//   );
-// }
 
 function HomeScreen() {
   const styles = Theme.useStyleCreator(styleCreator);

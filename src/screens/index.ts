@@ -5,3 +5,4 @@ export { default as PageScreen } from './PageScreen';
 export { default as HomeScreen } from './HomeScreen';
 export { default as DeveloperScreen } from './DeveloperScreen';
 export { default as ArticleCategory } from './ArticleCategory';
+export * from './NotFound';

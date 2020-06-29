@@ -55,6 +55,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "color": "#999",
               "fontSize": 14,
@@ -72,6 +73,7 @@ exports[`<ArticleCard /> medium card renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "fontSize": 14,
               "fontWeight": "700",
@@ -148,6 +150,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "color": "#999",
               "fontSize": 14,
@@ -165,6 +168,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
             Object {
               "color": "#000",
             },
+            null,
             Object {
               "fontSize": 14,
               "fontWeight": "700",
