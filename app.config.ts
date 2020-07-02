@@ -3,6 +3,9 @@ import './dotenv';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
+  experiments: {
+    redesignedLogBox: true
+  },
   name: 'Daily Targum',
   slug: 'daily-targum',
   privacy: 'unlisted',

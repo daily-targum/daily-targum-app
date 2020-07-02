@@ -6,3 +6,4 @@ export { default as HomeScreen } from './HomeScreen';
 export { default as DeveloperScreen } from './DeveloperScreen';
 export { default as ArticleCategory } from './ArticleCategory';
 export * from './NotFound';
+export * from './Author';

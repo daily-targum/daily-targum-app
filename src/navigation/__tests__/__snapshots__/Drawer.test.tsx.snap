@@ -319,6 +319,108 @@ exports[`Drawer renders correctly 1`] = `
         "paddingLeft": 10,
       }
     }
+    testID="Drawer-GetInvolved"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View>
+        <RNSVGSvgView
+          bbHeight={42}
+          bbWidth={42}
+          focusable={false}
+          height={42}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Array [
+                Object {
+                  "opacity": 1,
+                },
+                undefined,
+              ],
+              Object {
+                "flex": 0,
+                "height": 42,
+                "width": 42,
+              },
+            ]
+          }
+          width={42}
+        >
+          <RNSVGGroup
+            opacity={1}
+          >
+            <RNSVGGroup
+              matrix={
+                Array [
+                  0.42,
+                  0,
+                  0,
+                  0.42,
+                  0,
+                  0,
+                ]
+              }
+            >
+              <RNSVGPath
+                d="M71,36.25 L71,65.9090909 C71,70.4090909 67.3181818,74.0909091 62.8181818,74.0909091 L47.8863636,74.0909091 C45.6772727,74.0909091 43.5909091,73.2113636 42.0568182,71.6568182 L26,55.3340909 C26,55.3340909 28.5772727,52.8181818 28.6590909,52.7772727 C29.1090909,52.3886364 29.6613636,52.1840909 30.275,52.1840909 C30.725,52.1840909 31.1340909,52.3068182 31.5022727,52.5113636 C31.5840909,52.5318182 40.3181818,57.5431818 40.3181818,57.5431818 L40.3181818,33.1818182 C40.3181818,31.4840909 41.6886364,30.1136364 43.3863636,30.1136364 C45.0840909,30.1136364 46.4545455,31.4840909 46.4545455,33.1818182 L46.4545455,47.5 L48.5,47.5 L48.5,28.0681818 C48.5,26.3704545 49.8704545,25 51.5681818,25 C53.2659091,25 54.6363636,26.3704545 54.6363636,28.0681818 L54.6363636,47.5 L56.6818182,47.5 L56.6818182,30.1136364 C56.6818182,28.4159091 58.0522727,27.0454545 59.75,27.0454545 C61.4477273,27.0454545 62.8181818,28.4159091 62.8181818,30.1136364 L62.8181818,47.5 L64.8636364,47.5 L64.8636364,36.25 C64.8636364,34.5522727 66.2340909,33.1818182 67.9318182,33.1818182 C69.6295455,33.1818182 71,34.5522727 71,36.25 Z"
+                fill={4294379319}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                  ]
+                }
+                stroke={null}
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000",
+            },
+            null,
+            Object {
+              "color": "#f70737",
+              "fontSize": 20,
+              "marginLeft": 5,
+            },
+          ]
+        }
+      >
+        Get Involved
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "padding": 3,
+        "paddingLeft": 10,
+      }
+    }
     testID="Drawer-Settings"
   >
     <View

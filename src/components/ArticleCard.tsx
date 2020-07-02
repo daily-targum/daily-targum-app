@@ -2,7 +2,7 @@ import React from 'react';
 import Theme from './Theme';
 import Text from './Text';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { GetArticle } from '../shared/src/client';
+import { GetArticle, Article } from '../shared/src/client';
 import { useNavigation } from '@react-navigation/core';
 import { formatDateAbriviated } from '../shared/src/utils';
 import { shareArticle } from '../utils';
@@ -104,7 +104,7 @@ function Small({
   width,
   style
 }: {
-  article: GetArticle,
+  article: GetArticle | Article,
   width: number | string,
   style?: any
 }) {

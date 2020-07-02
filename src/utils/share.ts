@@ -2,13 +2,13 @@
 import * as logger from './logger';
 import { Platform, Share } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { GetArticle } from '../shared/src/client';
+import { GetArticle, Article } from '../shared/src/client';
 
 export function shareArticle({
   article,
   feedback = true
 }: {
-  article: GetArticle,
+  article: GetArticle | Article,
   feedback?: boolean
 }) {
   if(feedback && Platform.OS === 'ios') {

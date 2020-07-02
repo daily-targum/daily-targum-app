@@ -5,11 +5,9 @@ import { logEvent } from '../utils/logger';
 import { useNavigation } from '@react-navigation/core';
 import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '../utils';
 import { formatDate } from '../shared/src/utils';
-import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text } from '../components';
+import { Surface, Theme, Icon, FocalPointImage, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
-// import { drafts } from '../clients/contentful/client';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import NotFoundScreen from './NotFoundScreen';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -25,8 +23,8 @@ function Article({
   image: React.ReactNode
 }) {
 
-  const {insets, dark} = Theme.useTheme();
-  const [finished, setFinished] = useState(false);
+  const { insets, dark } = Theme.useTheme();
+  const [ finished, setFinished ] = useState(false);
   const navigation = useNavigation();
   const styles = Theme.useStyleCreator(styleCreator);
 
@@ -34,7 +32,7 @@ function Article({
     if(navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.navigate('App');
+      navigation.navigate('DrawerNavigator');
     }
   }
 
@@ -64,7 +62,6 @@ function Article({
     }
   }
 
-  const wasUpdated = article ? article.updatedAt > article.publishDate : false;
   return (
     <View 
       style={styles.container}
@@ -82,8 +79,11 @@ function Article({
           <Section style={styles.article}>
             <Text style={styles.title}>{article.title}</Text>
             <View style={styles.spacer}/>
-            <Text style={styles.author}>{article.authors.join(', ')}</Text>
-            <Text style={styles.date}>{wasUpdated ? ('Updated '+formatDate(article.updatedAt)) : formatDate(article.publishDate)}</Text>
+            <Byline
+              authors={article.authors}
+              updatedAt={article.updatedAt}
+              publishDate={article.publishDate}
+            />
             <View style={styles.spacer}/>
             <HTMLView
               addLineBreaks={false}

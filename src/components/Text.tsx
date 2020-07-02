@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as DefaultText, TextProps as DefaultTextProps, PixelRatio } from 'react-native';
+import { Text as DefaultText, TextProps as DefaultTextProps, View } from 'react-native';
 import Theme from './Theme';
 
 const FONT_BASE = 16;
@@ -26,6 +26,13 @@ export function Text({
         props.style
       ]}
     />
+  );
+}
+
+export function Br() {
+  const styles = Theme.useStyleCreator(styleCreator);
+  return (
+    <View style={styles.br}/>
   );
 }
 
@@ -77,4 +84,5 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
+Text.Br = Br;
 export default Text;

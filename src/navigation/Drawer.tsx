@@ -5,6 +5,37 @@ import { Theme, Icon, Divider, Text } from '../components';
 import { FontAwesome } from '@expo/vector-icons';
 import * as Linking from 'expo-linking'
 
+const links = [
+  {
+    to: 'Page',
+    testID: 'Drawer-About',
+    icon: 'about',
+    params: { slug: 'about' },
+    text: 'About'
+  },
+  {
+    to: 'Page',
+    testID: 'Drawer-Contact',
+    icon: 'contact',
+    params: { slug: 'contact' },
+    text: 'Contact'
+  },
+  {
+    to: 'Page',
+    testID: 'Drawer-GetInvolved',
+    icon: 'hand',
+    params: { slug: 'get-involved' },
+    text: 'Get Involved'
+  },
+  {
+    to: 'Settings',
+    testID: 'Drawer-Settings',
+    icon: 'settings',
+    params: {},
+    text: 'Settings'
+  }
+];
+
 function Link({
   to,
   children,
@@ -75,31 +106,18 @@ function Drawer() {
       }}
       testID='Drawer'
     >
-      <Link 
-        to='Page' 
-        testID='Drawer-About' 
-        icon='about'
-        params={{slug: 'about'}}
-      >
-        About
-      </Link>
 
-      <Link 
-        to='Page' 
-        testID='Drawer-Contact' 
-        icon='contact'
-        params={{slug: 'contact'}}
-      >
-        Contact
-      </Link>
-
-      <Link 
-        to='Settings' 
-        testID='Drawer-Settings' 
-        icon='settings'
-      >
-        Settings
-      </Link>
+      {links.map(l => (
+        <Link 
+          key={l.text}
+          to={l.to}
+          testID={l.testID}
+          icon={l.icon}
+          params={l.params}
+        >
+          {l.text}
+        </Link>
+      ))}
 
       <View style={{flex: 1}}/>
 

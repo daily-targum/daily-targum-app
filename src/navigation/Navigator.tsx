@@ -57,6 +57,13 @@ const HomeStackNavigator = () => {
           title: hyphenatedToCapitalized(route.params.category) 
         })}
       />
+      <HomeStack.Screen 
+        name="Author" 
+        component={Screens.Author} 
+        options={({ route }: { route: any }) => ({ 
+          title: hyphenatedToCapitalized(route.params.author) 
+        })}
+      />
       <AppStack.Screen name="NotFound" component={Screens.NotFound}/>
     </HomeStack.Navigator>
   );
@@ -114,7 +121,7 @@ const DrawerNavigator = () => {
     <Drawer.Navigator
       drawerType={navigation.drawer.type}
       drawerContent={() => <CustomDrawer/>}
-    >
+    > 
       <Drawer.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
     </Drawer.Navigator>
   );
@@ -159,8 +166,9 @@ export default () => {
     const { getInitialState } = useLinking(ref, {
       prefixes,
       config: {
+        initialRouteName: 'DrawerNavigator',
         screens: {
-          initialRouteName: 'DrawerNavigator',
+          initialRouteName: 'BottomTabNavigator',
           DrawerNavigator: {
             screens: {
               BottomTabNavigator: {

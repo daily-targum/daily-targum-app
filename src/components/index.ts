@@ -14,3 +14,4 @@ export { default as Icon } from './Icon';
 export { default as VideoCard } from './VideoCard';
 export * from './Text';
 export * from './Switch';
+export * from './Byline';
