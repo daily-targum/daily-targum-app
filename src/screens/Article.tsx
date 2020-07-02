@@ -7,14 +7,14 @@ import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '..
 import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
-import NotFoundScreen from './NotFoundScreen';
+import NotFoundScreen from './NotFound';
 import { FontAwesome } from '@expo/vector-icons';
 
 
 const IMAGE_HEIGHT = 320;
 
 
-function Article({
+function ArticleWithoutState({
   article,
   image
 }: {
@@ -246,7 +246,7 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
-function GraphQL({
+export function Article({
   route
 }: {
   route: any
@@ -275,7 +275,7 @@ function GraphQL({
   }, [params.id, slug]);
 
   return (
-    <Article
+    <ArticleWithoutState
       article={article}
       image={(article && article.media) ? (
         <Image
@@ -288,7 +288,8 @@ function GraphQL({
   )
 }
 
-function Contentful({
+Article.Preview = Preview;
+function Preview({
   route
 }: {
   route: any
@@ -324,7 +325,7 @@ function Contentful({
 
   return (
     <View style={{flex: 1}}>
-      <Article
+      <ArticleWithoutState
         article={article}
         image={(article && article.media) ? (
           <Image
@@ -353,7 +354,4 @@ function Contentful({
   )
 }
 
-export default {
-  GraphQL,
-  Contentful
-};
+export default Article;

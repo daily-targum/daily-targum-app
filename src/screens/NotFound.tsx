@@ -64,3 +64,5 @@ const styleCreator = Theme.makeStyleCreator((theme) => ({
     flex: 1
   },
 }));
+
+export default NotFound;

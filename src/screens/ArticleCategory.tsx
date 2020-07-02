@@ -19,7 +19,7 @@ const idMap: any = {
   'inside-beat': 'inside-beat'
 };
 
-function ArticleCategory() {
+export function ArticleCategory() {
   const [ firstActivity, setFirstActivity ] = useState(false);
   const { colors, dark } = Theme.useTheme();
   const route = useRoute<ArticleCategoryPageProp>();

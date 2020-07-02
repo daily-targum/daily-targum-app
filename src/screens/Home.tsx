@@ -102,7 +102,7 @@ function ArticleSection({
   );
 }
 
-function HomeScreen() {
+export function Home() {
   const styles = Theme.useStyleCreator(styleCreator);
   const {dark, statusBarHeight, colors, insets} = Theme.useTheme();
   const contentInsets = {
@@ -277,4 +277,4 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
-export default HomeScreen;
+export default Home;

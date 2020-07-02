@@ -34,22 +34,22 @@ const HomeStackNavigator = () => {
     >
       <HomeStack.Screen 
         name="Home" 
-        component={Screens.HomeScreen}
+        component={Screens.Home}
         options={{
           headerRight: () => <CustomDrawer.Button/>,
           title: 'Home',
           header: () => null
         }}
       />
-      <HomeStack.Screen name="Settings" component={Screens.SettingsScreen}/>
+      <HomeStack.Screen name="Settings" component={Screens.Settings}/>
       <HomeStack.Screen 
         name="Page" 
-        component={Screens.PageScreen}
+        component={Screens.Page}
         options={({ route }: { route: any }) => ({ 
           title: hyphenatedToCapitalized(route.params.slug) 
         })}
       />
-      <HomeStack.Screen name="Developer" component={Screens.DeveloperScreen}/>
+      <HomeStack.Screen name="Developer" component={Screens.Developer}/>
       <HomeStack.Screen 
         name="ArticleCategory" 
         component={Screens.ArticleCategory} 
@@ -79,7 +79,7 @@ const CalendarStackNavigator = () => {
         headerTransparent: true 
       }}
     >
-      <CalendarStack.Screen name="Calendar" component={Screens.CalendarScreen}/>
+      <CalendarStack.Screen name="Calendar" component={Screens.Calendar}/>
     </CalendarStack.Navigator>
   );
 }
@@ -143,8 +143,8 @@ const AppStackNavigator = () => {
       mode='modal'
     >
       <AppStack.Screen name="DrawerNavigator" component={DrawerNavigator}/>
-      <AppStack.Screen name="Article" component={Screens.ArticleScreen.GraphQL}/>
-      <AppStack.Screen name="Preview" component={Screens.ArticleScreen.Contentful}/>
+      <AppStack.Screen name="Article" component={Screens.Article}/>
+      <AppStack.Screen name="Preview" component={Screens.Article.Preview}/>
     </AppStack.Navigator>
   );
 }

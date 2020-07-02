@@ -1,8 +1,11 @@
 import React from 'react';
-export { default as ArticleScreen } from './Article';
-export const SettingsScreen = React.lazy(() => import('./SettingsScreen'));
-export const CalendarScreen = React.lazy(() => import('./CalendarScreen'));
-export const ContentfulScreen = React.lazy(() => import('./PageScreen'));
-export const HomeScreen = React.lazy(() => import('./HomeScreen'));
-export const DeveloperScreen = React.lazy(() => import('./DeveloperScreen'));
+export * from './Article';
+export const Article = React.lazy(() => import('./Article'));
+export const Settings = React.lazy(() => import('./Settings'));
+export const Calendar = React.lazy(() => import('./Calendar'));
+export const Page = React.lazy(() => import('./Page'));
+export const Home = React.lazy(() => import('./Home'));
+export const Developer = React.lazy(() => import('./Developer'));
 export const ArticleCategory = React.lazy(() => import('./ArticleCategory'));
+export const NotFound = React.lazy(() => import('./NotFound'));
+export const Author = React.lazy(() => import('./Author'));

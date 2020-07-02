@@ -66,7 +66,7 @@ function EventRow({
 
 
 
-class CalendarScreen extends Component<WithStyleCreator, any> {
+export class Screen extends Component<WithStyleCreator, any> {
 
   state = {
     events: [],
@@ -380,4 +380,5 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
-export default Theme.withStyleCreator(CalendarScreen, styleCreator);
+export const Calendar = Theme.withStyleCreator(Screen, styleCreator);
+export default Calendar;

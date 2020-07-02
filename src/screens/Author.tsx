@@ -149,3 +149,5 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     fontSize: 18
   }
 }));
+
+export default Author;

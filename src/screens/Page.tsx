@@ -7,12 +7,12 @@ import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { useDispatch } from 'react-redux';
 import { pageActions, usePageSelector } from '../store/ducks/page';
-import NotFoundScreen from './NotFoundScreen';
+import NotFoundScreen from './NotFound';
 import { useRoute } from '@react-navigation/core';
 import { PageRouteProp } from '../navigation/types';
 
 
-function PageScreen() {
+export function Page() {
   const slug = useRoute<PageRouteProp>().params?.slug;
   const dispatch = useDispatch();
   const styles = Theme.useStyleCreator(styleCreator);
@@ -127,4 +127,4 @@ const styleCreator = Theme.makeStyleCreator((theme) => ({
   }
 }));
 
-export default PageScreen;
+export default Page;

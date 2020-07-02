@@ -9,8 +9,8 @@ import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import { Theme, ConsecutiveTouchable, Section, Divider, Text, Switch } from '../components';
 import { isBeta } from '../utils';
 
-function SettingsScreen() {
-  const {dark, systemWideDarkMode} = Theme.useTheme();
+export function Settings() {
+  const theme = Theme.useTheme();
   const notificationsHasPermission = useNotificationsSelector(s => s.hasPermission);
   const notificationsEnabled = useNotificationsSelector(s => s.enabled);
   const useDeviceSettings = useThemeSelector(s => s.useDeviceSettings);
@@ -40,7 +40,7 @@ function SettingsScreen() {
         x: 0
       }}
       contentInsetAdjustmentBehavior="always"
-      indicatorStyle={dark ? 'white' : 'black'}
+      indicatorStyle={theme.dark ? 'white' : 'black'}
       testID='SettingsScreen'
     >
       <Header.ScrollSpacer/>
@@ -65,7 +65,7 @@ function SettingsScreen() {
         <View style={styles.row}>
           <Text>Dark mode</Text>
           <Switch
-            value={useDeviceSettings ? systemWideDarkMode : darkModeOverride }
+            value={useDeviceSettings ? theme.systemWideDarkMode : darkModeOverride }
             onValueChange={(val) => {
               dispatch(themeActions.toggleDarkMode(val));
               dispatch(themeActions.toggleUseDeviceSettings(false));
@@ -78,7 +78,7 @@ function SettingsScreen() {
             value={useDeviceSettings}
             onValueChange={() => {
               dispatch(themeActions.toggleUseDeviceSettings());
-              dispatch(themeActions.toggleDarkMode(systemWideDarkMode));
+              dispatch(themeActions.toggleDarkMode(theme.systemWideDarkMode));
             }}
           />
         </View>
@@ -136,4 +136,4 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
-export default SettingsScreen;
+export default Settings;

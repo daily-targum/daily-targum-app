@@ -12,7 +12,7 @@ function format(str: string) {
   return output.charAt(0).toUpperCase() + output.slice(1);
 }
 
-function Developer() {
+export function Developer() {
   const {dark} = Theme.useTheme();
   const notificationsToken = useNotificationsSelector(s => s.token);
   const styles = Theme.useStyleCreator(styleCreator);
