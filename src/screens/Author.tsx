@@ -1,6 +1,7 @@
 import React from 'react';
 import { Theme, ArticleCard, ActivityIndicator } from '../components';
-import { Header, Footer } from '../navigation';
+import Header from '../navigation/Header';
+import Footer from '../navigation/BottomTabBar';
 import { getAuthorPage, GetAuthorPage, Article } from '../shared/src/client/actions';
 import { useRoute } from '@react-navigation/core';
 import { AuthorRouteProp } from '../navigation/types';
