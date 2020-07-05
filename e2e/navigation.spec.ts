@@ -39,7 +39,7 @@ describe('Navigation', () => {
     await element(by.id('DrawerToggle').withAncestor(by.id('PageHeader'))).tap();
     await waitFor(element(by.id('Drawer'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
     await element(by.id('Drawer-About')).tap();
-    await waitFor(element(by.id('PageScreen-about'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+    await waitFor(element(by.id('pageScreen-about'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
     // can go back
     await element(by.traits(['button']).withAncestor(by.id('Header'))).atIndex(0).tap();
     await waitFor(element(by.id('HomeScreen'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
@@ -50,7 +50,18 @@ describe('Navigation', () => {
     await element(by.id('DrawerToggle').withAncestor(by.id('PageHeader'))).tap();
     await waitFor(element(by.id('Drawer'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
     await element(by.id('Drawer-Contact')).tap();
-    await waitFor(element(by.id('PageScreen-contact'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+    await waitFor(element(by.id('pageScreen-contact'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+    // can go back
+    await element(by.traits(['button']).withAncestor(by.id('Header'))).atIndex(0).tap();
+    await waitFor(element(by.id('HomeScreen'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+  });
+
+  it('navigate to get involved page', async () => {
+    await waitFor(element(by.id('DrawerToggle').withAncestor(by.id('PageHeader')))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+    await element(by.id('DrawerToggle').withAncestor(by.id('PageHeader'))).tap();
+    await waitFor(element(by.id('Drawer'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
+    await element(by.id('Drawer-GetInvolved')).tap();
+    await waitFor(element(by.id('pageScreen-getInvolved'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);
     // can go back
     await element(by.traits(['button']).withAncestor(by.id('Header'))).atIndex(0).tap();
     await waitFor(element(by.id('HomeScreen'))).toBeVisible().withTimeout(NAVIGATION_TIMEOUT);

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ViewStyle } from 'react-native';
 
 export const RESET_DELAY = 500;
 
-function ConsecutiveTouchable({
+export function ConsecutiveTouchable({
   children,
   requiredTaps = 10,
   onPress,
@@ -12,13 +12,16 @@ function ConsecutiveTouchable({
 }: {
   children?: React.ReactNode,
   requiredTaps?: number,
-  onPress: () => void,
+  onPress: () => any,
   style?: ViewStyle | ViewStyle[]
 }) {
-  const [consecutiveTaps, setConsecutiveTaps] = useState(0);
-  let callbackID = useRef<NodeJS.Timeout>();
+  const [ consecutiveTaps, setConsecutiveTaps ] = React.useState(0);
+  const callbackID = React.useRef<NodeJS.Timeout>();
+
   function handlePress() {
-    if(callbackID.current) clearTimeout(callbackID.current);
+    if(callbackID.current) {
+      clearTimeout(callbackID.current);
+    }
     setConsecutiveTaps(consecutiveTaps + 1);
     // wait up to 300ms for the next tap
     callbackID.current = setTimeout(() => {
@@ -28,11 +31,13 @@ function ConsecutiveTouchable({
       onPress();
     }
   }
-  useEffect(() => {
+
+  React.useEffect(() => {
     return () => {
       if(callbackID.current) clearTimeout(callbackID.current);
     };
   }, []);
+
   return (
     <TouchableWithoutFeedback
       style={style}

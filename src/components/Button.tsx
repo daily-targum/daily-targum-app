@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, ViewStyle, Text, TextStyle, View } from 'react-native';
+import { TouchableOpacity, ViewStyle, Text, TextStyle } from 'react-native';
 import { useStyleCreator, makeStyleCreator, useTheme } from './Theme';
+import { styleHelpers } from '../utils';
 
-function Button({
+export function Button({
   children,
   onPress,
   style
@@ -52,16 +53,16 @@ function TextButton({
 
 const styleCreator = makeStyleCreator(theme => ({
   touchableHighlight: {
+    ...styleHelpers.flex('row'),
     padding: theme.spacing(0.5),
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
-    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: theme.colors.button,
     borderRadius: theme.roundness()
   },
   touchableOpacity: {
-    flexDirection: 'row',
+    ...styleHelpers.flex('row'),
     alignItems: 'center'
   },
   text: {

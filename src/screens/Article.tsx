@@ -9,6 +9,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
 import NotFoundScreen from './NotFound';
 import { FontAwesome } from '@expo/vector-icons';
+import { useHideBottomTabBar } from '../store/ducks/navigation';
 
 
 const IMAGE_HEIGHT = 320;
@@ -26,6 +27,8 @@ function ArticleWithoutState({
   const [ finished, setFinished ] = useState(false);
   const navigation = useNavigation();
   const styles = Theme.useStyleCreator(styleCreator);
+
+  useHideBottomTabBar();
 
   function goBack() {
     if(navigation.canGoBack()) {
@@ -279,7 +282,7 @@ export function Article({
       article={article}
       image={(article && article.media) ? (
         <Image
-          source={{uri: article.media[0]}}
+          source={{uri: article.media[0]+'?h=1000&w=1000&fit=crop&crop=faces,center'}}
           style={styles.image}
           resizeMethod="resize"
         />
@@ -297,7 +300,7 @@ function Preview({
   const params = route.params;
   const [ article, setArticle ] = useState<GetArticle | null | undefined>();
   const styles = Theme.useStyleCreator(styleCreator);
-  const {colors} = Theme.useTheme();
+  const theme = Theme.useTheme();
 
   function refreshContent() {
     actions.getArticlePreview({
@@ -339,7 +342,7 @@ function Preview({
         <View style={styles.previewBackdrop} pointerEvents='box-none'>
           <Surface style={styles.preview} tint='dark'>
             <TouchableHighlight
-              underlayColor={colors.touchableHighlight}
+              underlayColor={theme.colors.touchableHighlight}
               onPress={refreshContent}
             >
               <View style={styles.previewTouchable}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator as Indicator, ActivityIndicatorProps } from 'react-native';
 import Theme from './Theme';
+import { styleHelpers } from '../utils';
 
 /**
  * How long the activity indicator,
@@ -13,7 +14,7 @@ import Theme from './Theme';
 export const SPINNER_DELAY = 750;
 
 
-function ActivityIndicator(props : ActivityIndicatorProps) {
+export function ActivityIndicator(props : ActivityIndicatorProps) {
   const {colors} = Theme.useTheme();
   const styles = Theme.useStyleCreator(styleCreator);
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,7 @@ function ActivityIndicator(props : ActivityIndicatorProps) {
   );
 }
 
-export function ActivityIndicatorScreen() {
+function ActivityIndicatorScreen() {
   const styles = Theme.useStyleCreator(styleCreator);
   return (
     <View style={styles.activityIndicatorScreen}>
@@ -48,13 +49,8 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     flex: 1,
     backgroundColor: theme.colors.background
   },
-
   activityIndicatorScreen: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    ...styleHelpers.absoluteFill(),
     backgroundColor: theme.colors.background,
     alignContent: 'center',
     justifyContent: 'center'

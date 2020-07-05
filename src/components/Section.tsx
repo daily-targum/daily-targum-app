@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyleCreator, makeStyleCreator } from './Theme';
 import { View, ViewStyle } from 'react-native';
 
-function Section({
+export function Section({
   children,
   style,
   innerStyle,

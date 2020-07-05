@@ -10,8 +10,7 @@ interface ScrollViewWithHeaderProps extends Animated.AnimatedProps<ScrollViewPro
   headerHeight: number
 }
 
-
-export function ScrollViewWithHeader({
+function ScrollView({
   children,
   Header,
   headerHeight,
@@ -80,7 +79,8 @@ export function BypassAnimation({
   );
 }
 
-export default Platform.select({
+export const ScrollViewWithHeader = Platform.select({
   default: BypassAnimation,
-  ios: ScrollViewWithHeader
+  ios: ScrollView
 });
+export default ScrollViewWithHeader;

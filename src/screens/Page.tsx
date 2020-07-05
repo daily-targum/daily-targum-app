@@ -10,6 +10,7 @@ import { pageActions, usePageSelector } from '../store/ducks/page';
 import NotFoundScreen from './NotFound';
 import { useRoute } from '@react-navigation/core';
 import { PageRouteProp } from '../navigation/types';
+import { hyphenatedToCamelCase } from '../shared/src/utils';
 
 
 export function Page() {
@@ -34,7 +35,7 @@ export function Page() {
   return (
     <View
       style={styles.container}
-      testID={`PageScreen-${slug}`}
+      testID={`pageScreen-${hyphenatedToCamelCase(slug)}`}
     >
       <Header.ScrollSpacer/>
       <ScrollView

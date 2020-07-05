@@ -7,14 +7,13 @@ import Animated, { Easing } from 'react-native-reanimated';
 
 const HEIGHT = 30;
 
-function ErrorSnackbar() {
-  const {colors, insets} = Theme.useTheme();
+export function ErrorSnackbar() {
+  const theme = Theme.useTheme();
   const error = useErrorSelector(s => s.error);
   const dispatch = useDispatch();
 
-  let id: NodeJS.Timeout;
   useEffect(() => {
-    id = setTimeout(() => {
+    const id = setTimeout(() => {
       dispatch(errorActions.clearError());
     }, 5000);
     return () => clearTimeout(id);
@@ -36,9 +35,9 @@ function ErrorSnackbar() {
       style={{
         height: height.interpolate({
           inputRange: [0, 1],
-          outputRange: [0, HEIGHT + insets.top],
+          outputRange: [0, HEIGHT + theme.insets.top],
         }),
-        backgroundColor: colors.accent,
+        backgroundColor: theme.colors.accent,
         alignItems: 'center',
         justifyContent: 'center'
       }}
@@ -46,7 +45,7 @@ function ErrorSnackbar() {
       <Text
         style={{
           color: '#fff',
-          paddingTop: insets.top
+          paddingTop: theme.insets.top
         }}
       >{error}</Text>
     </Animated.View>

@@ -16,6 +16,7 @@ exports[`<Button /> button renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#eee",
       "borderRadius": 10,
+      "display": "flex",
       "flexDirection": "row",
       "opacity": 1,
       "padding": 3.5,
@@ -55,6 +56,7 @@ exports[`<Button /> button renders correctly with ReactNode child 1`] = `
       "alignItems": "center",
       "backgroundColor": "#eee",
       "borderRadius": 10,
+      "display": "flex",
       "flexDirection": "row",
       "opacity": 1,
       "padding": 3.5,
@@ -83,6 +85,7 @@ exports[`<Button /> text button renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "display": "flex",
       "flexDirection": "row",
       "opacity": 1,
     }

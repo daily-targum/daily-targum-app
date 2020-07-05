@@ -128,6 +128,7 @@ exports[`<ArticleCard /> small card renders correctly 1`] = `
           "borderRadius": 10,
           "flex": 1,
           "maxWidth": "40%",
+          "minWidth": "40%",
           "width": "40%",
         }
       }

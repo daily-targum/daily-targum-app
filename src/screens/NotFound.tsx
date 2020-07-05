@@ -5,7 +5,7 @@ import { useScrollToTop } from '@react-navigation/native';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from '../utils';
+import { styleHelpers } from '../utils';
 
 export function NotFound() {
   const theme = Theme.useTheme();
@@ -58,7 +58,7 @@ export function NotFound() {
 
 const styleCreator = Theme.makeStyleCreator((theme) => ({
   container: {
-    ...styles.page(theme)
+    ...styleHelpers.page(theme)
   },
   scrollView: {
     flex: 1

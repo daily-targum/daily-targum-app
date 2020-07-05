@@ -1,9 +1,20 @@
 jest.mock('@react-navigation/core', () => {
   const navigate = jest.fn();
+  const dispatch = jest.fn();
   return {
     useNavigation: () => ({
-      navigate
+      navigate,
+      dispatch
     })
+  };
+});
+
+jest.mock('@react-navigation/native', () => {
+  const push = jest.fn();
+  return {
+    StackActions: {
+      push
+    }
   };
 });
 
@@ -36,7 +47,7 @@ describe('<ArticleCard />', () => {
       <ArticleCard.Small article={ARTICLE} width='100%'/>
     );
     tree.root.findByType(TouchableOpacity).props.onPress();
-    expect(useNavigation().navigate).toBeCalledTimes(1);
+    expect(useNavigation().dispatch).toBeCalledTimes(1);
   });
 
   it('small card handle long press', () => {
@@ -59,7 +70,7 @@ describe('<ArticleCard />', () => {
       <ArticleCard.Medium article={ARTICLE}/>
     );
     tree.root.findByType(TouchableOpacity).props.onPress();
-    expect(useNavigation().navigate).toBeCalledTimes(1);
+    expect(useNavigation().dispatch).toBeCalledTimes(1);
   });
 
   it('medium card handle long press', () => {

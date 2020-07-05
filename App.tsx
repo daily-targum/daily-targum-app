@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { Theme, ErrorAppBar } from './src/components';
+import { Theme, ErrorSnackbar } from './src/components';
 import { logger, useAppStateChange, isBeta } from './src/utils';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ReduxProvider from './src/store/Provider';
@@ -74,7 +74,7 @@ function App() {
       <ReduxProvider>
         <Theme.Provider>  
           <StatusBar animated={true} barStyle="light-content"/>
-          <ErrorAppBar/>
+          <ErrorSnackbar/>
           <View style={styles.container} testID='App'>
             <Navigator/>
           </View>

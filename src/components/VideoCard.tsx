@@ -1,10 +1,9 @@
 import React from 'react';
 import Theme from '../components/Theme';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { formatDateAbriviated, openLink, shareUrl } from '../utils';
-import { LinearGradient } from 'expo-linear-gradient';
+import { openLink, shareUrl } from '../utils';
 
-function VideoCard({
+export function VideoCard({
   video,
   width
 }: {

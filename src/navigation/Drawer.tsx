@@ -41,16 +41,17 @@ function Link({
   children,
   icon,
   testID,
-  params
+  params,
+  navigation
 }: {
   to: string,
   children: string,
   icon: string,
   testID: string,
-  params?: any
+  params?: any,
+  navigation: any
 }) {
-  const {colors} = Theme.useTheme();
-  const navigation = useNavigation();
+  const { colors } = Theme.useTheme();
 
   return (
     <TouchableHighlight
@@ -85,9 +86,10 @@ function Link({
   );
 }
 
-function Drawer() {
+function Drawer({ navigation }: any) {
   const spacer = 75;
-  const {colors} = Theme.useTheme();
+  const { colors } = Theme.useTheme();
+
   return (
     <View
       style={{
@@ -114,6 +116,7 @@ function Drawer() {
           testID={l.testID}
           icon={l.icon}
           params={l.params}
+          navigation={navigation}
         >
           {l.text}
         </Link>

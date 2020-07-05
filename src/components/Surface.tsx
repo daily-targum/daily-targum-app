@@ -15,7 +15,7 @@ const opacityLight = Platform.select({
   web: 0.8
 });
 
-function Surface({
+export function Surface({
   style,
   innerStyle,
   children,

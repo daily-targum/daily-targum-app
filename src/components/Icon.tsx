@@ -10,7 +10,7 @@ import { View } from 'react-native';
 import Svg, { Path, Polygon, G } from 'react-native-svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function Icon({
+export function Icon({
   size = 32,
   name = 'spacer',
   color = '#fff',

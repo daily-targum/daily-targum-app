@@ -41,6 +41,13 @@ const HomeStackNavigator = () => {
           header: () => null
         }}
       />
+      <HomeStack.Screen 
+        name="Article" 
+        component={Screens.Article}
+        options={{
+          header: () => null
+        }}
+      />
       <HomeStack.Screen name="Settings" component={Screens.Settings}/>
       <HomeStack.Screen 
         name="Page" 
@@ -64,7 +71,7 @@ const HomeStackNavigator = () => {
           title: hyphenatedToCapitalized(route.params.author) 
         })}
       />
-      <AppStack.Screen name="NotFound" component={Screens.NotFound}/>
+      <HomeStack.Screen name="NotFound" component={Screens.NotFound}/>
     </HomeStack.Navigator>
   );
 }
@@ -97,7 +104,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, size }) => (
             <Icon size={size*1.6} focused={focused} name='home'/>
-          ),
+          )
         }}
       />
       <BottomTab.Screen
@@ -120,35 +127,12 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerType={navigation.drawer.type}
-      drawerContent={() => <CustomDrawer/>}
+      drawerContent={props => <CustomDrawer {...props}/>}
     > 
       <Drawer.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
     </Drawer.Navigator>
   );
 }
-
-
-
-const AppStack = createStackNavigator();
-const AppStackNavigator = () => {
-  const {colors} = Theme.useTheme();
-  return (
-    <AppStack.Navigator
-      screenOptions={{
-        cardStyle: {
-          backgroundColor: colors.background
-        }
-      }}
-      headerMode='none'
-      mode='modal'
-    >
-      <AppStack.Screen name="DrawerNavigator" component={DrawerNavigator}/>
-      <AppStack.Screen name="Article" component={Screens.Article}/>
-      <AppStack.Screen name="Preview" component={Screens.Article.Preview}/>
-    </AppStack.Navigator>
-  );
-}
-
 
 
 const prefixes = [
@@ -166,50 +150,46 @@ export default () => {
     const { getInitialState } = useLinking(ref, {
       prefixes,
       config: {
-        initialRouteName: 'DrawerNavigator',
+        initialRouteName: 'BottomTabNavigator',
         screens: {
-          initialRouteName: 'BottomTabNavigator',
-          DrawerNavigator: {
+          BottomTabNavigator: {
+            initialRouteName: 'HomeNavigator',
             screens: {
-              BottomTabNavigator: {
-                initialRouteName: 'HomeNavigator',
+              HomeNavigator: {
+                initialRouteName: 'Home',
                 screens: {
-                  HomeNavigator: {
-                    initialRouteName: 'Home',
-                    screens: {
-                      ArticleCategory: {
-                        path: 'section/:category',
-                        parse: {
-                          category: String
-                        },
-                      },
-                      Page: {
-                        path: 'page/:slug',
-                        parse: {
-                          slug: String,
-                        },
-                      },
-                      NotFound: '*'
-                    }
-                  }
+                  ArticleCategory: {
+                    path: 'section/:category',
+                    parse: {
+                      category: String
+                    },
+                  },
+                  Page: {
+                    path: 'page/:slug',
+                    parse: {
+                      slug: String,
+                    },
+                  },
+                  Preview: {
+                    path: 'preview/:id',
+                    parse: {
+                      id: String,
+                    },
+                  },
+                  Article: {
+                    path: 'article/:year/:month/:slug',
+                    parse: {
+                      year: String,
+                      month: String,
+                      slug: String
+                    },
+                  },
+                  NotFound: '*'
                 }
               }
             }
-          },
-          Preview: {
-            path: 'preview/:id',
-            parse: {
-              id: String,
-            },
-          },
-          Article: {
-            path: 'article/:year/:month/:slug',
-            parse: {
-              year: String,
-              month: String,
-              slug: String
-            },
           }
+ 
         }
       },
     });
@@ -238,7 +218,7 @@ export default () => {
   return (
     <React.Suspense fallback={<ActivityIndicator.Screen/>}>
       <NavigationContainer initialState={initialState} ref={ref}>
-        <AppStackNavigator/>
+        <DrawerNavigator/>
       </NavigationContainer>
     </React.Suspense>
   );

@@ -30,7 +30,7 @@ export function increaseEdgeBias(x: number, segment: number) {
   return clamp(0, scaled, 1);
 }
 
-function FocalPointImage({
+export function FocalPointImage({
   src,
   size,
   focalPoint,

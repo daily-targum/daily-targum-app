@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/core';
 import { formatDateAbriviated } from '../shared/src/utils';
 import { shareArticle } from '../utils';
 import { LinearGradient } from 'expo-linear-gradient';
+import { styleHelpers } from '../utils';
+import { StackActions } from '@react-navigation/native';
 
 function Large({
   article,
@@ -20,10 +22,9 @@ function Large({
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
   function handlePress() {
-    navigation.navigate('Article', {
-      // id: '6jd2Gmkw7kuC3GWnjiuYY7',
-      id: article.id
-    });
+    navigation.dispatch(
+      StackActions.push('Article', { id: article.id, article })
+    );
   }
   return (
     <TouchableOpacity 
@@ -70,10 +71,9 @@ function Medium({
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
   function handlePress() {
-    navigation.navigate('Article', {
-      // id: '6jd2Gmkw7kuC3GWnjiuYY7',
-      id: article.id
-    });
+    navigation.dispatch(
+      StackActions.push('Article', { id: article.id, article })
+    );
   }
   return (
     <TouchableOpacity 
@@ -111,11 +111,9 @@ function Small({
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
   function handlePress() {
-    navigation.navigate('Article', {
-      // id: '6jd2Gmkw7kuC3GWnjiuYY7',
-      id: article.id,
-      article
-    });
+    navigation.dispatch(
+      StackActions.push('Article', { id: article.id, article })
+    );
   }
   return (
     <TouchableOpacity 
@@ -191,8 +189,7 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   },
   cardSmallImage: {
     flex: 1,
-    width: '40%',
-    maxWidth: '40%',
+    ...styleHelpers.lockWidth('40%'),
     borderRadius: theme.roundness(1),
     aspectRatio: 3/2
   },
@@ -215,8 +212,10 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   }
 }));
 
-export default {
+export const ArticleCard = {
   Large,
   Medium,
   Small
 };
+
+export default ArticleCard;

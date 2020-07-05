@@ -1,60 +1,85 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, Animated, Easing } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/core';
 import { Surface, Theme, Section } from '../components';
 import { navigation as navConfig } from '../constants';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { useSelector } from 'react-redux';
 
 export const HEIGHT = navConfig.bottomTabBar.height;
 
 function Footer(props: BottomTabBarProps) {
-  const {insets, colors} = Theme.useTheme();
+  const { insets, colors } = Theme.useTheme();
   const navigation = useNavigation();
+  const visible = useSelector((s: any) => s.navigation.bottomTabBarVisible);
+  const offset = React.useRef(new Animated.Value(+visible)).current;
+
+  React.useEffect(() => {
+    Animated.timing(offset, {
+      toValue: +visible,
+      easing: Easing.inOut(Easing.ease),
+      duration: 220,
+      useNativeDriver: true
+    }).start();
+  }, [visible]);
+
   return (
-    <Surface
-      tint='dark'
-      style={[props.style, {
+    <Animated.View
+      style={{
+        height: navConfig.bottomTabBar.height + insets.bottom,
         position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,
-        height: navConfig.bottomTabBar.height + insets.bottom
-      }]}
-      backgroundTint={colors.primary}
+        transform: [{ 
+          translateY: offset.interpolate({
+            inputRange: [0, 1],
+            outputRange: [HEIGHT + insets.bottom, 0]
+          })
+        }],
+      }}
     >
-      <Section 
-        style={{
-          flex: 1,
-          marginBottom: insets.bottom,
-          borderTopWidth: 0.5,
-          borderTopColor: colors.divider
-        }}
-        innerStyle={{
-          padding: 0,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center'
-        }}
+      <Surface
+        tint='dark'
+        style={[props.style, {
+          height: navConfig.bottomTabBar.height + insets.bottom
+        }]}
+        backgroundTint={colors.primary}
       >
-        {Object.keys(props.descriptors).map((d, i) => {
-          const descriptor: any = props.descriptors[d];
-          return (
-            <TouchableOpacity
-              key={d}
-              onPress={() => navigation.navigate({ key: d })}
-            >
-              {descriptor.options.tabBarIcon({
-                size: 24,
-                focused: i === props.state.index,
-                // TODO: check how react navigation has this configured
-                color: i === props.state.index ? props.activeTintColor : props.inactiveTintColor
-              })}
-            </TouchableOpacity>
-          );
-        })}
-      </Section>
-    </Surface>
+        <Section 
+          style={{
+            flex: 1,
+            marginBottom: insets.bottom,
+            borderTopWidth: 0.5,
+            borderTopColor: colors.divider
+          }}
+          innerStyle={{
+            padding: 0,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center'
+          }}
+        >
+          {Object.keys(props.descriptors).map((d, i) => {
+            const descriptor: any = props.descriptors[d];
+            return (
+              <TouchableOpacity
+                key={d}
+                onPress={() => navigation.navigate({ key: d })}
+              >
+                {descriptor.options.tabBarIcon({
+                  size: 24,
+                  focused: i === props.state.index,
+                  // TODO: check how react navigation has this configured
+                  color: i === props.state.index ? props.activeTintColor : props.inactiveTintColor
+                })}
+              </TouchableOpacity>
+            );
+          })}
+        </Section>
+      </Surface>
+    </Animated.View>
   );
 }
 
