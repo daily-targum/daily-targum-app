@@ -1,7 +1,8 @@
 import React from 'react';
-import { Theme, Button, ArticleCard, ActivityIndicator, Text } from '../components';
-import { View, RefreshControl, Platform, TouchableWithoutFeedback, LayoutChangeEvent } from 'react-native';
+import { Theme, Button, ActivityIndicator, Text, Divider, Card, CardRow, Section } from '../components';
+import { View, RefreshControl, Platform, TouchableWithoutFeedback } from 'react-native';
 import { GetArticle } from '../shared/src/client';
+import { formatDateAbriviated } from '../shared/src/utils';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';
@@ -11,8 +12,14 @@ import Animated from 'react-native-reanimated';
 import { newsActions, useNewsSelector } from '../store/ducks/news';
 import { useScrollToTop, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Feather } from '@expo/vector-icons';
+import { StackActions } from '@react-navigation/native';
 
 const HEADER_HEIGHT = 96;
+
+function chopArray<I>(arr: I[]) {
+  return [[arr[0]], [arr[1], arr[2]], [arr[3], arr[4]], [arr[5], arr[6]]];
+}
 
 const sections = [
   {
@@ -34,77 +41,97 @@ const sections = [
     id: 'inside-beat',
     title: 'Inside Beat', 
     type: 'article'
-  },
-  // {
-  //   id: 'videos',
-  //   title: 'Videos',
-  //   type: 'video'
-  // }
+  }
 ];
 
 function ArticleSection({
   title,
   items,
-  category,
-  cols
+  category
 }: {
   title: string,
   items?: GetArticle[] | null,
-  category: string,
-  cols: number
+  category: string
 }) {
   const styles = Theme.useStyleCreator(styleCreator);
-  const {dark, colors, spacing} = Theme.useTheme();
+  const theme = Theme.useTheme();
   const navigation = useNavigation();
-  if(!items) return null;
+
+  if(!items || items.length === 0) return null;
+
   return (
     <LinearGradient 
       colors={[
-        colors.background,
-        (dark ? '#1f1f21' : '#eee')
+        theme.colors.background,
+        (theme.dark ? '#1f1f21' : '#ddd')
       ]}
       start={{x: 0.5, y: 0}}
       end={{x: 1, y: 1}}
     >
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleCategory', {category})}>
-        <View style={styles.sectionTitleRow}>
+      <Section style={styles.section}>
+
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleCategory', {category})}>
           <Text style={styles.sectionTitle}>{title}</Text>
-          <Button.Text 
-            style={styles.button}
-            onPress={() => navigation.navigate('ArticleCategory', {category})}
-          >More</Button.Text>
-        </View>
-      </TouchableWithoutFeedback>
-      <View style={styles.sectionBody}>
-        {items.slice(0,4*cols).map((item, i) => i < cols ? (
-          <ArticleCard.Large 
-            key={item.id+'large'}
-            article={item}
-            width={100/cols+'%'}
-            style={{
-              paddingRight: (i % cols === cols - 1) ? 0 : spacing(0.75),
-              paddingLeft: (i % cols === 0) ? 0 : spacing(0.75),
-            }}
-          />
-        ) : (
-          <ArticleCard.Small 
-            key={item.id+'small'}
-            article={item}
-            width={100/cols+'%'}
-            style={{
-              paddingRight: (i % cols === cols - 1) ? 0 : spacing(0.75),
-              paddingLeft: (i % cols === 0) ? 0 : spacing(0.75),
-            }}
-          />
-        ))}
-      </View>
+        </TouchableWithoutFeedback>
+
+        <CardRow items={chopArray(items)}>
+          {(item, i) => {
+            if(!item) return null;
+            return i === 0 ? (
+              <Card.ImageResponsiveAspectRatio
+                key={item[0].id}
+                title={item[0].title}
+                image={item[0].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                date={formatDateAbriviated(item[0].publishDate)}
+                aspectRatioMobile={[3, 2]}
+                onPress={() => {
+                  navigation.dispatch(
+                    StackActions.push('Article', { id: item[0].id })
+                  );
+                }}
+              />
+            ) : (
+              <React.Fragment key={item[0].id}>
+                <Card.Compact
+                  title={item[0].title}
+                  image={item[0].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                  date={formatDateAbriviated(item[0].publishDate)}
+                  onPress={() => {
+                    navigation.dispatch(
+                      StackActions.push('Article', { id: item[0].id })
+                    );
+                  }}
+                />
+                <Card.Compact
+                  title={item[1].title}
+                  image={item[1].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                  date={formatDateAbriviated(item[1].publishDate)}
+                  onPress={() => {
+                    navigation.dispatch(
+                      StackActions.push('Article', { id: item[1].id })
+                    );
+                  }}
+                />
+              </React.Fragment>
+            );
+          }}
+        </CardRow>
+
+        <Divider style={styles.divider}/>
+        <Button.Link 
+          style={styles.moreButton}
+          onPress={() => navigation.navigate('ArticleCategory', {category})}
+        >
+          More in {category} <Feather name="arrow-right" size={16} />
+        </Button.Link>
+      </Section>
     </LinearGradient>
   );
 }
 
 export function Home() {
   const styles = Theme.useStyleCreator(styleCreator);
-  const {dark, statusBarHeight, colors, insets} = Theme.useTheme();
+  const { dark, statusBarHeight, colors, insets } = Theme.useTheme();
   const contentInsets = {
     top: HEADER_HEIGHT - (insets.top - statusBarHeight),
     bottom: Footer.useHeight({safe: false})
@@ -119,16 +146,11 @@ export function Home() {
   useScrollToTop(React.useRef({
     scrollToTop: () => ref.current?.scrollToOffset({ offset: -contentInsets.top }),
   }));
-  const [cols, setCols] = React.useState(1);
-  function getColumns(event: LayoutChangeEvent) {
-    const width = event.nativeEvent.layout.width;
-    setCols(Math.min(Math.ceil(width / 475), 3));
-  }
+
   return (
     <View 
       style={styles.container} 
       testID='HomeScreen'
-      onLayout={getColumns}
     >
       <Animated.ScrollView
         ref={ref}
@@ -173,7 +195,6 @@ export function Home() {
             title={section.title}
             items={feed[section.id].data.slice(0,20)}
             category={section.id}
-            cols={cols}
           />
         ))}
       </Animated.ScrollView>
@@ -244,31 +265,26 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     fontSize: 15
   },
   // Medium Card
-  sectionTitleRow: {
-    padding: theme.spacing(2),
+  section: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  sectionBody: {
-    padding: theme.spacing(2),
-    paddingTop: 0,
-    paddingBottom: theme.spacing(1),
-    flexDirection: 'row',
-    flexWrap: 'wrap'
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '800'
+    fontWeight: '800',
+    paddingBottom: theme.spacing(1.5),
+  },
+  moreButton: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    justifyContent: 'flex-end'
   },
   cardSpacer: {
     width: theme.spacing(1)
   },
-  button: {
-    height: 28,
-    borderRadius: 14
+  divider: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   row: {
     justifyContent: 'space-between',

@@ -1,2 +1,3 @@
-export * from './theme';
 export * from './array';
+export * from './theme';
+export * from './react';

@@ -10,6 +10,40 @@ function absoluteFill() {
   } as const;
 }
 
+function aspectRatioFullWidth(x: number, y: number) {
+  return {
+    width: '100%',
+    paddingTop: `${(y / x) * 100}%`
+  } as const;
+}
+
+function card(theme: Theme) {
+  return {
+    backgroundColor: theme.colors.surface,
+    borderColor: theme.colors.divider,
+    borderRadius: theme.roundness(1),
+    borderStyle: 'solid',
+    borderWidth: 1,
+    overflow: 'hidden'
+  } as const;
+}
+
+function centerBackgroundImage() {
+  return {
+    // backgroundPosition: 'center',
+    // backgroundSize: 'cover',
+    // backgroundRepeat: 'no-repeat',
+  } as const;
+}
+
+function container(theme: Theme) {
+  return {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+    height: '100%'
+  } as const;
+}
+
 type Flex<D> = {
   display: 'flex'
   flexDirection: D
@@ -53,12 +87,18 @@ function page(theme: Theme) {
   return {
     flex: 1,
     backgroundColor: theme.colors.background,
-    height: '100%'
+    height: '100%',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2)
   } as const;
 }
 
 export const styleHelpers = {
   absoluteFill,
+  aspectRatioFullWidth,
+  card,
+  centerBackgroundImage,
+  container,
   flex,
   lockHeight,
   lockWidth,

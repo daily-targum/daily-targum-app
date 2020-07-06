@@ -189,11 +189,13 @@ exports[`Drawer renders correctly 1`] = `
               "color": "#000",
             },
             null,
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
               "marginLeft": 5,
             },
+            null,
           ]
         }
       >
@@ -291,11 +293,13 @@ exports[`Drawer renders correctly 1`] = `
               "color": "#000",
             },
             null,
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
               "marginLeft": 5,
             },
+            null,
           ]
         }
       >
@@ -393,11 +397,13 @@ exports[`Drawer renders correctly 1`] = `
               "color": "#000",
             },
             null,
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
               "marginLeft": 5,
             },
+            null,
           ]
         }
       >
@@ -495,11 +501,13 @@ exports[`Drawer renders correctly 1`] = `
               "color": "#000",
             },
             null,
+            null,
             Object {
               "color": "#f70737",
               "fontSize": 20,
               "marginLeft": 5,
             },
+            null,
           ]
         }
       >
@@ -516,10 +524,13 @@ exports[`Drawer renders correctly 1`] = `
   />
   <View
     style={
-      Object {
-        "backgroundColor": "rgba(0,0,0,0.1)",
-        "height": 0.5,
-      }
+      Array [
+        Object {
+          "backgroundColor": "rgba(0,0,0,0.1)",
+          "height": 0.5,
+        },
+        undefined,
+      ]
     }
   />
   <View

@@ -93,11 +93,14 @@ exports[`<Button /> text button renders correctly 1`] = `
 >
   <Text
     style={
-      Object {
-        "color": "#f70737",
-        "fontSize": 17,
-        "fontWeight": "500",
-      }
+      Array [
+        Object {
+          "color": "#f70737",
+          "fontSize": 17,
+          "fontWeight": "500",
+        },
+        undefined,
+      ]
     }
   >
     Click Me!

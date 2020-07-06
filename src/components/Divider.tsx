@@ -1,20 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { useTheme } from './Theme';
 
 export function Divider({
-  color
+  color,
+  style
 }: {
-  color?: string
+  color?: string,
+  style?: ViewStyle
 }) {
   const theme = useTheme();
 
   return (
     <View
-      style={{
+      style={[{
         height: 0.5,
         backgroundColor: color || theme.colors.divider
-      }}
+      }, style]}
     />
   );
 }

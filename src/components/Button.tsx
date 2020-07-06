@@ -31,14 +31,16 @@ export function Button({
   );
 }
 
-function TextButton({
+function LinkButton({
   children,
   onPress,
-  style
+  style,
+  textStyle
 }: {
-  children: string,
-  onPress: () => any,
-  style?: TextStyle,
+  children: string | React.ReactNode
+  onPress: () => any
+  style?: ViewStyle
+  textStyle?: TextStyle
 }) {
   const styles = useStyleCreator(styleCreator);
   return (
@@ -46,7 +48,7 @@ function TextButton({
       style={[styles.touchableOpacity, style]}
       onPress={onPress}
     >
-      <Text style={styles.textButton}>{children}</Text>
+      <Text style={[styles.textButton, textStyle]}>{children}</Text>
     </TouchableOpacity>
   );
 }
@@ -78,5 +80,5 @@ const styleCreator = makeStyleCreator(theme => ({
   }
 }));
 
-Button.Text = TextButton;
+Button.Link = LinkButton;
 export default Button;

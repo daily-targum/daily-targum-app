@@ -16,8 +16,8 @@ exports[`<Section /> renders correctly 1`] = `
       Array [
         Object {
           "flex": 1,
-          "maxWidth": 750,
-          "padding": 14,
+          "paddingLeft": 14,
+          "paddingRight": 14,
           "width": "100%",
         },
         undefined,

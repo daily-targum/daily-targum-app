@@ -2,10 +2,12 @@ import React, { useState, useRef } from 'react';
 import { View, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { newsActions } from '../store/ducks/news';
-import { Theme, ActivityIndicator, ArticleCard } from '../components';
+import { Theme, ActivityIndicator, Card } from '../components';
 import { GetArticle } from '../shared/src/client';
+import { formatDateAbriviated } from '../shared/src/utils';
 import { useRoute } from '@react-navigation/core';
-import { useScrollToTop } from '@react-navigation/native';
+import { useScrollToTop, useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { FlatList } from 'react-native-gesture-handler';
@@ -27,6 +29,7 @@ export function ArticleCategory() {
   const dispatch = useDispatch();
   const feed = useSelector((s: any) => s.news.feed);
   const styles = Theme.useStyleCreator(styleCreator);
+  const navigation = useNavigation();
 
   const contentInsets = {
     top: Header.useHeight({ safe: true }),
@@ -87,9 +90,15 @@ export function ArticleCategory() {
           />
         }
         renderItem={({item}) => (
-          <ArticleCard.Small
-            article={item}
-            width='100%'
+          <Card.Compact
+            title={item.title}
+            image={item.media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+            date={formatDateAbriviated(item.publishDate)}
+            onPress={() => {
+              navigation.dispatch(
+                StackActions.push('Article', { id: item.id })
+              );
+            }}
           />
         )}
         onScrollBeginDrag={onFirstActivity}

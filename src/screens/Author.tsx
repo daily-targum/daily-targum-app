@@ -1,12 +1,14 @@
 import React from 'react';
-import { Theme, ArticleCard, ActivityIndicator } from '../components';
+import { Theme, Card, ActivityIndicator } from '../components';
 import Header from '../navigation/Header';
 import Footer from '../navigation/BottomTabBar';
 import { getAuthorPage, GetAuthorPage, Article } from '../shared/src/client/actions';
 import { useRoute } from '@react-navigation/core';
 import { AuthorRouteProp } from '../navigation/types';
-import { useScrollToTop } from '@react-navigation/native';
+import { useScrollToTop, useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 import { View, FlatList } from 'react-native';
+import { formatDateAbriviated } from '../shared/src/utils';
 
 
 export function Author() {
@@ -15,6 +17,7 @@ export function Author() {
   const [ page, setPage ] = React.useState<GetAuthorPage | null>(null);
   const route = useRoute<AuthorRouteProp>();
   const styles = Theme.useStyleCreator(styleCreator);
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     getAuthorPage({ author: route.params.author })
@@ -79,9 +82,15 @@ export function Author() {
         //   />
         // }
         renderItem={({item}) => (
-          <ArticleCard.Small
-            article={item}
-            width='100%'
+          <Card.Compact
+            title={item.title}
+            image={item.media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+            date={formatDateAbriviated(item.publishDate)}
+            onPress={() => {
+              navigation.dispatch(
+                StackActions.push('Article', { id: item.id })
+              );
+            }}
           />
         )}
         // onScrollBeginDrag={onFirstActivity}

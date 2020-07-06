@@ -3,7 +3,7 @@ import { View, StatusBar, NativeScrollEvent, Image, Platform } from 'react-nativ
 import HTMLView from 'react-native-htmlview';
 import { logEvent } from '../utils/logger';
 import { useNavigation } from '@react-navigation/core';
-import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent } from '../utils';
+import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent, styleHelpers } from '../utils';
 import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
@@ -34,7 +34,7 @@ function ArticleWithoutState({
     if(navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.navigate('DrawerNavigator');
+      navigation.navigate('Home');
     }
   }
 
@@ -78,46 +78,48 @@ function ArticleWithoutState({
           onScrollEndDrag={checkFinish}
           style={{height: '100%'}}
         > 
-          <Section style={styles.article}>
-            <Text style={styles.title}>{article.title}</Text>
-            <View style={styles.spacer}/>
-            <Byline
-              authors={article.authors}
-              updatedAt={article.updatedAt}
-              publishDate={article.publishDate}
-            />
-            <View style={styles.spacer}/>
-            <HTMLView
-              addLineBreaks={false}
-              onLinkPress={(url) => openLinkFromArticle({url, article})}
-              onLinkLongPress={shareUrl}
-              stylesheet={styles}
-              value={article.body}
-            />
-          </Section>
-          <Section innerStyle={styles.shareSection}>
-            <Button onPress={onShare}> 
-              {Platform.OS === 'ios' ? (
-                <Icon
-                  size={38}
-                  color={styles.buttonText.color}
-                  name='share'
-                />
-              ) : (
-                <FontAwesome
-                  size={26}
-                  color={styles.buttonText.color}
-                  name='share-alt'
-                  style={{
-                    padding: 8,
-                    paddingLeft: 0,
-                    paddingRight: 12
-                  }}
-                />
-              )}
-              <Text style={styles.buttonText}>Share Article</Text>
-            </Button>
-          </Section>
+          <View style={styles.page}>
+            <Section style={styles.article}>
+              <Text style={styles.title}>{article.title}</Text>
+              <View style={styles.spacer}/>
+              <Byline
+                authors={article.authors}
+                updatedAt={article.updatedAt}
+                publishDate={article.publishDate}
+              />
+              <View style={styles.spacer}/>
+              <HTMLView
+                addLineBreaks={false}
+                onLinkPress={(url) => openLinkFromArticle({url, article})}
+                onLinkLongPress={shareUrl}
+                stylesheet={styles}
+                value={article.body}
+              />
+            </Section>
+            <Section innerStyle={styles.shareSection}>
+              <Button onPress={onShare}> 
+                {Platform.OS === 'ios' ? (
+                  <Icon
+                    size={38}
+                    color={styles.buttonText.color}
+                    name='share'
+                  />
+                ) : (
+                  <FontAwesome
+                    size={26}
+                    color={styles.buttonText.color}
+                    name='share-alt'
+                    style={{
+                      padding: 8,
+                      paddingLeft: 0,
+                      paddingRight: 12
+                    }}
+                  />
+                )}
+                <Text style={styles.buttonText}>Share Article</Text>
+              </Button>
+            </Section>
+          </View>
         </ScrollViewWithHeader>
       ): <ActivityIndicator.Screen/>}
 
@@ -138,7 +140,7 @@ function ArticleWithoutState({
             size={38}
             onPress={goBack}
             color={styles.closeButtonText.color}
-            name={Platform.OS === 'android' ? 'back-android' : 'close'}
+            name='back-android'
           />
         </Surface>
       </Section>
@@ -148,8 +150,11 @@ function ArticleWithoutState({
 
 const styleCreator = Theme.makeStyleCreator(theme => ({
   container: {
-    backgroundColor: theme.colors.background,
-    height: '100%'
+    ...styleHelpers.container(theme),
+    backgroundColor: theme.colors.background
+  },
+  page: {
+    ...styleHelpers.page(theme)
   },
   share: {
     color: '#fff',

@@ -16,7 +16,7 @@ describe('<Divider />', () => {
 
   it('inherits color from theme provider', () => {
     const tree: any = renderer.create(<Divider/>).toJSON();
-    expect(tree?.props?.style?.backgroundColor).toBe(useTheme().colors.divider);
+    expect(tree?.props?.style[0]?.backgroundColor).toBe(useTheme().colors.divider);
   });
 
 });

@@ -34,7 +34,7 @@ describe('<Button />', () => {
 
   it('text button renders correctly', () => {
     const tree = renderer.create(
-      <Button.Text onPress={() => {}}>Click Me!</Button.Text>
+      <Button.Link onPress={() => {}}>Click Me!</Button.Link>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -42,7 +42,7 @@ describe('<Button />', () => {
   it('text button onPress', () => {
     const onPress = jest.fn();
     const tree = renderer.create(
-      <Button.Text onPress={onPress}>Click Me!</Button.Text>
+      <Button.Link onPress={onPress}>Click Me!</Button.Link>
     );
     tree.root.findByType(TouchableOpacity).props.onPress();
     expect(onPress).toHaveBeenCalledTimes(1);

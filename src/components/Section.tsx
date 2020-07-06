@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyleCreator, makeStyleCreator } from './Theme';
-import { View, ViewStyle } from 'react-native';
+import { View, ViewStyle, useWindowDimensions } from 'react-native';
 
 export function Section({
   children,
@@ -13,6 +13,7 @@ export function Section({
   innerStyle?: ViewStyle | ViewStyle[],
   testID?: string
 }) {
+  const dimensions = useWindowDimensions();
   const styles = useStyleCreator(styleCreator);
   return (
     <View 
@@ -33,8 +34,8 @@ const styleCreator = makeStyleCreator(theme => ({
 
   section: {
     flex: 1,
-    padding: theme.spacing(2),
-    maxWidth: 750,
+    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
     width: '100%'
   }
 }));
