@@ -1,20 +1,20 @@
 import React, { useRef } from 'react';
 import { View, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { themeActions, useThemeSelector } from '../store/ducks/theme';
-import { notificationActions, useNotificationsSelector } from '../store/ducks/notifications';
+import { themeActions } from '../store/ducks/theme';
+import { notificationsActions } from '../store/ducks/notifications';
+import { useSelector, useDispatch } from '../store';
 import Header from '../navigation/Header';
-import Footer from '../navigation/BottomTabBar';
+import BottomTabBar from '../navigation/BottomTabBar';
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import { Theme, ConsecutiveTouchable, Section, Divider, Text, Switch } from '../components';
-import { isBeta } from '../utils';
+import { isBeta, styleHelpers } from '../utils';
 
 export function Settings() {
   const theme = Theme.useTheme();
-  const notificationsHasPermission = useNotificationsSelector(s => s.hasPermission);
-  const notificationsEnabled = useNotificationsSelector(s => s.enabled);
-  const useDeviceSettings = useThemeSelector(s => s.useDeviceSettings);
-  const darkModeOverride = useThemeSelector(s => s.darkModeOverride);
+  const notificationsHasPermission = useSelector(s => s.notifications.hasPermission);
+  const notificationsEnabled = useSelector(s => s.notifications.enabled);
+  const useDeviceSettings = useSelector(s => s.theme.useDeviceSettings);
+  const darkModeOverride = useSelector(s => s.theme.darkModeOverride);
   const dispatch = useDispatch();
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
@@ -22,7 +22,7 @@ export function Settings() {
 
   const contentInsets = {
     top: Header.useHeight({ safe: false }),
-    bottom: Footer.useHeight({ safe: false })
+    bottom: BottomTabBar.useHeight({ safe: false })
   };
 
   const ref: any = useRef();
@@ -45,14 +45,14 @@ export function Settings() {
     >
       <Header.ScrollSpacer/>
 
-      <Section>
+      <Section style={styles.section}>
         <Text style={styles.sectionTitle}>Notifications</Text>
         <View style={styles.row}>
           <Text>Push notifications</Text>
           <Switch
             value={notificationsEnabled && !!notificationsHasPermission}
             onValueChange={() => {
-              dispatch(notificationActions.toggleNotifications({force: true}))
+              dispatch(notificationsActions.toggleNotifications({force: true}))
             }}
           />
         </View>
@@ -60,7 +60,7 @@ export function Settings() {
 
       <Divider/>
 
-      <Section>
+      <Section style={styles.section}>
         <Text style={styles.sectionTitle}>Theme</Text>
         <View style={styles.row}>
           <Text>Dark mode</Text>
@@ -98,15 +98,17 @@ export function Settings() {
         >All Rights Reserved{'\n'}© 2020 The Daily Targum</Text>
       </ConsecutiveTouchable>
 
-      <Footer.ScrollSpacer/>
+      <BottomTabBar.ScrollSpacer/>
     </ScrollView>
   );
 }
 
 const styleCreator = Theme.makeStyleCreator(theme => ({
   container: {
-    flex: 1,
-    backgroundColor: theme.colors.background
+    ...styleHelpers.container(theme)
+  },
+  section: {
+    ...styleHelpers.page(theme)
   },
   spacer: {
     height: 20

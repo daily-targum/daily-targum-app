@@ -1,9 +1,6 @@
-const DISPLAY_ERROR = 'DISPLAY_ERROR';
-const CLEAR_ERROR = 'CLEAR_ERROR';
-
-export default {
-  DISPLAY_ERROR,
-  CLEAR_ERROR
+export const types = {
+  DISPLAY_ERROR: 'DISPLAY_ERROR',
+  CLEAR_ERROR: 'CLEAR_ERROR'
 }
 
 export interface State {

@@ -1,5 +1,6 @@
 import React from 'react';
-import themeReducer, { themeActions, useThemeSelector } from '../ducks/theme';
+import themeReducer, { themeActions } from '../ducks/theme';
+import { useSelector } from '../context';
 import { mockInitialState, unmockInitialState } from '../ducks/theme/reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -46,7 +47,7 @@ describe('theme', () => {
     }), applyMiddleware(thunk));
     let state;
     function ReadContext() {
-      state = useThemeSelector(s => s);
+      state = useSelector(s => s.theme);
       return null;
     }
     renderer.create(

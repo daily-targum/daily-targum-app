@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import thunk from 'redux-thunk';
-import { AsyncStorage } from 'react-native';
 import * as reducers from "./ducks";
+import { CombinedReducers } from './types';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const persistConfig = {
   key: 'root',
@@ -11,7 +12,7 @@ const persistConfig = {
   whitelist: ['theme', 'notifications', 'bookmark', 'page']
 };
 
-const reducer = persistCombineReducers(persistConfig, reducers);
+const reducer = persistCombineReducers<CombinedReducers>(persistConfig, reducers);
 
 export const store = createStore(reducer, applyMiddleware(thunk));
 export const persistor = persistStore(store, {});

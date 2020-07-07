@@ -1,4 +1,4 @@
-import types from './types';
+import { types } from './types';
 
 function toggleDarkMode(val?: boolean): any {
   return (dispatch: any, getState: any) => {

@@ -187,8 +187,9 @@ exports[`Drawer renders correctly 1`] = `
           Array [
             Object {
               "color": "#000",
+              "fontSize": 16,
+              "lineHeight": 19.2,
             },
-            null,
             null,
             Object {
               "color": "#f70737",
@@ -291,8 +292,9 @@ exports[`Drawer renders correctly 1`] = `
           Array [
             Object {
               "color": "#000",
+              "fontSize": 16,
+              "lineHeight": 19.2,
             },
-            null,
             null,
             Object {
               "color": "#f70737",
@@ -395,8 +397,9 @@ exports[`Drawer renders correctly 1`] = `
           Array [
             Object {
               "color": "#000",
+              "fontSize": 16,
+              "lineHeight": 19.2,
             },
-            null,
             null,
             Object {
               "color": "#f70737",
@@ -499,8 +502,9 @@ exports[`Drawer renders correctly 1`] = `
           Array [
             Object {
               "color": "#000",
+              "fontSize": 16,
+              "lineHeight": 19.2,
             },
-            null,
             null,
             Object {
               "color": "#f70737",

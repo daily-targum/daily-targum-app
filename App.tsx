@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Theme, ErrorSnackbar, Grid } from './src/components';
 import { logger, useAppStateChange, isBeta } from './src/utils';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import ReduxProvider from './src/store/Provider';
+import { Provider as ReduxProvider } from './src/store';
 import { store } from './src/store/store';
 import { Navigator } from './src/navigation';
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -13,8 +13,8 @@ import * as Updates from 'expo-updates';
 const MAX_TIME_TO_WAIT_FOR_REDUX_TASKS_MS = 3 * 1000;
 
 function App() {
-  const [reduxLoaded, setReduxLoaded] = React.useState(false);
-  const [startupTasksFinished, setStartupTasksFinished] = React.useState(false);
+  const [ reduxLoaded, setReduxLoaded ] = React.useState(false);
+  const [ startupTasksFinished, setStartupTasksFinished ] = React.useState(false);
 
   // beta app attempts to update
   useAppStateChange(async (state) => {
@@ -67,7 +67,7 @@ function App() {
     if (startupTasksFinished && reduxLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [startupTasksFinished, reduxLoaded])
+  }, [ startupTasksFinished, reduxLoaded ])
 
   return startupTasksFinished ? (
     <SafeAreaProvider>

@@ -85,9 +85,6 @@ function lockHeight<N extends number | string>(height: N): {
 
 function page(theme: Theme) {
   return {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-    height: '100%',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2)
   } as const;

@@ -15,9 +15,9 @@ export const SPINNER_DELAY = 750;
 
 
 export function ActivityIndicator(props : ActivityIndicatorProps) {
-  const {colors} = Theme.useTheme();
+  const theme = Theme.useTheme();
   const styles = Theme.useStyleCreator(styleCreator);
-  const [visible, setVisible] = useState(false);
+  const [ visible, setVisible ] = useState(false);
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -28,7 +28,7 @@ export function ActivityIndicator(props : ActivityIndicatorProps) {
 
   return !visible ? null : (
     <Indicator
-      color={colors.spinner}
+      color={theme.colors.spinner}
       style={styles.activityIndicator}
       {...props}
     />

@@ -5,14 +5,14 @@ import { useNavigation } from '@react-navigation/core';
 import { Surface, Theme, Section } from '../components';
 import { navigation as navConfig } from '../constants';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../store';
 
 export const HEIGHT = navConfig.bottomTabBar.height;
 
-function Footer(props: BottomTabBarProps) {
+export function BottomTabBar(props: BottomTabBarProps) {
   const { insets, colors } = Theme.useTheme();
   const navigation = useNavigation();
-  const visible = useSelector((s: any) => s.navigation.bottomTabBarVisible);
+  const visible = useSelector(s => s.navigation.bottomTabBarVisible);
   const offset = React.useRef(new Animated.Value(+visible)).current;
 
   React.useEffect(() => {
@@ -22,16 +22,16 @@ function Footer(props: BottomTabBarProps) {
       duration: 220,
       useNativeDriver: true
     }).start();
-  }, [visible]);
+  }, [ visible ]);
 
   return (
     <Animated.View
       style={{
         height: navConfig.bottomTabBar.height + insets.bottom,
         position: 'absolute',
+        right: 0,
         bottom: 0,
         left: 0,
-        right: 0,
         transform: [{ 
           translateY: offset.interpolate({
             inputRange: [0, 1],
@@ -88,9 +88,9 @@ function useHeight({
 }: {
   safe?: boolean
 }) {
-  const {insets} = Theme.useTheme();
+  const theme = Theme.useTheme();
 
-  const paddingBottom = (safe ? insets.bottom : 0);
+  const paddingBottom = (safe ? theme.insets.bottom : 0);
   return navConfig.bottomTabBar.height + paddingBottom;
 }
 
@@ -101,13 +101,15 @@ function getUnsafeHeight(): number {
 function ScrollSpacer() {
   const paddingBottom = useHeight({safe: true});
   return (
-    <View style={{
-      height: Platform.OS !== 'ios' ? paddingBottom : 0
-    }}/>
+    <View 
+      style={{
+        height: Platform.OS !== 'ios' ? paddingBottom : 0
+      }}
+    />
   );
 }
 
-Footer.useHeight = useHeight;
-Footer.getUnsafeHeight = getUnsafeHeight;
-Footer.ScrollSpacer = ScrollSpacer;
-export default Footer;
+BottomTabBar.useHeight = useHeight;
+BottomTabBar.getUnsafeHeight = getUnsafeHeight;
+BottomTabBar.ScrollSpacer = ScrollSpacer;
+export default BottomTabBar;

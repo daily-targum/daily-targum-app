@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { errorActions, useErrorSelector } from '../store/ducks/error';
+import { errorActions } from '../store/ducks/error';
 import Theme from '../components/Theme';
 import Animated, { Easing } from 'react-native-reanimated';
+import { useSelector } from '../store';
 
 const HEIGHT = 30;
 
 export function ErrorSnackbar() {
   const theme = Theme.useTheme();
-  const error = useErrorSelector(s => s.error);
+  const error = useSelector(s => s.error.error);
   const dispatch = useDispatch();
 
   useEffect(() => {

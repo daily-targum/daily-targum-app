@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Theme, Text, Section } from '../components';
 import { useScrollToTop } from '@react-navigation/native';
 import Header from '../navigation/Header';
-import Footer from '../navigation/BottomTabBar';
+import BottomTabBar from '../navigation/BottomTabBar';
 import { ScrollView } from 'react-native-gesture-handler';
 import { styleHelpers } from '../utils';
 
@@ -13,12 +13,12 @@ export function NotFound() {
 
   const contentInsets = {
     top: Header.useHeight({ safe: true }),
-    bottom: Footer.useHeight({ safe: true })
+    bottom: BottomTabBar.useHeight({ safe: true })
   };
 
   const scrollIndicatorInsets = {
     top: Header.useHeight({ safe: false }),
-    bottom: Footer.useHeight({ safe: false })
+    bottom: BottomTabBar.useHeight({ safe: false })
   };
 
   // tap tab to scroll to top
@@ -51,13 +51,14 @@ export function NotFound() {
           <Text variant='p'>Sorry, but the page you were trying to view does not exist.</Text>
         </Section>
       </ScrollView>
-      <Footer.ScrollSpacer/>
+      <BottomTabBar.ScrollSpacer/>
     </View>
   );
 }
 
 const styleCreator = Theme.makeStyleCreator((theme) => ({
   container: {
+    ...styleHelpers.container(theme),
     ...styleHelpers.page(theme)
   },
   scrollView: {

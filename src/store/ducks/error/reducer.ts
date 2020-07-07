@@ -1,4 +1,4 @@
-import types, { State } from './types';
+import { types, State } from './types';
 
 const initialState: State = {
   error: null

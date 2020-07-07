@@ -1,15 +1,16 @@
 import React from 'react';
 import { Theme, Button, ActivityIndicator, Text, Divider, Card, CardRow, Section } from '../components';
 import { View, RefreshControl, Platform, TouchableWithoutFeedback } from 'react-native';
-import { GetArticle } from '../shared/src/client';
+import { Article } from '../shared/src/client';
 import { formatDateAbriviated } from '../shared/src/utils';
 import Header from '../navigation/Header';
-import Footer from '../navigation/BottomTabBar';
+import BottomTabBar from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';
 import { useDispatch } from 'react-redux';
 import { useDate } from '../utils';
 import Animated from 'react-native-reanimated';
-import { newsActions, useNewsSelector } from '../store/ducks/news';
+import { newsActions } from '../store/ducks/news';
+import { useSelector } from '../store';
 import { useScrollToTop, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
@@ -50,7 +51,7 @@ function ArticleSection({
   category
 }: {
   title: string,
-  items?: GetArticle[] | null,
+  items?: Article[] | null,
   category: string
 }) {
   const styles = Theme.useStyleCreator(styleCreator);
@@ -71,7 +72,7 @@ function ArticleSection({
       <Section style={styles.section}>
 
         <TouchableWithoutFeedback onPress={() => navigation.navigate('ArticleCategory', {category})}>
-          <Text style={styles.sectionTitle}>{title}</Text>
+          <Text variant='h4'>{title}</Text>
         </TouchableWithoutFeedback>
 
         <CardRow items={chopArray(items)}>
@@ -131,17 +132,17 @@ function ArticleSection({
 
 export function Home() {
   const styles = Theme.useStyleCreator(styleCreator);
-  const { dark, statusBarHeight, colors, insets } = Theme.useTheme();
+  const theme = Theme.useTheme();
   const contentInsets = {
-    top: HEADER_HEIGHT - (insets.top - statusBarHeight),
-    bottom: Footer.useHeight({safe: false})
+    top: HEADER_HEIGHT - (theme.insets.top - theme.statusBarHeight),
+    bottom: BottomTabBar.useHeight({safe: false})
   };
   const scrollY = React.useRef(new Animated.Value(-contentInsets.top)).current;
   const dispatch = useDispatch();
-  const refreshing = useNewsSelector(s => s.refreshingAll);
-  const loading = useNewsSelector(s => s.loading);
-  const feed = useNewsSelector(s => s.feed);
-  const ref = React.useRef<any>();
+  const refreshing = useSelector(s => s.news.refreshingAll);
+  const loading = useSelector(s => s.news.loading);
+  const feed = useSelector(s => s.news.feed);
+  const ref = React.useRef<any>(null);
   const date = useDate('minute');
   useScrollToTop(React.useRef({
     scrollToTop: () => ref.current?.scrollToOffset({ offset: -contentInsets.top }),
@@ -157,7 +158,7 @@ export function Home() {
         contentInset={contentInsets}
         automaticallyAdjustContentInsets={false}
         contentInsetAdjustmentBehavior='always'
-        indicatorStyle={dark ? 'white' : 'black'}
+        indicatorStyle={theme.dark ? 'white' : 'black'}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }]
         )}
@@ -175,7 +176,7 @@ export function Home() {
               dispatch(newsActions.refreshAll({}));
             }}
             refreshing={refreshing}
-            tintColor={colors.spinner}
+            tintColor={theme.colors.spinner}
           />
         }
         style={{flex: 1, maxHeight: '100%'}}
@@ -183,7 +184,7 @@ export function Home() {
         {Platform.OS !== 'ios' ? (
           <View style={styles.pageHeader} testID='PageHeader'>
             <View style={styles.row}>
-              <Text style={styles.title}>Daily Targum</Text>
+              <Text variant='h1' style={styles.title}>Daily Targum</Text>
               <Drawer.Button/>
             </View>
             <Text style={styles.subtitle}>{date.format('dddd, MMMM D')}</Text>
@@ -207,8 +208,8 @@ export function Home() {
             right: 0,
             transform: [{
               translateY: scrollY.interpolate({
-                inputRange: [-contentInsets.top - insets.top, 0],
-                outputRange: [0, -contentInsets.top - insets.top],
+                inputRange: [-contentInsets.top - theme.insets.top, 0],
+                outputRange: [0, -contentInsets.top - theme.insets.top],
                 extrapolate: Animated.Extrapolate.CLAMP
               })
             }]
@@ -216,7 +217,7 @@ export function Home() {
           testID='PageHeader'
         >
           <View style={styles.row}>
-            <Text style={styles.title}>Daily Targum</Text>
+            <Text variant='h1' style={styles.title}>Daily Targum</Text>
             <Drawer.Button/>
           </View>
           <Text style={styles.subtitle}>{date.format('dddd, MMMM D')}</Text>
@@ -226,11 +227,11 @@ export function Home() {
         title='Daily Targum'
         scrollY={scrollY}
         offset={Platform.select({
-          ios: -(contentInsets.top-statusBarHeight*0.5) - insets.top,
+          ios: -(contentInsets.top - theme.statusBarHeight * 0.5) - theme.insets.top,
           default: 0
         })}
       />
-      <Footer.ScrollSpacer/>
+      <BottomTabBar.ScrollSpacer/>
 
       {loading ? <ActivityIndicator.Screen/> : null}
     </View>
@@ -254,7 +255,6 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     backgroundColor: theme.colors.primary
   },
   title: {
-    fontSize: 32, 
     fontWeight: '800',
     color: '#fff'
   },
@@ -267,11 +267,6 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   // Medium Card
   section: {
     paddingTop: theme.spacing(1.5),
-    paddingBottom: theme.spacing(1.5),
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '800',
     paddingBottom: theme.spacing(1.5),
   },
   moreButton: {

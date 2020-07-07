@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ViewToken, Platform } from 'react-native';
 import { Theme, Surface, Text } from '../components';
 import { CalendarList } from 'react-native-calendars';
-import Footer from '../navigation/BottomTabBar';
+import BottomTabBar from '../navigation/BottomTabBar';
 import Drawer from '../navigation/Drawer';
 import dayjs from 'dayjs';
 // import { client } from '../clients/contentful/client';
@@ -206,7 +206,7 @@ export class Screen extends Component<WithStyleCreator, any> {
     const {colors, dark} = this.props.theme;
     const {styles} = this.props;
     const contentInsets = {
-      bottom: Footer.getUnsafeHeight()
+      bottom: BottomTabBar.getUnsafeHeight()
     };
     const eventMarks: any = {};
     events.forEach(({ fields, isDivider }: any) => {
@@ -223,7 +223,7 @@ export class Screen extends Component<WithStyleCreator, any> {
         >
           <View style={styles.pageHeader}>
             <View style={styles.row}>
-              <Text style={styles.title}>{dayjs(month.dateString).format('MMMM YYYY')}</Text>
+              <Text variant='h1' style={styles.title}>{dayjs(month.dateString).format('MMMM YYYY')}</Text>
               <Drawer.Button/>
             </View>
             <Text style={styles.subtitle}>Events</Text>
@@ -301,7 +301,7 @@ export class Screen extends Component<WithStyleCreator, any> {
           onViewableItemsChanged={this.handleViewableItemsChanged}
           viewabilityConfig={this.viewabilityConfig}
         />
-        <Footer.ScrollSpacer/>
+        <BottomTabBar.ScrollSpacer/>
       </View>
     );
   }
@@ -325,8 +325,6 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     paddingRight: 0
   },
   title: {
-    fontSize: 32, 
-    fontWeight: '800',
     color: '#fff'
   },
   subtitle: {

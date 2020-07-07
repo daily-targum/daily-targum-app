@@ -1,14 +1,6 @@
-/**
- * long description for the file
- *
- * @summary short description for the file
- * @author Christian Juth
- */
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { Appearance, AppearanceProvider } from 'react-native-appearance';
-import { useThemeSelector } from '../store/ducks/theme';
 import { useSafeArea, EdgeInsets } from 'react-native-safe-area-context';
 import { Provider as ContextThemeProvider, useTheme as defaultUseTheme, Context } from 'react-context-theming/lib/index';
 import * as NativeTheming from 'react-context-theming/lib/native';
@@ -16,6 +8,7 @@ import { StyleCreatorFunction, GenerateStylesFunction } from 'react-context-them
 import { ComputedTheme } from '../types';
 import { theme } from '../constants';
 import { StyleSheet, Platform } from 'react-native';
+import { useSelector } from '../store';
 
 /**
  * THIS IS A HACK!!!
@@ -35,10 +28,10 @@ function statusBarHeight(insets: EdgeInsets) {
 
 export function Provider({ children }: {children: React.ReactNode}) {
   const insets = useSafeArea();
-  const darkModeOverride = useThemeSelector(s => s.darkModeOverride);
-  const useDeviceSettings = useThemeSelector(s => s.useDeviceSettings);
-  const [ activeTheme, setActiveTheme ] = useState(darkModeOverride ? theme.dark : theme.light);
-  const [ systemWideDarkMode, setSystemWideDarkMode ] = useState(false);
+  const darkModeOverride = useSelector(s => s.theme.darkModeOverride);
+  const useDeviceSettings = useSelector(s => s.theme.useDeviceSettings);
+  const [ activeTheme, setActiveTheme ] = React.useState(darkModeOverride ? theme.dark : theme.light);
+  const [ systemWideDarkMode, setSystemWideDarkMode ] = React.useState(false);
 
   function updateTheme() {
     const darkAppearance = Appearance.getColorScheme() === 'dark';
@@ -48,7 +41,7 @@ export function Provider({ children }: {children: React.ReactNode}) {
   }
 
   // subscribe to dark mode
-  useEffect(() => {
+  React.useEffect(() => {
     if(useDeviceSettings) {
       const subscription = Appearance.addChangeListener(() => updateTheme());
       return function cleanup() {
@@ -58,7 +51,7 @@ export function Provider({ children }: {children: React.ReactNode}) {
   }, [useDeviceSettings]);
 
   // subscribe to screen rotation
-  useEffect(() => {
+  React.useEffect(() => {
     updateTheme();
   }, [darkModeOverride, useDeviceSettings]);
 

@@ -1,15 +1,14 @@
 import React from 'react';
-import { useThemeSelector } from '../ducks/theme';
+import { useSelector, Provider } from '../context';
 import { store } from '../store';
 import renderer from 'react-test-renderer';
-import Provider from '../Provider';
 
 describe('Redux Provider', () => {
 
   it('hydration', async (done) => {
     let state: any;
     function ReadContext() {
-      state = useThemeSelector(s => s);
+      state = useSelector(s => s.theme);
       expect(state).toBe(store.getState().theme);
       done();
       return null;

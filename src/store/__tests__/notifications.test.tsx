@@ -6,7 +6,8 @@ jest.mock('expo', () => ({
 jest.mock('../../shared/src/client/actions/notifications');
 
 import React from 'react';
-import notificationsReducer, { notificationActions, useNotificationsSelector } from '../ducks/notifications';
+import notificationsReducer, { notificationsActions } from '../ducks/notifications';
+import { useSelector } from '../context';
 import { mockInitialState, unmockInitialState, INITIAL_STATE } from '../ducks/notifications/reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -28,9 +29,9 @@ describe('notifications', () => {
       notifications: notificationsReducer
     }), applyMiddleware(thunk));
     expect(store.getState().notifications.enabled).toBe(true);
-    store.dispatch(notificationActions.toggleNotifications({ force: false }));
+    store.dispatch(notificationsActions.toggleNotifications({ force: false }));
     expect(store.getState().notifications.enabled).toBe(false);
-    store.dispatch(notificationActions.toggleNotifications({ force: false }));
+    store.dispatch(notificationsActions.toggleNotifications({ force: false }));
     expect(store.getState().notifications.enabled).toBe(true);
   });
 
@@ -54,16 +55,16 @@ describe('notifications', () => {
         done();
       }
     });
-    store.dispatch(notificationActions.bootstrapPushNotifications({force: true}));
+    store.dispatch(notificationsActions.bootstrapPushNotifications({force: true}));
   });
 
-  it('useNotificationSelector', () => {
+  it('useSelector', () => {
     const store = createStore(combineReducers({
       notifications: notificationsReducer
     }), applyMiddleware(thunk));
     let state;
     function ReadContext() {
-      state = useNotificationsSelector(s => s);
+      state = useSelector(s => s.notifications);
       return null;
     }
     renderer.create(

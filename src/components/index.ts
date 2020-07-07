@@ -11,6 +11,7 @@ export * from './Divider';
 export * from './ErrorAppBar';
 export * from './FocalPointImage';
 export * from './Grid/native';
+export * from './HTML';
 export * from './Icon';
 export * from './Surface';
 export * from './Section';

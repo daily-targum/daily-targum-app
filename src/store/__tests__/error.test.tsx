@@ -1,5 +1,6 @@
 import React from 'react';
-import errorReducer, { errorActions, useErrorSelector } from '../ducks/error';
+import errorReducer, { errorActions } from '../ducks/error';
+import { useSelector } from '../context';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import renderer from 'react-test-renderer';
@@ -25,13 +26,13 @@ describe('error duck', () => {
     expect(store.getState().error.error).toBe(null);
   });
 
-  it('useErrorSelector', () => {
+  it('useSelector', () => {
     const store = createStore(combineReducers({
       error: errorReducer
     }), applyMiddleware(thunk));
     let state;
     function ReadContext() {
-      state = useErrorSelector(s => s);
+      state = useSelector(s => s.error);
       return null;
     }
     renderer.create(

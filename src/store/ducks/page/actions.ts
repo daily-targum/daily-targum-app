@@ -1,6 +1,4 @@
-import types, { State } from './types';
-import errorTypes from '../error/types';
-import { logger } from '../../../utils';
+import { types } from './types';
 import { getPage } from '../../../shared/src/client';
 
 function loadPage({ slug }: {
@@ -18,11 +16,6 @@ function loadPage({ slug }: {
           slug
         }
       });
-      // dispatch({
-      //   type: errorTypes.DISPLAY_ERROR,
-      //   payload: '404. Page Not Found.'
-      // });
-      // logger.logError(`No contentful page found with title "${title}"`);
     }
 
     else {

@@ -6,7 +6,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll=true --setupFiles ./dotenv.js",
+    "test": "jest --watchAll=true",
     "e2e": "concurrently -k --success first 'wait-port -t 60000 19000 && detox test' 'expo start >/dev/null'",
     "typescript": "tsc --noEmit",
     "build:ios:prod": "expo build:ios --release-channel='production'",
@@ -15,7 +15,7 @@
     "build:android:beta": "expo build:android --release-channel='default' -t app-bundle",
     "ota:prod": "expo publish --release-channel='production' --non-interactive ",
     "ota:beta": "expo publish --release-channel='default' --non-interactive",
-    "coverage": "jest --watchAll=false --coverage  --setupFiles ./dotenv.js",
+    "coverage": "jest --watchAll=false --coverage",
     "lint": "yarn eslint src/**/*.{ts,tsx}"
   },
   "husky": {
@@ -27,6 +27,7 @@
   "dependencies": {
     "@contentful/rich-text-html-renderer": "14.1.1",
     "@expo/vector-icons": "^10.0.0",
+    "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "5.9.2",
     "@react-navigation/bottom-tabs": "5.6.1",

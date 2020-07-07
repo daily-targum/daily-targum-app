@@ -1,11 +1,13 @@
 import React, {useRef} from 'react';
 import { View, ScrollView, Clipboard, Alert } from 'react-native';
 import Constants from 'expo-constants';
-import { useNotificationsSelector } from '../store/ducks/notifications';
-import { Theme, Section, Text } from '../components';
+import { Theme, Section, Text, Divider, Button } from '../components';
 import Header from '../navigation/Header';
-import Footer from '../navigation/BottomTabBar';
-import { useScrollToTop } from '@react-navigation/native';
+import BottomTabBar from '../navigation/BottomTabBar';
+import { useScrollToTop, useNavigation } from '@react-navigation/native';
+import { styleHelpers } from '../utils';
+import { StackActions } from '@react-navigation/native';
+import { useSelector } from '../store';
 
 function format(str: string) {
   const output =  str.replace(/([A-Z])/, ' $1');
@@ -14,11 +16,12 @@ function format(str: string) {
 
 export function Developer() {
   const {dark} = Theme.useTheme();
-  const notificationsToken = useNotificationsSelector(s => s.token);
+  const notificationsToken = useSelector(s => s.notifications.token);
   const styles = Theme.useStyleCreator(styleCreator);
+  const navigation = useNavigation();
   const contentInsets = {
     top: Header.useHeight({ safe: false }),
-    bottom: Footer.useHeight({ safe: false })
+    bottom: BottomTabBar.useHeight({ safe: false })
   };
 
   const ref: any = useRef();
@@ -83,8 +86,33 @@ export function Developer() {
         indicatorStyle={dark ? 'white' : 'black'}
         testID='SettingsScreen'
       >
-        <View style={styles.spacer}/>
-        <Section>
+
+        <Section style={styles.section}>
+          <Text style={styles.sectionTitle}>Tools</Text>
+          <View 
+            style={styles.row}
+          >
+            <Text 
+              style={styles.cellLeft}
+              numberOfLines={1}
+            >Test Deep Links</Text>
+            <Button.Link 
+              style={styles.cellRight}
+              textStyle={{textAlign: 'right'}}
+              onPress={() => {
+                navigation.dispatch(
+                  StackActions.push('Page', { slug: 'debug' })
+                )
+              }}
+            >
+              Debug Screen
+            </Button.Link>
+          </View>
+        </Section>
+
+        <Divider/>
+
+        <Section style={styles.section}>
           <Text style={styles.sectionTitle}>Constants</Text>
           {Object.keys(constants).map((key) => (
             <View 
@@ -106,8 +134,8 @@ export function Developer() {
 
         {Object.keys(platform).length > 0 ? (
           <>
-            <View style={styles.spacer}/>
-            <Section>
+            <Divider/>
+            <Section style={styles.section}>
               <Text style={styles.sectionTitle}>Manifest</Text>
               {Object.keys(manifest).map((key) => (
                 <View 
@@ -131,8 +159,8 @@ export function Developer() {
 
         {Object.keys(platform).length > 0 ? (
           <>
-            <View style={styles.spacer}/>
-            <Section>
+            <Divider/>
+            <Section style={styles.section}>
               <Text style={styles.sectionTitle}>Platform</Text>
               {Object.keys(platform).map((key) => (
                 <View 
@@ -154,8 +182,8 @@ export function Developer() {
           </>
         ) : null}
 
-        <View style={styles.spacer}/>
-        <Section>
+        <Divider/>
+        <Section style={styles.section}>
           <Text style={styles.sectionTitle}>Push Nofications</Text>
           {Object.keys(pushNotifications).map((key) => (
             <View 
@@ -176,18 +204,17 @@ export function Developer() {
         </Section>
 
       </ScrollView>
-      <Footer.ScrollSpacer/>
+      <BottomTabBar.ScrollSpacer/>
     </View>
   );
 }
 
 const styleCreator = Theme.makeStyleCreator(theme => ({
   container: {
-    flex: 1,
-    backgroundColor: theme.colors.background
+    ...styleHelpers.container(theme)
   },
-  spacer: {
-    height: theme.spacing(1)
+  section: {
+    ...styleHelpers.page(theme)
   },
   row: {
     flexDirection: 'row',
@@ -200,7 +227,8 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   },
   cellRight: {
     width: '50%',
-    textAlign: 'right'
+    textAlign: 'right',
+    justifyContent: 'flex-end'
   },
   sectionTitle: {
     color: '#888',

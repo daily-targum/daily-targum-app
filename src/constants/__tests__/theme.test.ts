@@ -1,4 +1,4 @@
-import * as theme from '../theme';
+import { theme } from '../theme';
 
 describe('theme', () => {
 

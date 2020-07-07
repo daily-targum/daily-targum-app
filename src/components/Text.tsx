@@ -1,18 +1,25 @@
 import React from 'react';
 import { Text as DefaultText, TextProps as DefaultTextProps, View } from 'react-native';
 import Theme from './Theme';
+import { Theme as ThemeType } from '../types';
 
-const FONT_BASE = 15;
+const FONT_BASE = 16;
 const LINE_HEIGHT_MULTIPLIER = 1.2;
 const LINE_HEIGHT_MULTIPLIER_PARAGRAPH = 1.8;
 
-function getFontSize(
-  multiplier: number, 
-  type: 'normal' | 'paragraph' = 'normal'
-) {
+function getTextBase({
+  theme,
+  size,
+  type = 'normal'
+} : {
+  theme: ThemeType
+  size: number
+  type?: 'normal' | 'paragraph'
+}) {
   return {
-    fontSize: multiplier * FONT_BASE,
-    lineHeight: multiplier * FONT_BASE * (type === 'normal' ? LINE_HEIGHT_MULTIPLIER : LINE_HEIGHT_MULTIPLIER_PARAGRAPH)
+    color: theme.colors.text,
+    fontSize: size * FONT_BASE,
+    lineHeight: size * FONT_BASE * (type === 'normal' ? LINE_HEIGHT_MULTIPLIER : LINE_HEIGHT_MULTIPLIER_PARAGRAPH)
   } as const;
 }
 
@@ -27,17 +34,17 @@ export interface TextProps extends DefaultTextProps {
 }
 
 export function Text({
-  variant,
+  variant = 'span',
   noPadding = false,
   lockNumberOfLines = false,
   ...props
 }: TextProps) {
   const styles = Theme.useStyleCreator(styleCreator);
+
   return (
     <DefaultText 
       {...props}
       style={[
-        styles.textBase,
         variant ? styles[variant] : null,
         noPadding ? styles.noPadding : null,
         props.style,
@@ -57,53 +64,94 @@ export function Br() {
 }
 
 const styleCreator = Theme.makeStyleCreator(theme => ({
-  textBase: {
-    color: theme.colors.text
-  },
   h1: {
-    fontWeight: '700',
-    ...getFontSize(2),
+    ...getTextBase({
+      theme,
+      size: 2
+    }),
+    fontWeight: '800',
     marginBottom: theme.spacing(1)
   },
   h2: {
+    ...getTextBase({
+      theme,
+      size: 1.7
+    }),
     fontWeight: '700',
-    ...getFontSize(1.7),
     marginBottom: theme.spacing(2)
   },
   h3: {
+    ...getTextBase({
+      theme,
+      size: 1.3
+    }),
     fontWeight: '700',
-    ...getFontSize(1.3),
     marginBottom: theme.spacing(2)
   },
   h4: {
+    ...getTextBase({
+      theme,
+      size: 1.3
+    }),
     fontWeight: '700',
-    ...getFontSize(1.2),
     marginBottom: theme.spacing(1)
   },
   h5: {
+    ...getTextBase({
+      theme,
+      size: 1.2
+    }),
     fontWeight: '700',
-    ...getFontSize(1.2),
     marginBottom: theme.spacing(1),
   },
   h6: {
-    ...getFontSize(0.9),
+    ...getTextBase({
+      theme,
+      size: 0.9
+    }),
     marginBottom: theme.spacing(1),
   },
   p: {
+    ...getTextBase({
+      theme,
+      size: 1, 
+      type: 'paragraph'
+    }),
     marginBottom: theme.spacing(2),
-    ...getFontSize(1, 'paragraph'),
   },
   span: {
-    ...getFontSize(1),
+    ...getTextBase({
+      theme,
+      size: 1
+    }),
   },
   br: {
     height: theme.spacing(2),
   },
   noPadding: {
     marginBottom: 0
+  },
+  // extra styles for html view
+  a: {
+    ...getTextBase({
+      theme,
+      size: 1, 
+      type: 'paragraph'
+    }),
+    color: theme.colors.accent,
+    marginBottom: theme.spacing(2),
+    textDecorationLine: 'underline'
+  },
+  b: {
+    fontWeight: 'bold'
   }
 }));
 
+function useTextStyles() {
+  return Theme.useStyleCreator(styleCreator);
+}
+
 Text.Br = Br;
 Text.FONT_BASE = FONT_BASE;
+Text.useStyles = useTextStyles;
 export default Text;

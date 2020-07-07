@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, Card, ActivityIndicator } from '../components';
 import Header from '../navigation/Header';
-import Footer from '../navigation/BottomTabBar';
+import BottomTabBar from '../navigation/BottomTabBar';
 import { getAuthorPage, GetAuthorPage, Article } from '../shared/src/client/actions';
 import { useRoute } from '@react-navigation/core';
 import { AuthorRouteProp } from '../navigation/types';
@@ -26,12 +26,12 @@ export function Author() {
 
   const contentInsets = {
     top: Header.useHeight({ safe: true }),
-    bottom: Footer.useHeight({ safe: true })
+    bottom: BottomTabBar.useHeight({ safe: true })
   };
 
   const scrollIndicatorInsets = {
     top: Header.useHeight({ safe: false }),
-    bottom: Footer.useHeight({ safe: false })
+    bottom: BottomTabBar.useHeight({ safe: false })
   };
 
   // tap tab to scroll to top
@@ -68,7 +68,7 @@ export function Author() {
         style={styles.list}
         ref={ref}
         data={articles}
-        keyExtractor={(item: Article, index) => item.id}
+        keyExtractor={item => item.id}
         // refreshControl={
         //   <RefreshControl
         //     onRefresh={() => {
@@ -114,7 +114,7 @@ export function Author() {
           </View>
         )}
       />
-      <Footer.ScrollSpacer/>
+      <BottomTabBar.ScrollSpacer/>
     </View>
   );
 }

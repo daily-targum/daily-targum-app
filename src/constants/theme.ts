@@ -1,7 +1,7 @@
 import { Theme } from '../types';
 import { Platform } from 'react-native';
 
-export const light: Theme = {
+const light: Theme = {
   colors: {
     primary: '#000',
     accent: '#f70737',
@@ -31,7 +31,7 @@ export const light: Theme = {
   spacing: (multiplier: number = 1) => 7 * multiplier
 }
 
-export const dark: Theme = {
+const dark: Theme = {
   ...light,
   colors: {
     ...light.colors,
@@ -50,4 +50,9 @@ export const dark: Theme = {
     button: '#fff'
   },
   dark: true
+}
+
+export const theme = {
+  dark,
+  light
 }

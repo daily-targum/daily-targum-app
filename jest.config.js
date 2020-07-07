@@ -16,5 +16,9 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!**/node_modules/**",
+  ],
+  setupFiles: [
+    "./dotenv.js",
+    "./jestSetup.js"
   ]
 };

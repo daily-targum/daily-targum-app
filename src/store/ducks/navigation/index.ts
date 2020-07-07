@@ -1,11 +1,15 @@
 import React from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import reducer from './reducer';
-import * as navigationActions from "./actions";
 import { useDispatch } from 'react-redux';
 
+export { default } from './reducer';
+import * as navigationActions from "./actions";
 export { navigationActions };
-export default reducer;
+export { 
+  types as navigationTypes, 
+  State  as NavigationState
+} from './types';
+
 
 export function useHideBottomTabBar() {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import types, { State } from './types';
+import { types, State } from './types';
 
 const INITIAL_STATE: State = {
   bottomTabBarVisible: true

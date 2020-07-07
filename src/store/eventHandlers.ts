@@ -1,5 +1,5 @@
 import { store } from './store';
-import { notificationActions } from './ducks/notifications';
+import { notificationsActions } from './ducks/notifications';
 import { newsActions } from './ducks/news';
 import { themeActions } from './ducks/theme';
 
@@ -7,7 +7,7 @@ import { themeActions } from './ducks/theme';
  * This gests run once on app startup
  */
 export function onAppStart() {
-  store.dispatch(notificationActions.bootstrapPushNotifications({}));
+  store.dispatch(notificationsActions.bootstrapPushNotifications({}));
   store.dispatch(themeActions.patchReducer());
 }
 

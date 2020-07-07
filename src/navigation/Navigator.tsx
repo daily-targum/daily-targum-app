@@ -1,13 +1,11 @@
 import React, { useRef } from 'react';
-import * as Linking from 'expo-linking'
 import { Platform } from 'react-native';
 import { NavigationContainer, useLinking, NavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Icon, Theme, ActivityIndicator } from '../components';
-import { logger } from '../utils';
-import { navigation } from '../constants';
+import { Icon, ActivityIndicator } from '../components';
+import { navigation, deepLink } from '../constants/navigation';
 import { hyphenatedToCapitalized } from '../shared/src/utils';
 
 // custom navigation components
@@ -71,7 +69,10 @@ const HomeStackNavigator = () => {
           title: hyphenatedToCapitalized(route.params.author) 
         })}
       />
-      <HomeStack.Screen name="NotFound" component={Screens.NotFound}/>
+      <HomeStack.Screen 
+        name="NotFound" 
+        component={Screens.NotFound}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -86,7 +87,10 @@ const CalendarStackNavigator = () => {
         headerTransparent: true 
       }}
     >
-      <CalendarStack.Screen name="Calendar" component={Screens.Calendar}/>
+      <CalendarStack.Screen 
+        name="Calendar" 
+        component={Screens.Calendar}
+      />
     </CalendarStack.Navigator>
   );
 }
@@ -129,17 +133,13 @@ const DrawerNavigator = () => {
       drawerType={navigation.drawer.type}
       drawerContent={props => <CustomDrawer {...props}/>}
     > 
-      <Drawer.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+      <Drawer.Screen 
+        name="BottomTabNavigator" 
+        component={BottomTabNavigator} 
+      />
     </Drawer.Navigator>
   );
 }
-
-
-const prefixes = [
-  Linking.makeUrl('/'),
-  Linking.makeUrl(''),
-  'https://dailytargum.now.sh'
-];
 
 export default () => {
   const ref = useRef<NavigationContainerRef>(null);
@@ -147,52 +147,7 @@ export default () => {
   const [initialState, setInitialState] = React.useState();
 
   if(Platform.OS !== 'web') {
-    const { getInitialState } = useLinking(ref, {
-      prefixes,
-      config: {
-        initialRouteName: 'BottomTabNavigator',
-        screens: {
-          BottomTabNavigator: {
-            initialRouteName: 'HomeNavigator',
-            screens: {
-              HomeNavigator: {
-                initialRouteName: 'Home',
-                screens: {
-                  ArticleCategory: {
-                    path: 'section/:category',
-                    parse: {
-                      category: String
-                    },
-                  },
-                  Page: {
-                    path: 'page/:slug',
-                    parse: {
-                      slug: String,
-                    },
-                  },
-                  Preview: {
-                    path: 'preview/:id',
-                    parse: {
-                      id: String,
-                    },
-                  },
-                  Article: {
-                    path: 'article/:year/:month/:slug',
-                    parse: {
-                      year: String,
-                      month: String,
-                      slug: String
-                    },
-                  },
-                  NotFound: '*'
-                }
-              }
-            }
-          }
- 
-        }
-      },
-    });
+    const { getInitialState } = useLinking(ref, deepLink);
 
     React.useEffect(() => {
       let isCancled = false;

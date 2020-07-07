@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, StatusBar, NativeScrollEvent, Image, Platform } from 'react-native';
-import HTMLView from 'react-native-htmlview';
 import { logEvent } from '../utils/logger';
 import { useNavigation } from '@react-navigation/core';
-import { shareArticle, shareUrl, openLinkFromArticle, useFreshContent, styleHelpers } from '../utils';
-import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline } from '../components';
+import { shareArticle, useFreshContent, styleHelpers } from '../utils';
+import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline, HTML } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
 import NotFoundScreen from './NotFound';
@@ -80,7 +79,7 @@ function ArticleWithoutState({
         > 
           <View style={styles.page}>
             <Section style={styles.article}>
-              <Text style={styles.title}>{article.title}</Text>
+              <Text variant='h1'>{article.title}</Text>
               <View style={styles.spacer}/>
               <Byline
                 authors={article.authors}
@@ -88,12 +87,8 @@ function ArticleWithoutState({
                 publishDate={article.publishDate}
               />
               <View style={styles.spacer}/>
-              <HTMLView
-                addLineBreaks={false}
-                onLinkPress={(url) => openLinkFromArticle({url, article})}
-                onLinkLongPress={shareUrl}
-                stylesheet={styles}
-                value={article.body}
+              <HTML
+                html={article.body}
               />
             </Section>
             <Section innerStyle={styles.shareSection}>
@@ -209,33 +204,6 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     lineHeight: 28
   },
   // Text Styles
-  title: {
-    fontWeight: '800',
-    fontSize: 32,
-    lineHeight: 36
-  },
-  author: {
-    color: theme.colors.accent,
-    fontSize: 18,
-    marginBottom: theme.spacing(0.6)
-  },
-  date: {
-    color: theme.colors.textMuted,
-    fontSize: 14
-  },
-  p: {
-    color: theme.colors.text,
-    fontSize: 18,
-    lineHeight: 26,
-    marginBottom: theme.spacing(2)
-  },
-  a: {
-    fontSize: 17,
-    lineHeight: 26,
-    marginBottom: theme.spacing(2),
-    color: theme.colors.accent,
-    textDecorationLine: 'underline'
-  },
   shareSection: {
     justifyContent: 'center',
     alignItems: 'center',
