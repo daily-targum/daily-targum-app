@@ -1,5 +1,4 @@
 jest.mock('../Theme');
-jest.useFakeTimers();
 console.warn = jest.fn();
 
 import React from 'react';

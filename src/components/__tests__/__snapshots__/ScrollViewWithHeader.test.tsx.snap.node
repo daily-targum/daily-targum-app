@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Section /> bypass animation 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  onResponderGrant={[Function]}
+  onResponderReject={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onScroll={[Function]}
+  onScrollShouldSetResponder={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  onWheel={[Function]}
+  style={
+    Object {
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxFlex": 1,
+      "WebkitBoxOrient": "vertical",
+      "WebkitFlexDirection": "column",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "WebkitOverflowScrolling": "touch",
+      "WebkitTransform": "translateZ(0px)",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexDirection": "column",
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "overflowX": "hidden",
+      "overflowY": "auto",
+      "transform": "translateZ(0px)",
+    }
+  }
+>
+  <div
+    className="css-view-1dbjc4n"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+        style={
+          Object {
+            "WebkitBoxFlex": 1,
+            "WebkitFlexBasis": "0%",
+            "WebkitFlexGrow": 1,
+            "WebkitFlexShrink": 1,
+            "flexBasis": "0%",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "30px",
+            "msFlexNegative": 1,
+            "msFlexPositive": 1,
+            "msFlexPreferredSize": "0%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="css-text-901oao"
+      dir="auto"
+    >
+      Hello World!!!
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Section /> ios 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  onResponderGrant={[Function]}
+  onResponderReject={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onScroll={[Function]}
+  onScrollShouldSetResponder={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  onWheel={[Function]}
+  style={
+    Object {
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxFlex": 1,
+      "WebkitBoxOrient": "vertical",
+      "WebkitFlexDirection": "column",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "WebkitOverflowScrolling": "touch",
+      "WebkitTransform": "translateZ(0px)",
+      "flexDirection": "column",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexDirection": "column",
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "overflowX": "hidden",
+      "overflowY": "auto",
+      "transform": "translateZ(0px)",
+    }
+  }
+>
+  <div
+    className="css-view-1dbjc4n"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+        style={
+          Object {
+            "WebkitBoxFlex": 1,
+            "WebkitFlexBasis": "0%",
+            "WebkitFlexGrow": 1,
+            "WebkitFlexShrink": 1,
+            "flexBasis": "0%",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "height": "30px",
+            "msFlexNegative": 1,
+            "msFlexPositive": 1,
+            "msFlexPreferredSize": "0%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="css-text-901oao"
+      dir="auto"
+    >
+      Hello World!!!
+    </div>
+  </div>
+</div>
+`;

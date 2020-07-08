@@ -1,88 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Drawer button renders correctly 1`] = `
-<RNGestureHandlerButton
-  collapsable={false}
-  onGestureEvent={[Function]}
-  onGestureHandlerEvent={[Function]}
-  onGestureHandlerStateChange={[Function]}
-  onHandlerStateChange={[Function]}
-  rippleColor={0}
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
-        "overflow": "hidden",
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    accessible={true}
-    style={
-      Object {
-        "opacity": 1,
-      }
+    Object {
+      "opacity": 1,
     }
-    testID="DrawerToggle"
-  >
-    <RNSVGSvgView
-      bbHeight={50}
-      bbWidth={50}
-      focusable={false}
-      height={50}
-      style={
+  }
+  testID="DrawerToggle"
+>
+  <RNSVGSvgView
+    bbHeight={50}
+    bbWidth={50}
+    focusable={false}
+    height={50}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
         Array [
           Object {
-            "backgroundColor": "transparent",
-            "borderWidth": 0,
+            "opacity": 1,
           },
-          Array [
-            Object {
-              "opacity": 1,
-            },
-            undefined,
-          ],
-          Object {
-            "flex": 0,
-            "height": 50,
-            "width": 50,
-          },
-        ]
-      }
-      width={50}
+          undefined,
+        ],
+        Object {
+          "flex": 0,
+          "height": 50,
+          "width": 50,
+        },
+      ]
+    }
+    width={50}
+  >
+    <RNSVGGroup
+      opacity={1}
     >
       <RNSVGGroup
-        opacity={1}
+        matrix={
+          Array [
+            0.5,
+            0,
+            0,
+            0.5,
+            0,
+            0,
+          ]
+        }
       >
-        <RNSVGGroup
-          matrix={
+        <RNSVGPath
+          d="M30,63.6666667 L70,63.6666667 L70,59.2222222 L30,59.2222222 L30,63.6666667 Z M30,52.5555556 L70,52.5555556 L70,48.1111111 L30,48.1111111 L30,52.5555556 Z M30,37 L30,41.4444444 L70,41.4444444 L70,37 L30,37 Z"
+          fill={4294967295}
+          propList={
             Array [
-              0.5,
-              0,
-              0,
-              0.5,
-              0,
-              0,
+              "fill",
+              "stroke",
             ]
           }
-        >
-          <RNSVGPath
-            d="M30,63.6666667 L70,63.6666667 L70,59.2222222 L30,59.2222222 L30,63.6666667 Z M30,52.5555556 L70,52.5555556 L70,48.1111111 L30,48.1111111 L30,52.5555556 Z M30,37 L30,41.4444444 L70,41.4444444 L70,37 L30,37 Z"
-            fill={4294967295}
-            propList={
-              Array [
-                "fill",
-                "stroke",
-              ]
-            }
-            stroke={null}
-          />
-        </RNSVGGroup>
+          stroke={null}
+        />
       </RNSVGGroup>
-    </RNSVGSvgView>
-  </View>
-</RNGestureHandlerButton>
+    </RNSVGGroup>
+  </RNSVGSvgView>
+</View>
 `;
 
 exports[`Drawer renders correctly 1`] = `
@@ -545,10 +536,6 @@ exports[`Drawer renders correctly 1`] = `
         "paddingTop": 16,
       }
     }
-  >
-    <Text />
-    <Text />
-    <Text />
-  </View>
+  />
 </View>
 `;

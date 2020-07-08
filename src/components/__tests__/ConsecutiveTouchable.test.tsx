@@ -5,8 +5,6 @@ import ConsecutiveTouchable, { RESET_DELAY } from '../ConsecutiveTouchable';
 import renderer from 'react-test-renderer';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-jest.useFakeTimers();
-
 describe('<ConsecutiveTouchable />', () => {
 
   it('ten consecutive taps', () => {

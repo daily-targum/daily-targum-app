@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActivityIndicator /> eventually renders spinner 1`] = `
+<div
+  aria-valuemax="1"
+  aria-valuemin="0"
+  className="css-view-1dbjc4n"
+  role="progressbar"
+  style={
+    Object {
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxFlex": 1,
+      "WebkitBoxPack": "center",
+      "WebkitFlexBasis": "0%",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "WebkitJustifyContent": "center",
+      "alignItems": "center",
+      "backgroundColor": "rgba(245,245,245,1.00)",
+      "flexBasis": "0%",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "justifyContent": "center",
+      "msFlexAlign": "center",
+      "msFlexNegative": 1,
+      "msFlexPack": "center",
+      "msFlexPositive": 1,
+      "msFlexPreferredSize": "0%",
+    }
+  }
+>
+  <div
+    className="css-view-1dbjc4n r-animationKeyframes-127358a"
+    style={
+      Object {
+        "WebkitAnimationDuration": "0.75s",
+        "WebkitAnimationIterationCount": "infinite",
+        "WebkitAnimationTimingFunction": "linear",
+        "animationDuration": "0.75s",
+        "animationIterationCount": "infinite",
+        "animationTimingFunction": "linear",
+        "height": "20px",
+        "width": "20px",
+      }
+    }
+  >
+    <svg
+      height="100%"
+      viewBox="0 0 32 32"
+      width="100%"
+    >
+      <circle
+        cx="16"
+        cy="16"
+        fill="none"
+        r="14"
+        strokeWidth="4"
+        style={
+          Object {
+            "opacity": 0.2,
+            "stroke": "#1976D2",
+          }
+        }
+      />
+      <circle
+        cx="16"
+        cy="16"
+        fill="none"
+        r="14"
+        strokeWidth="4"
+        style={
+          Object {
+            "stroke": "#1976D2",
+            "strokeDasharray": 80,
+            "strokeDashoffset": 60,
+          }
+        }
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`<ActivityIndicator.Screen /> eventually renders spinner 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "WebkitAlignContent": "center",
+      "WebkitBoxPack": "center",
+      "WebkitJustifyContent": "center",
+      "alignContent": "center",
+      "backgroundColor": "rgba(245,245,245,1.00)",
+      "bottom": "0px",
+      "justifyContent": "center",
+      "left": "0px",
+      "msFlexLinePack": "center",
+      "msFlexPack": "center",
+      "position": "absolute",
+      "right": "0px",
+      "top": "0px",
+    }
+  }
+>
+  <div
+    aria-valuemax="1"
+    aria-valuemin="0"
+    className="css-view-1dbjc4n"
+    role="progressbar"
+    style={
+      Object {
+        "WebkitAlignItems": "center",
+        "WebkitBoxAlign": "center",
+        "WebkitBoxFlex": 1,
+        "WebkitBoxPack": "center",
+        "WebkitFlexBasis": "0%",
+        "WebkitFlexGrow": 1,
+        "WebkitFlexShrink": 1,
+        "WebkitJustifyContent": "center",
+        "alignItems": "center",
+        "backgroundColor": "rgba(245,245,245,1.00)",
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "justifyContent": "center",
+        "msFlexAlign": "center",
+        "msFlexNegative": 1,
+        "msFlexPack": "center",
+        "msFlexPositive": 1,
+        "msFlexPreferredSize": "0%",
+      }
+    }
+  >
+    <div
+      className="css-view-1dbjc4n r-animationKeyframes-127358a"
+      style={
+        Object {
+          "WebkitAnimationDuration": "0.75s",
+          "WebkitAnimationIterationCount": "infinite",
+          "WebkitAnimationTimingFunction": "linear",
+          "animationDuration": "0.75s",
+          "animationIterationCount": "infinite",
+          "animationTimingFunction": "linear",
+          "height": "20px",
+          "width": "20px",
+        }
+      }
+    >
+      <svg
+        height="100%"
+        viewBox="0 0 32 32"
+        width="100%"
+      >
+        <circle
+          cx="16"
+          cy="16"
+          fill="none"
+          r="14"
+          strokeWidth="4"
+          style={
+            Object {
+              "opacity": 0.2,
+              "stroke": "#1976D2",
+            }
+          }
+        />
+        <circle
+          cx="16"
+          cy="16"
+          fill="none"
+          r="14"
+          strokeWidth="4"
+          style={
+            Object {
+              "stroke": "#1976D2",
+              "strokeDasharray": 80,
+              "strokeDashoffset": 60,
+            }
+          }
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ActivityIndicator.Screen /> initially renders null 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "WebkitAlignContent": "center",
+      "WebkitBoxPack": "center",
+      "WebkitJustifyContent": "center",
+      "alignContent": "center",
+      "backgroundColor": "rgba(245,245,245,1.00)",
+      "bottom": "0px",
+      "justifyContent": "center",
+      "left": "0px",
+      "msFlexLinePack": "center",
+      "msFlexPack": "center",
+      "position": "absolute",
+      "right": "0px",
+      "top": "0px",
+    }
+  }
+/>
+`;

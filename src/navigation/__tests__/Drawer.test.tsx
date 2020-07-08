@@ -1,16 +1,5 @@
-jest.mock('expo', () => {
-  let enabled = true;
-  return ({
-    Linking: {
-      enabled: true,
-      setEnabled: (val: boolean) => enabled = val,
-      canOpenURL: jest.fn(() => enabled),
-      openURL: jest.fn(),
-      makeUrl: jest.fn(),
-    }
-  });
-});
 jest.mock('../../components/Theme');
+
 jest.mock('@react-navigation/core', () => {
   const navigate = jest.fn();
   const openDrawer = jest.fn();
@@ -21,6 +10,11 @@ jest.mock('@react-navigation/core', () => {
     })
   };
 });
+
+// TODO: THIS IS A HACK! Fix this
+jest.mock('@expo/vector-icons', () => ({ 
+  FontAwesome: () => null
+}));
 
 import React from 'react';
 import renderer from 'react-test-renderer';

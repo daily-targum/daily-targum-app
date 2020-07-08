@@ -7,7 +7,6 @@ import { logger, confirmationPrompt } from '../../../utils';
 // @ts-ignore
 import NotificationSetting from 'react-native-open-notification';
 
-
 function getNotificationPermission({
   force = false
 }: { 

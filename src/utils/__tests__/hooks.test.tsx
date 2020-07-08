@@ -7,8 +7,6 @@ import dayjs from 'dayjs';
 const DATE_ALLOWED_ERROR_PERCENT = 0.02;
 const DATE_ITTERATIONS = 100;
 
-jest.useFakeTimers();
-
 describe('hooks', () => {
 
   it('useInterval', () => {

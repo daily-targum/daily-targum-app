@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> button renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  data-focusable={true}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "MozTransitionProperty": "opacity",
+      "MozUserSelect": "none",
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "horizontal",
+      "WebkitFlexDirection": "row",
+      "WebkitTransitionDuration": "0.15s",
+      "WebkitTransitionProperty": "opacity",
+      "WebkitUserSelect": "none",
+      "alignItems": "center",
+      "backgroundColor": "rgba(238,238,238,1.00)",
+      "borderBottomLeftRadius": "10px",
+      "borderBottomRightRadius": "10px",
+      "borderTopLeftRadius": "10px",
+      "borderTopRightRadius": "10px",
+      "cursor": "pointer",
+      "display": "flex",
+      "flexDirection": "row",
+      "msFlexAlign": "center",
+      "msFlexDirection": "row",
+      "msTouchAction": "manipulation",
+      "msUserSelect": "none",
+      "paddingBottom": "3.5px",
+      "paddingLeft": "21px",
+      "paddingRight": "21px",
+      "paddingTop": "3.5px",
+      "touchAction": "manipulation",
+      "transitionDuration": "0.15s",
+      "transitionProperty": "opacity",
+      "userSelect": "none",
+    }
+  }
+  tabIndex="0"
+>
+  <div
+    className="css-text-901oao"
+    dir="auto"
+    style={
+      Object {
+        "color": "rgba(247,7,55,1.00)",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "textTransform": "uppercase",
+      }
+    }
+  >
+    Click Me!
+  </div>
+</div>
+`;
+
+exports[`<Button /> button renders correctly with ReactNode child 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  data-focusable={true}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "MozTransitionProperty": "opacity",
+      "MozUserSelect": "none",
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "horizontal",
+      "WebkitFlexDirection": "row",
+      "WebkitTransitionDuration": "0.15s",
+      "WebkitTransitionProperty": "opacity",
+      "WebkitUserSelect": "none",
+      "alignItems": "center",
+      "backgroundColor": "rgba(238,238,238,1.00)",
+      "borderBottomLeftRadius": "10px",
+      "borderBottomRightRadius": "10px",
+      "borderTopLeftRadius": "10px",
+      "borderTopRightRadius": "10px",
+      "cursor": "pointer",
+      "display": "flex",
+      "flexDirection": "row",
+      "msFlexAlign": "center",
+      "msFlexDirection": "row",
+      "msTouchAction": "manipulation",
+      "msUserSelect": "none",
+      "paddingBottom": "3.5px",
+      "paddingLeft": "21px",
+      "paddingRight": "21px",
+      "paddingTop": "3.5px",
+      "touchAction": "manipulation",
+      "transitionDuration": "0.15s",
+      "transitionProperty": "opacity",
+      "userSelect": "none",
+    }
+  }
+  tabIndex="0"
+>
+  <div
+    className="css-text-901oao"
+    dir="auto"
+  >
+    Click Me!
+  </div>
+</div>
+`;
+
+exports[`<Button /> text button renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  data-focusable={true}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "MozTransitionProperty": "opacity",
+      "MozUserSelect": "none",
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxDirection": "normal",
+      "WebkitBoxOrient": "horizontal",
+      "WebkitFlexDirection": "row",
+      "WebkitTransitionDuration": "0.15s",
+      "WebkitTransitionProperty": "opacity",
+      "WebkitUserSelect": "none",
+      "alignItems": "center",
+      "cursor": "pointer",
+      "display": "flex",
+      "flexDirection": "row",
+      "msFlexAlign": "center",
+      "msFlexDirection": "row",
+      "msTouchAction": "manipulation",
+      "msUserSelect": "none",
+      "touchAction": "manipulation",
+      "transitionDuration": "0.15s",
+      "transitionProperty": "opacity",
+      "userSelect": "none",
+    }
+  }
+  tabIndex="0"
+>
+  <div
+    className="css-text-901oao"
+    dir="auto"
+    style={
+      Object {
+        "color": "rgba(247,7,55,1.00)",
+        "fontSize": "17px",
+        "fontWeight": "500",
+      }
+    }
+  >
+    Click Me!
+  </div>
+</div>
+`;

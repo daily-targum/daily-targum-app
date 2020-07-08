@@ -1,14 +1,6 @@
-/**
- * Custom SVG Icon Component
- *
- * @summary custom svg icon component
- * @author Christian Juth
- */
-
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Svg, { Path, Polygon, G } from 'react-native-svg';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export function Icon({
   size = 32,

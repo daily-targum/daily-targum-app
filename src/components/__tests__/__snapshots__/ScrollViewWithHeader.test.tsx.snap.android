@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Section /> bypass animation 1`] = `
+<RCTScrollView
+  scrollEventThrottle={0.0001}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "height": 30,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "height": 30,
+          }
+        }
+      />
+    </View>
+    <Text>
+      Hello World!!!
+    </Text>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`<Section /> ios 1`] = `
+<RCTScrollView
+  scrollEventThrottle={0.0001}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "height": 30,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "height": 30,
+          }
+        }
+      />
+    </View>
+    <Text>
+      Hello World!!!
+    </Text>
+  </View>
+</RCTScrollView>
+`;

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorAppBar /> without error 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxPack": "center",
+      "WebkitJustifyContent": "center",
+      "alignItems": "center",
+      "backgroundColor": "rgba(247,7,55,1.00)",
+      "justifyContent": "center",
+      "msFlexAlign": "center",
+      "msFlexPack": "center",
+    }
+  }
+>
+  <div
+    className="css-text-901oao"
+    dir="auto"
+    style={
+      Object {
+        "color": "rgba(255,255,255,1.00)",
+        "paddingTop": "30px",
+      }
+    }
+  />
+</div>
+`;

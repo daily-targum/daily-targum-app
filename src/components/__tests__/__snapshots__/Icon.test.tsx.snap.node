@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Icon /> renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+>
+  <svg
+    height={32}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    width={32}
+  >
+    <g
+      transform="scale(0.32 0.32)"
+    >
+      <polygon
+        fill="#fff"
+        points="59.935 67.065 43.905 51 59.935 34.935 55 30 34 51 55 72"
+        stroke="none"
+      />
+    </g>
+  </svg>
+</div>
+`;
+
+exports[`<Icon /> renders correctly 2`] = `
+<div
+  className="css-view-1dbjc4n"
+>
+  <svg
+    height={32}
+    style={
+      Object {
+        "opacity": 0.5,
+      }
+    }
+    width={32}
+  >
+    <g
+      transform="scale(0.32 0.32)"
+    >
+      <path
+        d="M50.5,88 C29.7893219,88 13,71.2106781 13,50.5 C13,29.7893219 29.7893219,13 50.5,13 C71.2106781,13 88,29.7893219 88,50.5 C88,71.2106781 71.2106781,88 50.5,88 Z M59.935,67.065 L43.905,51 L59.935,34.935 L55,30 L34,51 L55,72 L59.935,67.065 Z"
+        fill="#fff"
+        stroke="none"
+      />
+    </g>
+  </svg>
+</div>
+`;

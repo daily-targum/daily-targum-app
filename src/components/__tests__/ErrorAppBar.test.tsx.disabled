@@ -1,5 +1,7 @@
+// TODO: needs updated reanimated for mock to work
+// see https://github.com/software-mansion/react-native-reanimated/issues/612
+
 jest.mock('../Theme');
-jest.useFakeTimers();
 
 import React from 'react';
 import ErrorAppBar from '../ErrorAppBar';

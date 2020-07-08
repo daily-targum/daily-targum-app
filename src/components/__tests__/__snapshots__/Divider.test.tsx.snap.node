@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Divider /> renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "backgroundColor": "rgba(0,0,0,0.10)",
+      "height": "0.5px",
+    }
+  }
+/>
+`;

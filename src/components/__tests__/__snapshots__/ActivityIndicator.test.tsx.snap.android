@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActivityIndicator /> eventually renders spinner 1`] = `
+<ActivityIndicator
+  animating={true}
+  color={null}
+  hidesWhenStopped={true}
+  size="small"
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`<ActivityIndicator.Screen /> eventually renders spinner 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "center",
+      "backgroundColor": "#f5f5f5",
+      "bottom": 0,
+      "justifyContent": "center",
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color={null}
+    hidesWhenStopped={true}
+    size="small"
+    style={
+      Object {
+        "backgroundColor": "#f5f5f5",
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`<ActivityIndicator.Screen /> initially renders null 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "center",
+      "backgroundColor": "#f5f5f5",
+      "bottom": 0,
+      "justifyContent": "center",
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+/>
+`;

@@ -1,0 +1,423 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drawer renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  data-testid="Drawer"
+  style={
+    Object {
+      "WebkitBoxFlex": 1,
+      "WebkitFlexBasis": "0%",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "backgroundColor": "rgba(31,31,33,1.00)",
+      "borderRightColor": "rgba(0,0,0,0.10)",
+      "borderRightWidth": "0.5px",
+      "flexBasis": "0%",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "msFlexPreferredSize": "0%",
+      "paddingBottom": "75px",
+      "paddingTop": "112.5px",
+    }
+  }
+>
+  <div
+    className="css-view-1dbjc4n"
+    data-focusable={true}
+    data-testid="Drawer-About"
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "MozUserSelect": "none",
+        "WebkitUserSelect": "none",
+        "backgroundColor": "rgba(0,0,0,0.00)",
+        "cursor": "pointer",
+        "msTouchAction": "manipulation",
+        "msUserSelect": "none",
+        "paddingBottom": "3px",
+        "paddingLeft": "10px",
+        "paddingRight": "3px",
+        "paddingTop": "3px",
+        "touchAction": "manipulation",
+        "userSelect": "none",
+      }
+    }
+    tabIndex="0"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "WebkitAlignItems": "center",
+          "WebkitBoxAlign": "center",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "horizontal",
+          "WebkitFlexDirection": "row",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "msFlexAlign": "center",
+          "msFlexDirection": "row",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+      >
+        <svg
+          height={42}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          width={42}
+        >
+          <g
+            transform="scale(0.42 0.42)"
+          >
+            <path
+              d="M50.5,25 C36.424,25 25,36.424 25,50.5 C25,64.576 36.424,76 50.5,76 C64.576,76 76,64.576 76,50.5 C76,36.424 64.576,25 50.5,25 Z M50.5,32.65 C54.733,32.65 58.15,36.067 58.15,40.3 C58.15,44.533 54.733,47.95 50.5,47.95 C46.267,47.95 42.85,44.533 42.85,40.3 C42.85,36.067 46.267,32.65 50.5,32.65 Z M50.5,68.86 C44.125,68.86 38.4895,65.596 35.2,60.649 C35.2765,55.5745 45.4,52.795 50.5,52.795 C55.5745,52.795 65.7235,55.5745 65.8,60.649 C62.5105,65.596 56.875,68.86 50.5,68.86 Z"
+              fill="#f70737"
+              stroke="none"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="css-text-901oao"
+        dir="auto"
+        style={
+          Object {
+            "color": "rgba(247,7,55,1.00)",
+            "fontSize": "20px",
+            "lineHeight": "19.2px",
+            "marginLeft": "5px",
+          }
+        }
+      >
+        About
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-view-1dbjc4n"
+    data-focusable={true}
+    data-testid="Drawer-Contact"
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "MozUserSelect": "none",
+        "WebkitUserSelect": "none",
+        "backgroundColor": "rgba(0,0,0,0.00)",
+        "cursor": "pointer",
+        "msTouchAction": "manipulation",
+        "msUserSelect": "none",
+        "paddingBottom": "3px",
+        "paddingLeft": "10px",
+        "paddingRight": "3px",
+        "paddingTop": "3px",
+        "touchAction": "manipulation",
+        "userSelect": "none",
+      }
+    }
+    tabIndex="0"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "WebkitAlignItems": "center",
+          "WebkitBoxAlign": "center",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "horizontal",
+          "WebkitFlexDirection": "row",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "msFlexAlign": "center",
+          "msFlexDirection": "row",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+      >
+        <svg
+          height={42}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          width={42}
+        >
+          <g
+            transform="scale(0.42 0.42)"
+          >
+            <path
+              d="M68.5,32 L32.5,32 C30.025,32 28.0225,34.025 28.0225,36.5 L28,63.5 C28,65.975 30.025,68 32.5,68 L68.5,68 C70.975,68 73,65.975 73,63.5 L73,36.5 C73,34.025 70.975,32 68.5,32 Z M68.5,41 L50.5,52.25 L32.5,41 L32.5,36.5 L50.5,47.75 L68.5,36.5 L68.5,41 Z"
+              fill="#f70737"
+              stroke="none"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="css-text-901oao"
+        dir="auto"
+        style={
+          Object {
+            "color": "rgba(247,7,55,1.00)",
+            "fontSize": "20px",
+            "lineHeight": "19.2px",
+            "marginLeft": "5px",
+          }
+        }
+      >
+        Contact
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-view-1dbjc4n"
+    data-focusable={true}
+    data-testid="Drawer-GetInvolved"
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "MozUserSelect": "none",
+        "WebkitUserSelect": "none",
+        "backgroundColor": "rgba(0,0,0,0.00)",
+        "cursor": "pointer",
+        "msTouchAction": "manipulation",
+        "msUserSelect": "none",
+        "paddingBottom": "3px",
+        "paddingLeft": "10px",
+        "paddingRight": "3px",
+        "paddingTop": "3px",
+        "touchAction": "manipulation",
+        "userSelect": "none",
+      }
+    }
+    tabIndex="0"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "WebkitAlignItems": "center",
+          "WebkitBoxAlign": "center",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "horizontal",
+          "WebkitFlexDirection": "row",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "msFlexAlign": "center",
+          "msFlexDirection": "row",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+      >
+        <svg
+          height={42}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          width={42}
+        >
+          <g
+            transform="scale(0.42 0.42)"
+          >
+            <path
+              d="M71,36.25 L71,65.9090909 C71,70.4090909 67.3181818,74.0909091 62.8181818,74.0909091 L47.8863636,74.0909091 C45.6772727,74.0909091 43.5909091,73.2113636 42.0568182,71.6568182 L26,55.3340909 C26,55.3340909 28.5772727,52.8181818 28.6590909,52.7772727 C29.1090909,52.3886364 29.6613636,52.1840909 30.275,52.1840909 C30.725,52.1840909 31.1340909,52.3068182 31.5022727,52.5113636 C31.5840909,52.5318182 40.3181818,57.5431818 40.3181818,57.5431818 L40.3181818,33.1818182 C40.3181818,31.4840909 41.6886364,30.1136364 43.3863636,30.1136364 C45.0840909,30.1136364 46.4545455,31.4840909 46.4545455,33.1818182 L46.4545455,47.5 L48.5,47.5 L48.5,28.0681818 C48.5,26.3704545 49.8704545,25 51.5681818,25 C53.2659091,25 54.6363636,26.3704545 54.6363636,28.0681818 L54.6363636,47.5 L56.6818182,47.5 L56.6818182,30.1136364 C56.6818182,28.4159091 58.0522727,27.0454545 59.75,27.0454545 C61.4477273,27.0454545 62.8181818,28.4159091 62.8181818,30.1136364 L62.8181818,47.5 L64.8636364,47.5 L64.8636364,36.25 C64.8636364,34.5522727 66.2340909,33.1818182 67.9318182,33.1818182 C69.6295455,33.1818182 71,34.5522727 71,36.25 Z"
+              fill="#f70737"
+              stroke="none"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="css-text-901oao"
+        dir="auto"
+        style={
+          Object {
+            "color": "rgba(247,7,55,1.00)",
+            "fontSize": "20px",
+            "lineHeight": "19.2px",
+            "marginLeft": "5px",
+          }
+        }
+      >
+        Get Involved
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-view-1dbjc4n"
+    data-focusable={true}
+    data-testid="Drawer-Settings"
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "MozUserSelect": "none",
+        "WebkitUserSelect": "none",
+        "backgroundColor": "rgba(0,0,0,0.00)",
+        "cursor": "pointer",
+        "msTouchAction": "manipulation",
+        "msUserSelect": "none",
+        "paddingBottom": "3px",
+        "paddingLeft": "10px",
+        "paddingRight": "3px",
+        "paddingTop": "3px",
+        "touchAction": "manipulation",
+        "userSelect": "none",
+      }
+    }
+    tabIndex="0"
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "WebkitAlignItems": "center",
+          "WebkitBoxAlign": "center",
+          "WebkitBoxDirection": "normal",
+          "WebkitBoxOrient": "horizontal",
+          "WebkitFlexDirection": "row",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "msFlexAlign": "center",
+          "msFlexDirection": "row",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n"
+      >
+        <svg
+          height={42}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          width={42}
+        >
+          <g
+            transform="scale(0.42 0.42)"
+          >
+            <path
+              d="M69.7888574,50 C69.7888574,50.8542857 69.7145717,51.7085714 69.6031431,52.5257143 L75.100286,56.8342857 C75.5831431,57.2428571 75.7317145,57.9485714 75.3974288,58.5057143 L70.1974288,67.4942857 C69.8631431,68.0514286 69.1945717,68.2742857 68.600286,68.0514286 L62.1374288,65.4514286 C60.800286,66.4914286 59.3145717,67.3457143 57.7545717,68.0142857 L56.7888574,74.8857143 C56.6774288,75.5171429 56.120286,76 55.4888574,76 L45.0888574,76 C44.4574288,76 43.900286,75.5171429 43.7888574,74.9228571 L42.8231431,68.0514286 C41.2260003,67.3828571 39.7774288,66.5285714 38.440286,65.4885714 L31.9774288,68.0885714 C31.3831431,68.3114286 30.7145717,68.0885714 30.380286,67.5314286 L25.180286,58.5428571 C24.8460003,57.9857143 24.9945717,57.28 25.4774288,56.8714286 L30.9745717,52.5628571 C30.8631431,51.7085714 30.7888574,50.8542857 30.7888574,50 C30.7888574,49.1457143 30.8631431,48.2914286 30.9745717,47.4742857 L25.4774288,43.1657143 C24.9945717,42.7571429 24.8460003,42.0514286 25.180286,41.4942857 L30.380286,32.5057143 C30.7145717,31.9485714 31.3831431,31.7257143 31.9774288,31.9485714 L38.440286,34.5485714 C39.7774288,33.5085714 41.2631431,32.6542857 42.8231431,31.9857143 L43.7888574,25.1142857 C43.900286,24.4828571 44.4574288,24 45.0888574,24 L55.4888574,24 C56.120286,24 56.6774288,24.4828571 56.7888574,25.0771429 L57.7545717,31.9485714 C59.3517145,32.6171429 60.800286,33.4714286 62.1374288,34.5114286 L68.600286,31.9114286 C69.1945717,31.6885714 69.8631431,31.9114286 70.1974288,32.4685714 L75.3974288,41.4571429 C75.7317145,42.0142857 75.5831431,42.72 75.100286,43.1285714 L69.6031431,47.4371429 C69.7145717,48.2914286 69.7888574,49.1457143 69.7888574,50 Z M50.249999,60.3999996 C56.0213746,60.3999996 60.6999989,55.7213753 60.6999989,49.9499998 C60.6999989,44.1786243 56.0213746,39.5 50.249999,39.5 C44.4786235,39.5 39.7999992,44.1786243 39.7999992,49.9499998 C39.7999992,55.7213753 44.4786235,60.3999996 50.249999,60.3999996 Z"
+              fill="#f70737"
+              stroke="none"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="css-text-901oao"
+        dir="auto"
+        style={
+          Object {
+            "color": "rgba(247,7,55,1.00)",
+            "fontSize": "20px",
+            "lineHeight": "19.2px",
+            "marginLeft": "5px",
+          }
+        }
+      >
+        Settings
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-view-1dbjc4n"
+    style={
+      Object {
+        "WebkitBoxFlex": 1,
+        "WebkitFlexBasis": "0%",
+        "WebkitFlexGrow": 1,
+        "WebkitFlexShrink": 1,
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "msFlexNegative": 1,
+        "msFlexPositive": 1,
+        "msFlexPreferredSize": "0%",
+      }
+    }
+  />
+  <div
+    className="css-view-1dbjc4n"
+    style={
+      Object {
+        "backgroundColor": "rgba(0,0,0,0.10)",
+        "height": "0.5px",
+      }
+    }
+  />
+  <div
+    className="css-view-1dbjc4n"
+    style={
+      Object {
+        "WebkitBoxDirection": "normal",
+        "WebkitBoxOrient": "horizontal",
+        "WebkitFlexDirection": "row",
+        "flexDirection": "row",
+        "msFlexDirection": "row",
+        "paddingBottom": "8px",
+        "paddingLeft": "8px",
+        "paddingRight": "8px",
+        "paddingTop": "16px",
+      }
+    }
+  >
+    <div
+      className="css-text-901oao"
+      dir="auto"
+    />
+    <div
+      className="css-text-901oao"
+      dir="auto"
+    />
+    <div
+      className="css-text-901oao"
+      dir="auto"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FocalPointImage /> renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "overflow": "hidden",
+    }
+  }
+>
+  <Image
+    resizeMethod="resize"
+    source={
+      Object {
+        "uri": "https://via.placeholder.com/150x200",
+      }
+    }
+    style={
+      Object {
+        "display": undefined,
+        "height": 100,
+        "left": -16.666666666666657,
+        "top": undefined,
+        "width": 133.33333333333331,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`<FocalPointImage /> renders correctly 2`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "overflow": "hidden",
+    }
+  }
+>
+  <Image
+    resizeMethod="resize"
+    source={
+      Object {
+        "uri": "https://via.placeholder.com/150x200",
+      }
+    }
+    style={
+      Object {
+        "display": undefined,
+        "height": 100,
+        "left": -4.999999999999998,
+        "top": undefined,
+        "width": 133.33333333333331,
+      }
+    }
+  />
+</View>
+`;

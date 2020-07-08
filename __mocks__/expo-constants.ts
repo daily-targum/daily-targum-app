@@ -1,9 +1,12 @@
 // ENVIRONMENT VARIABLES
+const Constants = jest.requireActual('expo-constants').default;
 
 export default {
-  appOwnership: 'expo',
+  ...Constants,
   manifest: {
+    ...Constants.manifest,
     extra: {
+      ...Constants.manifest?.extra,
       // Sentry Config
       SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
       SENTRY_DSN: process.env.SENTRY_DSN,

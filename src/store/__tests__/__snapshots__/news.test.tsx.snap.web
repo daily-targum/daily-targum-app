@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`news duck initial state 1`] = `
+Object {
+  "feed": Object {
+    "News": Object {
+      "data": Array [],
+      "nextToken": "",
+      "refreshing": true,
+      "scrollIndex": 0,
+    },
+    "Opinions": Object {
+      "data": Array [],
+      "nextToken": "",
+      "refreshing": true,
+      "scrollIndex": 0,
+    },
+    "Sports": Object {
+      "data": Array [],
+      "nextToken": "",
+      "refreshing": true,
+      "scrollIndex": 0,
+    },
+    "inside-beat": Object {
+      "data": Array [],
+      "nextToken": "",
+      "refreshing": true,
+      "scrollIndex": 0,
+    },
+  },
+  "loading": true,
+  "refreshingAll": false,
+}
+`;

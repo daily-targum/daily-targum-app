@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header <ScrollSpacer /> 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "height": "94px",
+    }
+  }
+/>
+`;

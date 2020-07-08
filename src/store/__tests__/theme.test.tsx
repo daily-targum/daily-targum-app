@@ -1,11 +1,7 @@
-import React from 'react';
 import themeReducer, { themeActions } from '../ducks/theme';
-import { useSelector } from '../context';
 import { mockInitialState, unmockInitialState } from '../ducks/theme/reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
 
 describe('theme', () => {
 
@@ -39,23 +35,6 @@ describe('theme', () => {
     expect(store.getState().theme.useDeviceSettings).toBe(true);
     store.dispatch(themeActions.toggleUseDeviceSettings());
     expect(store.getState().theme.useDeviceSettings).toBe(false);
-  });
-
-  it('useThemeSelector', () => {
-    const store = createStore(combineReducers({
-      theme: themeReducer
-    }), applyMiddleware(thunk));
-    let state;
-    function ReadContext() {
-      state = useSelector(s => s.theme);
-      return null;
-    }
-    renderer.create(
-      <Provider store={store}>
-        <ReadContext/>
-      </Provider>
-    );
-    expect(state).toBe(store.getState().theme);
   });
 
 });

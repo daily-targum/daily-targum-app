@@ -1,12 +1,8 @@
 jest.mock('../../shared/src/client/actions/articles');
 
-import React from 'react';
 import newsReducer, { newsActions } from '../ducks/news';
-import { useSelector } from '../context';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
 
 describe('news duck', () => {
 
@@ -37,23 +33,6 @@ describe('news duck', () => {
       }
     });
     store.dispatch(newsActions.refreshAll({quietly: false}));
-  });
-
-  it('useSelector', () => {
-    const store = createStore(combineReducers({
-      news: newsReducer
-    }), applyMiddleware(thunk));
-    let state;
-    function ReadContext() {
-      state = useSelector(s => s.news);
-      return null;
-    }
-    renderer.create(
-      <Provider store={store}>
-        <ReadContext/>
-      </Provider>
-    );
-    expect(state).toBe(store.getState().news);
   });
 
 });

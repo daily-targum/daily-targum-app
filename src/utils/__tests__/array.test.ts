@@ -1,5 +1,7 @@
 import { chunkArray } from '../array';
 
+import Constants from 'expo-constants';
+
 describe('array', () => {
 
   it('chunkArray', () => {

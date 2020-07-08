@@ -2,8 +2,6 @@ import React from 'react';
 import ActivityIndicator, { SPINNER_DELAY } from '../ActivityIndicator';
 import renderer from 'react-test-renderer';
 
-jest.useFakeTimers();
-
 describe('<ActivityIndicator />', () => {
 
   it('initially renders null', () => {
