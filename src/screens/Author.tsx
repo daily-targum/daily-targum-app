@@ -9,12 +9,14 @@ import { useScrollToTop, useNavigation } from '@react-navigation/native';
 import { StackActions } from '@react-navigation/native';
 import { View, FlatList } from 'react-native';
 import { formatDateAbriviated } from '../shared/src/utils';
+import { Rect } from 'react-native-svg';
 
 
 export function Author() {
   // const [ firstActivity, setFirstActivity ] = React.useState(false);
   const theme = Theme.useTheme();
   const [ page, setPage ] = React.useState<GetAuthorPage | null>(null);
+  const [ sharedElementEnabled, setSharedElementEnabled ] = React.useState(true);
   const route = useRoute<AuthorRouteProp>();
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
@@ -23,6 +25,21 @@ export function Author() {
     getAuthorPage({ author: route.params.author })
     .then(setPage);
   }, [route.params.author])
+
+  // Disable Shared Element when the user
+  // is poping the screen off the stack
+  const initialIndex = React.useRef<number>();
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('state', (state) => {
+      if(!initialIndex.current) {
+        initialIndex.current = state.data.state.index
+      }      
+      if(state.data.state.index < initialIndex.current) {
+        setSharedElementEnabled(false);
+      }
+    });
+    return unsubscribe;
+  });
 
   const contentInsets = {
     top: Header.useHeight({ safe: true }),
@@ -83,12 +100,13 @@ export function Author() {
         // }
         renderItem={({item}) => (
           <Card.Compact
+            id={sharedElementEnabled ? item.id : 'disabled'}
             title={item.title}
-            image={item.media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+            image={item.media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
             date={formatDateAbriviated(item.publishDate)}
             onPress={() => {
               navigation.dispatch(
-                StackActions.push('Article', { id: item.id })
+                StackActions.push('Article', { id: item.id, article: item })
               );
             }}
           />

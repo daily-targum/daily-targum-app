@@ -9,6 +9,7 @@ import { actions, GetArticle } from '../shared/src/client';
 import NotFoundScreen from './NotFound';
 import { FontAwesome } from '@expo/vector-icons';
 import { useHideBottomTabBar } from '../store/ducks/navigation';
+import { SharedElement } from 'react-navigation-shared-element';
 
 
 const IMAGE_HEIGHT = 320;
@@ -16,16 +17,34 @@ const IMAGE_HEIGHT = 320;
 
 function ArticleWithoutState({
   article,
-  image
+  image,
+  articleId
 }: {
   article: GetArticle | null | undefined,
-  image: React.ReactNode
+  image: React.ReactNode,
+  articleId: string
 }) {
 
   const { insets, dark } = Theme.useTheme();
   const [ finished, setFinished ] = useState(false);
   const navigation = useNavigation();
   const styles = Theme.useStyleCreator(styleCreator);
+  const [ sharedElementEnabled, setSharedElementEnabled ] = useState(true);
+
+  // Enable Shared Element when the user
+  // is poping the screen off the stack
+  const initialIndex = React.useRef<number>();
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('state', (state) => {
+      if(!initialIndex.current) {
+        initialIndex.current = state.data.state.index
+      }      
+      if(state.data.state.index < initialIndex.current) {
+        setSharedElementEnabled(true);
+      }
+    });
+    return unsubscribe;
+  });
 
   useHideBottomTabBar();
 
@@ -63,57 +82,78 @@ function ArticleWithoutState({
     }
   }
 
+  const Shared = sharedElementEnabled ? SharedElement : View;
+
   return (
     <View 
       style={styles.container}
       onLayout={() => {}}
     >
       <StatusBar animated={true} hidden={Platform.OS === 'ios'}/>
+
+      <Shared
+        id={`card.${articleId}.overlay`}
+        style={styles.fakeOverlay}
+      >
+        <View/>
+      </Shared>
+
       {article ? (
         <ScrollViewWithHeader
           indicatorStyle={dark ? 'white' : 'black'}
-          Header={image}
+          Header={(
+            <Shared id={`card.${articleId}.image`}>
+              {image}
+            </Shared>
+          )}
           headerHeight={IMAGE_HEIGHT}
           onScrollEndDrag={checkFinish}
           style={{height: '100%'}}
         > 
           <View style={styles.page}>
             <Section style={styles.article}>
-              <Text variant='h1'>{article.title}</Text>
+              <Shared id={`card.${articleId}.title`}>
+                <Text variant='h1'>{article.title}</Text>
+              </Shared>
               <View style={styles.spacer}/>
               <Byline
                 authors={article.authors}
                 updatedAt={article.updatedAt}
                 publishDate={article.publishDate}
+                articleId={articleId}
+                navigateSideEffect={() => setSharedElementEnabled(false)}
+                sharedElementEnabled={sharedElementEnabled}
               />
               <View style={styles.spacer}/>
               <HTML
                 html={article.body}
               />
             </Section>
-            <Section innerStyle={styles.shareSection}>
-              <Button onPress={onShare}> 
-                {Platform.OS === 'ios' ? (
-                  <Icon
-                    size={38}
-                    color={styles.buttonText.color}
-                    name='share'
-                  />
-                ) : (
-                  <FontAwesome
-                    size={26}
-                    color={styles.buttonText.color}
-                    name='share-alt'
-                    style={{
-                      padding: 8,
-                      paddingLeft: 0,
-                      paddingRight: 12
-                    }}
-                  />
-                )}
-                <Text style={styles.buttonText}>Share Article</Text>
-              </Button>
-            </Section>
+            {article.body ? (
+              <Section innerStyle={styles.shareSection}>
+                <Button onPress={onShare}> 
+                  {Platform.OS === 'ios' ? (
+                    <Icon
+                      size={38}
+                      color={styles.buttonText.color}
+                      name='share'
+                    />
+                  ) : (
+                    <FontAwesome
+                      size={26}
+                      color={styles.buttonText.color}
+                      name='share-alt'
+                      style={{
+                        padding: 8,
+                        paddingLeft: 0,
+                        paddingRight: 12
+                      }}
+                    />
+                  )}
+                  <Text style={styles.buttonText}>Share Article</Text>
+                </Button>
+              </Section>
+            ) : null}
           </View>
         </ScrollViewWithHeader>
       ): <ActivityIndicator.Screen/>}
@@ -135,7 +175,7 @@ function ArticleWithoutState({
             size={38}
             onPress={goBack}
             color={styles.closeButtonText.color}
-            name='back-android'
+            name={Platform.OS === 'ios' ? 'close' : 'back-android'}
           />
         </Surface>
       </Section>
@@ -219,6 +259,9 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
   },
   spacer: {
     height: theme.spacing(2)
+  },
+  fakeOverlay: {
+    ...styleHelpers.absoluteFill()
   }
 }));
 
@@ -228,7 +271,7 @@ export function Article({
   route: any
 }) {
   const params = route.params;
-  const [ article, setArticle ] = useState<GetArticle | null | undefined>();
+  const [ article, setArticle ] = useState<GetArticle | null | undefined>(params.article);
   const styles = Theme.useStyleCreator(styleCreator);
   const slug = `article/${params.year}/${params.month}/${params.slug}`;
 
@@ -253,10 +296,12 @@ export function Article({
   return (
     <ArticleWithoutState
       article={article}
+      articleId={params.id}
       image={(article && article.media) ? (
         <Image
-          source={{uri: article.media[0]+'?h=1000&w=1000&fit=crop&crop=faces,center'}}
+          source={{uri: article.media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}}
           style={styles.image}
+          resizeMode='cover'
           resizeMethod="resize"
         />
       ): null}
@@ -303,6 +348,7 @@ function Preview({
     <View style={{flex: 1}}>
       <ArticleWithoutState
         article={article}
+        articleId={''}
         image={(article && article.media) ? (
           <Image
             source={{uri: article.media[0]}}

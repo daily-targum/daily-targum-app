@@ -6,6 +6,7 @@ import { AspectRatioView } from './AspectRatioView';
 import { styleHelpers } from '../utils';
 import { View, ViewStyle, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { SharedElement } from 'react-navigation-shared-element';
 
 
 function CardCompact({
@@ -16,7 +17,8 @@ function CardCompact({
   aspectRatio,
   date,
   style,
-  onPress
+  onPress,
+  id
 }: {
   title?: string
   subtitle?: string
@@ -25,37 +27,51 @@ function CardCompact({
   aspectRatio?: [number, number]
   date?: string,
   style?: ViewStyle
-  onPress?: () => any
+  onPress?: () => any,
+  id: string
 }) {
   const styles = Theme.useStyleCreator(styleCreator);
   return (
     <TouchableOpacity 
       style={styles.cardLink}
       onPress={onPress}
+      activeOpacity={0.8}
     >
       <View style={[styles.compactCard, style]}>
-        <Image
-          source={{uri: image}}
+        <SharedElement 
+          id={`card.${id}.image`} 
           style={[
-            styles.compactCardImage,
+            styles.compactCardImageWrap,
             {
               aspectRatio: aspectRatio ? (aspectRatio[0] / aspectRatio[1]) : undefined
             }
           ]}
-          resizeMethod="resize"
-        />
+        >
+          <Image
+            style={styles.image}
+            source={{uri: image}}
+            resizeMethod="resize"
+            resizeMode='cover'
+          />
+        </SharedElement>
         <View style={styles.cardBody}>
-          {date ? <Text variant='h6' style={styles.date}>{date}</Text> : null}
           {tag ? <Text style={styles.tag}>{tag}</Text> : null}
           {title ? (
-            <Text 
-              variant='h5' 
-              numberOfLines={3} 
-              lockNumberOfLines
-              noPadding
-            >
-              {title}
-            </Text>
+            <SharedElement id={`card.${id}.title`}>
+              <Text 
+                variant='h5' 
+                numberOfLines={3} 
+                lockNumberOfLines
+                noPadding
+              >
+                {title}
+              </Text>
+            </SharedElement>
+          ) : null}
+          {date ? (
+            <SharedElement id={`card.${id}.date`}>
+              <Text variant='h6' style={styles.subtitle} noPadding>{date}</Text>
+            </SharedElement>
           ) : null}
           {subtitle ? <Text variant='h6' numberOfLines={3}>{subtitle}</Text> : null}
         </View>
@@ -72,6 +88,7 @@ type CardStackedProps = {
   aspectRatio?: [number, number]
   date?: string
   onPress?: () => any
+  id: string
 }
 
 function CardStacked({
@@ -88,7 +105,7 @@ function CardStacked({
       <View style={styles.stackedCard}>
         <ImageBackground
           style={styles.backgroundImgae}
-          source={{uri: image+'?h=260&w=400&fit=crop&crop=faces,center'}}
+          source={{uri: image}}
         >
           {aspectRatio ? (
           <AspectRatioView 
@@ -150,7 +167,8 @@ type CardImageProps = {
   image: string
   aspectRatio?: [number, number]
   date?: string
-  onPress: () => any
+  onPress: () => any,
+  id: string
 }
 
 function CardImage({
@@ -158,35 +176,55 @@ function CardImage({
   image,
   aspectRatio,
   date,
-  onPress
+  onPress,
+  id
 }: CardImageProps) {
   const styles = Theme.useStyleCreator(styleCreator);
   return (
     <TouchableOpacity
       style={styles.cardLink}
       onPress={onPress}
+      activeOpacity={0.8}
     >
-      <ImageBackground
-        style={styles.imageCard}
-        source={{uri: image}}
-      >
+      <View style={styles.imageCard}>
+        <SharedElement id={`card.${id}.image`} style={styles.fill}>
+          <Image
+            source={{uri: image}}
+            style={styles.image}
+            resizeMode='cover'
+            resizeMethod="resize"
+          />
+        </SharedElement>
+
         {aspectRatio ? (
           <AspectRatioView 
             aspectRatio={aspectRatio}
             style={{width: '100%'}}
           /> 
         ) : <View style={{flex: 1}}/>}
+
         <View style={styles.imageCardOverlay}/>
-        <LinearGradient
-          style={styles.imageCardOverlay}
-          colors={['transparent', 'rgba(0, 0, 0, 0.7)']}
-        />
+
+        <SharedElement id={`card.${id}.overlay`} style={styles.imageCardOverlay}>
+          <LinearGradient
+            style={styles.fill}
+            colors={['transparent', 'rgba(0, 0, 0, 0.7)']}
+          />
+        </SharedElement>
 
         <View style={styles.imageCardTitleWrap}>
-          {date ? <Text variant='h6' style={styles.imageCardSubtitle} noPadding>{date}</Text> : null}
-          {title ? <Text variant='h3' numberOfLines={2} style={styles.imageCardTitle} noPadding>{title}</Text> : null}
+          {title ? (
+            <SharedElement id={`card.${id}.title`}>
+              <Text variant='h3' numberOfLines={2} style={styles.imageCardTitle} noPadding>{title}</Text>
+            </SharedElement>
+          ) : null}
+          {date ? (
+            <SharedElement id={`card.${id}.date`}>
+              <Text variant='h6' style={styles.subtitle} noPadding>{date}</Text>
+            </SharedElement>
+          ) : null}
         </View>
-      </ImageBackground>
+      </View> 
     </TouchableOpacity>
   );
 }
@@ -271,10 +309,14 @@ const styleCreator =  Theme.makeStyleCreator(theme => ({
     marginBottom: theme.spacing(1),
     flex: 1
   },
-  compactCardImage: {
-    ...styleHelpers.lockWidth('40%'),
+  compactCardImageWrap: {
+    ...styleHelpers.lockWidth('40%')
+  },
+  image: {
     borderRadius: theme.roundness(1),
-    overflow: 'hidden'
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%'
   },
   cardBody: {
     ...styleHelpers.flex('column'),
@@ -290,7 +332,8 @@ const styleCreator =  Theme.makeStyleCreator(theme => ({
     position: 'relative',
     ...styleHelpers.centerBackgroundImage(),
     marginBottom: theme.spacing(1),
-    flex: 1
+    flex: 1,
+    backgroundColor: 'transparent'
   },
   backgroundImgae: {
     height: '100%',
@@ -303,9 +346,9 @@ const styleCreator =  Theme.makeStyleCreator(theme => ({
   imageCardTitle: {
     color: '#fff'
   },
-  imageCardSubtitle: {
-    color: 'rgba(255,255,255,0.7)',
-    marginBottom: theme.spacing(1)
+  subtitle: {
+    color: theme.colors.textMuted,
+    marginTop: theme.spacing(1)
   },
   imageCardTitleWrap: {
     ...styleHelpers.absoluteFill(),
@@ -324,6 +367,10 @@ const styleCreator =  Theme.makeStyleCreator(theme => ({
   },
   date: {
     color: theme.colors.textMuted
+  },
+  fill: {
+    height: '100%',
+    width: '100%'
   }
 }));
 

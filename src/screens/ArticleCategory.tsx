@@ -91,12 +91,13 @@ export function ArticleCategory() {
         }
         renderItem={({item}) => (
           <Card.Compact
+            id={item.id}
             title={item.title}
-            image={item.media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+            image={item.media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
             date={formatDateAbriviated(item.publishDate)}
             onPress={() => {
               navigation.dispatch(
-                StackActions.push('Article', { id: item.id })
+                StackActions.push('Article', { id: item.id, article: item })
               );
             }}
           />
@@ -116,11 +117,11 @@ export function ArticleCategory() {
         scrollIndicatorInsets={scrollIndicatorInsets}
         contentInsetAdjustmentBehavior="never"
         indicatorStyle={dark ? 'white' : 'black'}
-        ListFooterComponent={(
+        ListFooterComponent={nextToken ? (
           <View style={{padding: 30}}>
             <ActivityIndicator/>
           </View>
-        )}
+        ) : null}
       />
       <BottomTabBar.ScrollSpacer/>
     </View>

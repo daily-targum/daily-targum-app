@@ -80,36 +80,38 @@ function ArticleSection({
             if(!item) return null;
             return i === 0 ? (
               <Card.ImageResponsiveAspectRatio
-                key={item[0].id}
                 title={item[0].title}
-                image={item[0].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                image={item[0].media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
                 date={formatDateAbriviated(item[0].publishDate)}
                 aspectRatioMobile={[3, 2]}
                 onPress={() => {
                   navigation.dispatch(
-                    StackActions.push('Article', { id: item[0].id })
+                    StackActions.push('Article', { id: item[0].id, article: item[0] })
                   );
                 }}
+                id={item[0].id}
               />
             ) : (
               <React.Fragment key={item[0].id}>
                 <Card.Compact
+                  id={item[0].id}
                   title={item[0].title}
-                  image={item[0].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                  image={item[0].media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
                   date={formatDateAbriviated(item[0].publishDate)}
                   onPress={() => {
                     navigation.dispatch(
-                      StackActions.push('Article', { id: item[0].id })
+                      StackActions.push('Article', { id: item[0].id, article: item[0] })
                     );
                   }}
                 />
                 <Card.Compact
+                  id={item[1].id}
                   title={item[1].title}
-                  image={item[1].media[0]+'?h=260&w=400&fit=crop&crop=faces,center'}
+                  image={item[1].media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
                   date={formatDateAbriviated(item[1].publishDate)}
                   onPress={() => {
                     navigation.dispatch(
-                      StackActions.push('Article', { id: item[1].id })
+                      StackActions.push('Article', { id: item[1].id, article: item[1] })
                     );
                   }}
                 />

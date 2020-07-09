@@ -7,6 +7,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Icon, ActivityIndicator } from '../components';
 import { navigation, deepLink } from '../constants/navigation';
 import { hyphenatedToCapitalized } from '../shared/src/utils';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import { forFade } from './transitions';
 
 // custom navigation components
 import BottomTabBar from './BottomTabBar';
@@ -17,8 +19,7 @@ import CustomDrawer from './Drawer';
 import * as Screens from '../screens';
 
 
-
-const HomeStack = createStackNavigator();
+const HomeStack = createSharedElementStackNavigator();
 const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator 
@@ -43,7 +44,38 @@ const HomeStackNavigator = () => {
         name="Article" 
         component={Screens.Article}
         options={{
-          header: () => null
+          header: () => null,
+          gestureEnabled: true,
+          gestureDirection: 'vertical',
+          cardStyle: { 
+            backgroundColor: 'transparent'
+          },
+          cardOverlayEnabled: true,
+          cardStyleInterpolator: forFade
+        }}
+        sharedElementsConfig={(route, otherRoute, showing) => {
+          return [
+            {
+              id: `card.${route.params.id}.image`,
+              align: 'center-bottom',
+              resize: 'stretch'
+            }, 
+            {
+              id: `card.${route.params.id}.title`,
+              animation: 'fade',
+              resize: 'clip'
+            },
+            {
+              id: `card.${route.params.id}.overlay`,
+              animation: 'fade'
+            },
+            {
+              id: `card.${route.params.id}.date`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-center'
+            }
+          ];
         }}
       />
       <HomeStack.Screen name="Settings" component={Screens.Settings}/>
@@ -66,8 +98,36 @@ const HomeStackNavigator = () => {
         name="Author" 
         component={Screens.Author} 
         options={({ route }: { route: any }) => ({ 
-          title: hyphenatedToCapitalized(route.params.author) 
+          title: hyphenatedToCapitalized(route.params.author),
+          cardStyle: { 
+            backgroundColor: 'transparent'
+          },
+          cardOverlayEnabled: true
         })}
+        sharedElementsConfig={(route, otherRoute, showing) => {
+          return otherRoute.name !== 'Article' ? [
+            {
+              id: `card.${otherRoute.params.id}.image`,
+              align: 'center-bottom',
+              resize: 'stretch'
+            }, 
+            {
+              id: `card.${otherRoute.params.id}.title`,
+              animation: 'fade',
+              resize: 'clip'
+            },
+            {
+              id: `card.${otherRoute.params.id}.overlay`,
+              animation: 'fade'
+            },
+            {
+              id: `card.${otherRoute.params.id}.date`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-center'
+            }
+          ] : undefined;
+        }}
       />
       <HomeStack.Screen 
         name="NotFound" 

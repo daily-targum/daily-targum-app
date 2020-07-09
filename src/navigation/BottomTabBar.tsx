@@ -18,8 +18,8 @@ export function BottomTabBar(props: BottomTabBarProps) {
   React.useEffect(() => {
     Animated.timing(offset, {
       toValue: +visible,
-      easing: Easing.inOut(Easing.ease),
-      duration: 220,
+      easing: Easing.linear,
+      duration: 200,
       useNativeDriver: true
     }).start();
   }, [ visible ]);
