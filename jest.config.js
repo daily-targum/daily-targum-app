@@ -1,14 +1,16 @@
+// jest.config.js
 const jestPreset = require('jest-expo/universal/jest-preset');
+
+const PLATFORMS = [
+  'iOS',
+  'Android',
+  // 'Web',
+  // 'Node'
+]
 
 function modifyProject(project) {
   return {
     ...project,
-    testMatch: [
-      "**/*.test.js",
-      "**/*.test.jsx",
-      "**/*.test.ts",
-      "**/*.test.tsx"
-    ],
     collectCoverageFrom: [
       "src/**/*.{ts,tsx}",
       "!**/node_modules/**",
@@ -17,12 +19,14 @@ function modifyProject(project) {
       "./dotenv.js",
       "./jestSetup.js",
       ...project.setupFiles
+    ],
+    testPathIgnorePatterns: [
+      '<rootDir>/e2e/'
     ]
   };
 }
 
-// jest.config.js
 module.exports = {
   ...jestPreset,
-  projects: jestPreset.projects.filter(p => p.displayName.name === 'iOS').map(modifyProject)
+  projects: jestPreset.projects.filter(p => PLATFORMS.includes(p.displayName.name)).map(modifyProject)
 };
