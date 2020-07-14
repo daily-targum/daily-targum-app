@@ -30,9 +30,9 @@ function card(theme: Theme) {
 
 function centerBackgroundImage() {
   return {
-    // backgroundPosition: 'center',
-    // backgroundSize: 'cover',
-    // backgroundRepeat: 'no-repeat',
+    // resizeMode: 'cover', 
+    // justifyContent: 'center', 
+    // alignItems: 'center'
   } as const;
 }
 

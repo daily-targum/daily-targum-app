@@ -203,8 +203,6 @@ function CardImage({
           /> 
         ) : <View style={{flex: 1}}/>}
 
-        <View style={styles.imageCardOverlay}/>
-
         <SharedElement id={`card.${id}.overlay`} style={styles.imageCardOverlay}>
           <LinearGradient
             style={styles.fill}

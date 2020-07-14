@@ -235,6 +235,8 @@ export function Home() {
       />
       <BottomTabBar.ScrollSpacer/>
 
+      {/* <CloseButton/> */}
+
       {loading ? <ActivityIndicator.Screen/> : null}
     </View>
   );

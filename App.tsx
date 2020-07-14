@@ -74,7 +74,12 @@ function App() {
       <ReduxProvider>
         <Theme.Provider>  
           <Grid.Provider>
-            <StatusBar animated={true} barStyle="light-content"/>
+            <StatusBar 
+              animated={true} 
+              hidden={false}
+              showHideTransition='fade'
+              barStyle="light-content"
+            />
             <ErrorSnackbar/>
             <View style={styles.container} testID='App'>
               <Navigator/>

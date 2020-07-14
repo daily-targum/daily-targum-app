@@ -61,19 +61,24 @@ const HomeStackNavigator = () => {
               resize: 'stretch'
             }, 
             {
-              id: `card.${route.params.id}.title`,
-              animation: 'fade',
-              resize: 'clip'
-            },
-            {
               id: `card.${route.params.id}.overlay`,
               animation: 'fade'
+            },
+            {
+              id: `card.${route.params.id}.title`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-top'
             },
             {
               id: `card.${route.params.id}.date`,
               animation: 'fade',
               resize: 'clip',
-              align: 'left-center'
+              align: 'left-top'
+            },
+            {
+              id: `article.closeIcon`,
+              animation: 'fade'
             }
           ];
         }}
@@ -112,19 +117,24 @@ const HomeStackNavigator = () => {
               resize: 'stretch'
             }, 
             {
-              id: `card.${otherRoute.params.id}.title`,
-              animation: 'fade',
-              resize: 'clip'
-            },
-            {
               id: `card.${otherRoute.params.id}.overlay`,
               animation: 'fade'
+            },
+            {
+              id: `card.${otherRoute.params.id}.title`,
+              animation: 'fade',
+              resize: 'clip',
+              align: 'left-top'
             },
             {
               id: `card.${otherRoute.params.id}.date`,
               animation: 'fade',
               resize: 'clip',
-              align: 'left-center'
+              align: 'left-top'
+            },
+            {
+              id: `article.closeIcon`,
+              animation: 'fade'
             }
           ] : undefined;
         }}

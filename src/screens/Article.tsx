@@ -18,37 +18,40 @@ const IMAGE_HEIGHT = 320;
 function ArticleWithoutState({
   article,
   image,
-  articleId
+  articleId,
+  sharedElementPrevious
 }: {
   article: GetArticle | null | undefined,
   image: React.ReactNode,
   articleId: string
+  sharedElementPrevious: boolean
 }) {
 
   const { insets, dark } = Theme.useTheme();
   const [ finished, setFinished ] = useState(false);
   const navigation = useNavigation();
   const styles = Theme.useStyleCreator(styleCreator);
-  const [ sharedElementEnabled, setSharedElementEnabled ] = useState(true);
+  const [ sharedElementEnabled, setSharedElementEnabled ] = useState(sharedElementPrevious);
 
-  // Enable Shared Element when the user
-  // is poping the screen off the stack
-  const initialIndex = React.useRef<number>();
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('state', (state) => {
-      if(!initialIndex.current) {
-        initialIndex.current = state.data.state.index
-      }      
-      if(state.data.state.index < initialIndex.current) {
-        setSharedElementEnabled(true);
-      }
-    });
-    return unsubscribe;
-  });
+  // // Enable Shared Element when the user
+  // // is poping the screen off the stack
+  // const initialIndex = React.useRef<number>();
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('state', (state) => {
+  //     if(!initialIndex.current) {
+  //       initialIndex.current = state.data.state.index
+  //     }      
+  //     if(state.data.state.index < initialIndex.current) {
+  //       setSharedElementEnabled(sharedElementPrevious);
+  //     }
+  //   });
+  //   return unsubscribe;
+  // });
 
   useHideBottomTabBar();
 
   function goBack() {
+    setSharedElementEnabled(sharedElementPrevious);
     if(navigation.canGoBack()) {
       navigation.goBack();
     } else {
@@ -89,14 +92,12 @@ function ArticleWithoutState({
       style={styles.container}
       onLayout={() => {}}
     >
-      <StatusBar animated={true} hidden={Platform.OS === 'ios'}/>
-
-      <Shared
-        id={`card.${articleId}.overlay`}
-        style={styles.fakeOverlay}
-      >
-        <View/>
-      </Shared>
+      <StatusBar 
+        animated={true} 
+        showHideTransition='slide'
+        barStyle="light-content"
+        hidden={Platform.OS === 'ios'}
+      />
 
       {article ? (
         <ScrollViewWithHeader
@@ -166,10 +167,12 @@ function ArticleWithoutState({
         <NotFoundScreen/>
       ) : null}
 
-      <Section style={{
-        position: 'absolute',
-        width: '100%'
-      }}>
+      <Shared 
+        id='article.closeIcon'
+        style={{
+          position: 'absolute'
+        }}
+      >
         <Surface style={styles.closeIcon}>
           <Icon
             size={38}
@@ -178,7 +181,8 @@ function ArticleWithoutState({
             name={Platform.OS === 'ios' ? 'close' : 'back-android'}
           />
         </Surface>
-      </Section>
+      </Shared>
+
     </View>
   );
 }
@@ -305,6 +309,7 @@ export function Article({
           resizeMethod="resize"
         />
       ): null}
+      sharedElementPrevious={!!params.article}
     />
   )
 }
@@ -356,6 +361,7 @@ function Preview({
             resizeMethod="resize"
           />
         ): null}
+        sharedElementPrevious={false}
       />
       {article ? (
         <View style={styles.previewBackdrop} pointerEvents='box-none'>
