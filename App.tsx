@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { Theme, ErrorSnackbar, Grid } from './src/components';
+import { Theme, ErrorSnackbar, Grid, StatusBar } from './src/components';
 import { logger, useAppStateChange, isBeta } from './src/utils';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as ReduxProvider } from './src/store';
@@ -74,12 +74,7 @@ function App() {
       <ReduxProvider>
         <Theme.Provider>  
           <Grid.Provider>
-            <StatusBar 
-              animated={true} 
-              hidden={false}
-              showHideTransition='fade'
-              barStyle="light-content"
-            />
+            <StatusBar.WithoutNavigation/>
             <ErrorSnackbar/>
             <View style={styles.container} testID='App'>
               <Navigator/>

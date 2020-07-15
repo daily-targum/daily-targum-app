@@ -30,27 +30,28 @@ jobs:
       - name: Yarn Install
         if: steps.cache.outputs.cache-hit != 'true' || steps.submodule-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
-  # setup-macos:
-  #   name: Setup - MacOS
-  #   runs-on: macos-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Checkout submodules
-  #       run: |
-  #         git submodule sync --recursive
-  #         git submodule update --init --recursive
-  #     - uses: actions/cache@v1
-  #       id: cache
-  #       with:
-  #         path: node_modules
-  #         key: v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-  #     - uses: actions/cache@v1
-  #       id: submodule-cache
-  #       with:
-  #         path: src/shared/node_modules
-  #         key: v1-${{ runner.os }}-${{ hashFiles('src/shared/yarn.lock') }}
-  #     - name: Yarn Install
-  #       run: yarn install --frozen-lockfile
+  setup-macos:
+    name: Setup - MacOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - uses: actions/cache@v1
+        id: submodule-cache
+        with:
+          path: src/shared/node_modules
+          key: v1-${{ runner.os }}-${{ hashFiles('src/shared/yarn.lock') }}
+      - name: Yarn Install
+        if: steps.cache.outputs.cache-hit != 'true' || steps.submodule-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
   test-lint:
     name: Test - Lint
     runs-on: ubuntu-latest
@@ -126,6 +127,7 @@ jobs:
           AWS_APPSYNC_API_KEY: ${{ secrets.AWS_APPSYNC_API_KEY }}
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN_DRAFTS: ${{ secrets.CONTENTFUL_ACCESS_TOKEN_DRAFTS }}
+        timeout-minutes: 15 
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
@@ -133,7 +135,7 @@ jobs:
   test-detox:
     name: Test - Detox
     runs-on: macos-latest
-    # needs: setup-macos
+    needs: setup-macos
     env:
       CODE_SIGNING_REQUIRED: NO
     steps:
@@ -158,9 +160,6 @@ jobs:
         run: |
           brew tap wix/brew
           brew install applesimutils --HEAD
-      - name: Yarn Install
-        if: steps.cache.outputs.cache-hit != 'true' || steps.submodule-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
       - name: Rebuild Detox
         run: |
           yarn detox clean-framework-cache
@@ -193,7 +192,7 @@ jobs:
   deploy-netlify:
     name: Deploy - Netlify
     runs-on: ubuntu-latest
-    needs: [test-lint, test-typecheck, test-jest, test-detox]
+    needs: [test-typecheck]
     steps:
       - uses: actions/checkout@v2
       - name: Checkout submodules
@@ -229,7 +228,7 @@ jobs:
   deploy-expo-publish:
     name: Deploy - Expo Publish
     runs-on: ubuntu-latest
-    needs: [test-lint, test-typecheck, test-jest, test-detox]
+    needs: [test-typecheck]
     steps:
       - uses: actions/checkout@v2
       - name: Checkout submodules

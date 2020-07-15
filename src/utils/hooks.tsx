@@ -1,5 +1,6 @@
 import React from 'react';
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
+import { useNavigation } from '@react-navigation/core';
 import { AppState, AppStateStatus, Platform } from 'react-native';
 import dayjs from 'dayjs';
 
@@ -87,13 +88,13 @@ export function useFreshContent(
   // default value is 10 minutes
   maxAge = 10 * 60 * 1000
 ) {
-  let updatedAt = Date.now();
+  let updatedAt = React.useRef(Date.now());
   React.useEffect(() => {
     // changing app state refreshes content
     const onAppStateChange = (state: AppStateStatus) => {
-      if((Date.now() - updatedAt > maxAge) && state === 'active') {
+      if((Date.now() - updatedAt.current > maxAge) && state === 'active') {
         fn();
-        updatedAt = Date.now();
+        updatedAt.current = Date.now();
       }
     }
     AppState.addEventListener('change', onAppStateChange);
@@ -101,9 +102,9 @@ export function useFreshContent(
     let unsubscribe = () => {};
     if(Platform.OS !== 'web') {
       unsubscribe = NetInfo.addEventListener(state => {
-        if((Date.now() - updatedAt > maxAge) && state.isConnected) {
+        if((Date.now() - updatedAt.current > maxAge) && state.isConnected) {
           fn();
-          updatedAt = Date.now();
+          updatedAt.current = Date.now();
         }
       });
     }
@@ -113,4 +114,24 @@ export function useFreshContent(
       unsubscribe();
     };
   }, deps);
+}
+
+/**
+ * This hooks runs a function when the user pops the
+ * sreen (from which the hook was called) off the stack
+ */
+export function useNavigateBackEffect(fn: () => any, deps: any[] = []) {
+  const navigation = useNavigation();
+  const initialIndex = React.useRef<number>();
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('state', (state) => {
+      if(!initialIndex.current) {
+        initialIndex.current = state.data.state.index
+      }      
+      if(state.data.state.index < initialIndex.current) {
+        fn();
+      }
+    });
+    return unsubscribe;
+  }, [fn, ...deps]);
 }

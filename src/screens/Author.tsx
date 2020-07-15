@@ -1,15 +1,15 @@
 import React from 'react';
-import { Theme, Card, ActivityIndicator } from '../components';
+import { Theme, Card, ActivityIndicator, StatusBar } from '../components';
 import Header from '../navigation/Header';
 import BottomTabBar from '../navigation/BottomTabBar';
-import { getAuthorPage, GetAuthorPage, Article } from '../shared/src/client/actions';
+import { getAuthorPage, GetAuthorPage } from '../shared/src/client/actions';
 import { useRoute } from '@react-navigation/core';
 import { AuthorRouteProp } from '../navigation/types';
-import { useScrollToTop, useNavigation } from '@react-navigation/native';
+import { useScrollToTop, useNavigation, useIsFocused } from '@react-navigation/native';
 import { StackActions } from '@react-navigation/native';
 import { View, FlatList } from 'react-native';
 import { formatDateAbriviated } from '../shared/src/utils';
-import { Rect } from 'react-native-svg';
+import { useNavigateBackEffect } from '../utils';
 
 
 export function Author() {
@@ -17,29 +17,21 @@ export function Author() {
   const theme = Theme.useTheme();
   const [ page, setPage ] = React.useState<GetAuthorPage | null>(null);
   const [ sharedElementEnabled, setSharedElementEnabled ] = React.useState(true);
+  const [ navigatingBack, setNavigatingBack ] = React.useState(false);
   const route = useRoute<AuthorRouteProp>();
   const styles = Theme.useStyleCreator(styleCreator);
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     getAuthorPage({ author: route.params.author })
     .then(setPage);
   }, [route.params.author])
 
-  // Disable Shared Element when the user
-  // is poping the screen off the stack
-  const initialIndex = React.useRef<number>();
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('state', (state) => {
-      if(!initialIndex.current) {
-        initialIndex.current = state.data.state.index
-      }      
-      if(state.data.state.index < initialIndex.current) {
-        setSharedElementEnabled(false);
-      }
-    });
-    return unsubscribe;
-  });
+  useNavigateBackEffect(() => {
+    setNavigatingBack(true);
+    setSharedElementEnabled(false);
+  }, []);
 
   const contentInsets = {
     top: Header.useHeight({ safe: true }),
@@ -76,64 +68,72 @@ export function Author() {
   const { articles, author } = page;
 
   return(
-    <View 
-      style={styles.container}
-      testID={`AuthorScreen-${author[0]?.display_name.replace(/\s/g, '')}`}
-    >
-      <Header.ScrollSpacer/>
-      <FlatList
-        style={styles.list}
-        ref={ref}
-        data={articles}
-        keyExtractor={item => item.id}
-        // refreshControl={
-        //   <RefreshControl
-        //     onRefresh={() => {
-        //       // prevent double refresh
-        //       if(refreshing) return;
-        //       // begin refresh
-        //       dispatch(newsActions.loadCategory({ category }));
-        //     }}
-        //     refreshing={refreshing}
-        //     tintColor={colors.spinner}
-        //   />
-        // }
-        renderItem={({item}) => (
-          <Card.Compact
-            id={sharedElementEnabled ? item.id : 'disabled'}
-            title={item.title}
-            image={item.media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
-            date={formatDateAbriviated(item.publishDate)}
-            onPress={() => {
-              navigation.dispatch(
-                StackActions.push('Article', { id: item.id, article: item })
-              );
-            }}
-          />
-        )}
-        // onScrollBeginDrag={onFirstActivity}
-        // onEndReachedThreshold={0.5}
-        // onEndReached={() => {
-        //   if(nextToken) dispatch(newsActions.loadCategory({ category, nextToken }));
-        // }}
-        contentContainerStyle={styles.contentContainer}
-        contentInset={contentInsets}
-        contentOffset={{
-          y: -contentInsets.top,
-          x: 0
-        }}
-        automaticallyAdjustContentInsets={false}
-        scrollIndicatorInsets={scrollIndicatorInsets}
-        contentInsetAdjustmentBehavior="never"
-        indicatorStyle={theme.dark ? 'white' : 'black'}
-        ListFooterComponent={(
-          <View style={{padding: 30}}>
-            <ActivityIndicator/>
-          </View>
-        )}
-      />
-      <BottomTabBar.ScrollSpacer/>
-    </View>
+    <>
+      {isFocused ? (
+        <StatusBar 
+          hidden={navigatingBack}
+          showHideTransition='fade'
+        />
+      ) : null}
+      <View 
+        style={styles.container}
+        testID={`AuthorScreen-${author[0]?.displayName.replace(/\s/g, '')}`}
+      >
+        <Header.ScrollSpacer/>
+        <FlatList
+          style={styles.list}
+          ref={ref}
+          data={articles}
+          keyExtractor={item => item.id}
+          // refreshControl={
+          //   <RefreshControl
+          //     onRefresh={() => {
+          //       // prevent double refresh
+          //       if(refreshing) return;
+          //       // begin refresh
+          //       dispatch(newsActions.loadCategory({ category }));
+          //     }}
+          //     refreshing={refreshing}
+          //     tintColor={colors.spinner}
+          //   />
+          // }
+          renderItem={({item}) => (
+            <Card.Compact
+              id={sharedElementEnabled ? item.id : 'disabled'}
+              title={item.title}
+              image={item.media[0]+'?h=500&w=500&fit=crop&crop=faces,center'}
+              date={formatDateAbriviated(item.publishDate)}
+              onPress={() => {
+                navigation.dispatch(
+                  StackActions.push('Article', { id: item.id, article: item })
+                );
+              }}
+            />
+          )}
+          // onScrollBeginDrag={onFirstActivity}
+          // onEndReachedThreshold={0.5}
+          // onEndReached={() => {
+          //   if(nextToken) dispatch(newsActions.loadCategory({ category, nextToken }));
+          // }}
+          contentContainerStyle={styles.contentContainer}
+          contentInset={contentInsets}
+          contentOffset={{
+            y: -contentInsets.top,
+            x: 0
+          }}
+          automaticallyAdjustContentInsets={false}
+          scrollIndicatorInsets={scrollIndicatorInsets}
+          contentInsetAdjustmentBehavior="never"
+          indicatorStyle={theme.dark ? 'white' : 'black'}
+          ListFooterComponent={(
+            <View style={{padding: 30}}>
+              <ActivityIndicator/>
+            </View>
+          )}
+        />
+        <BottomTabBar.ScrollSpacer/>
+      </View>
+    </>
   );
 }
 

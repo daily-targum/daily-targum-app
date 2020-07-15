@@ -4,7 +4,7 @@ import { NavigationContainer, useLinking, NavigationContainerRef } from '@react-
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Icon, ActivityIndicator } from '../components';
+import { Icon, ActivityIndicator, StatusBar } from '../components';
 import { navigation, deepLink } from '../constants/navigation';
 import { hyphenatedToCapitalized } from '../shared/src/utils';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
@@ -81,6 +81,13 @@ const HomeStackNavigator = () => {
               animation: 'fade'
             }
           ];
+        }}
+      />
+      <HomeStack.Screen 
+        name="Preview" 
+        component={Screens.Article.Preview}
+        options={{
+          header: () => null
         }}
       />
       <HomeStack.Screen name="Settings" component={Screens.Settings}/>

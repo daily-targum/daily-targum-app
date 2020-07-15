@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, StatusBar, NativeScrollEvent, Image, Platform } from 'react-native';
+import { View, NativeScrollEvent, Image, Platform } from 'react-native';
 import { logEvent } from '../utils/logger';
-import { useNavigation } from '@react-navigation/core';
-import { shareArticle, useFreshContent, styleHelpers } from '../utils';
-import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline, HTML } from '../components';
+import { useNavigation, useIsFocused } from '@react-navigation/core';
+import { shareArticle, useFreshContent, styleHelpers, useNavigateBackEffect } from '../utils';
+import { Surface, Theme, Icon, ActivityIndicator, Section, ScrollViewWithHeader, Button, Text, Byline, HTML, StatusBar } from '../components';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { actions, GetArticle } from '../shared/src/client';
 import NotFoundScreen from './NotFound';
@@ -32,22 +32,8 @@ function ArticleWithoutState({
   const navigation = useNavigation();
   const styles = Theme.useStyleCreator(styleCreator);
   const [ sharedElementEnabled, setSharedElementEnabled ] = useState(sharedElementPrevious);
-
-  // // Enable Shared Element when the user
-  // // is poping the screen off the stack
-  // const initialIndex = React.useRef<number>();
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('state', (state) => {
-  //     if(!initialIndex.current) {
-  //       initialIndex.current = state.data.state.index
-  //     }      
-  //     if(state.data.state.index < initialIndex.current) {
-  //       setSharedElementEnabled(sharedElementPrevious);
-  //     }
-  //   });
-  //   return unsubscribe;
-  // });
-
+  const isFocused = useIsFocused();
+  
   useHideBottomTabBar();
 
   function goBack() {
@@ -65,7 +51,7 @@ function ArticleWithoutState({
     }
   }
 
-  function checkFinish({nativeEvent}: {nativeEvent: NativeScrollEvent}) {
+  function checkFinish({ nativeEvent }: {nativeEvent: NativeScrollEvent}) {
     if(!article || finished) return;
     function isCloseToBottom() {
       const {layoutMeasurement, contentOffset, contentSize} = nativeEvent;
@@ -92,12 +78,11 @@ function ArticleWithoutState({
       style={styles.container}
       onLayout={() => {}}
     >
-      <StatusBar 
-        animated={true} 
-        showHideTransition='slide'
-        barStyle="light-content"
-        hidden={Platform.OS === 'ios'}
-      />
+      {isFocused ? (
+        <StatusBar 
+          hidden={Platform.OS === 'ios'}
+        />
+      ) : null}
 
       {article ? (
         <ScrollViewWithHeader
@@ -224,11 +209,7 @@ const styleCreator = Theme.makeStyleCreator(theme => ({
     height: 45 + (Platform.OS !== 'ios' ? theme.insets.top : 10),
   },
   previewBackdrop: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    ...styleHelpers.absoluteFill(),
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -337,16 +318,7 @@ function Preview({
   }
 
   useFreshContent(() => {
-    actions.getArticlePreview({
-      id: params.id
-    })
-    .then(res => {
-      refreshContent()
-    });
-  }, [params.id]);
-
-  useEffect(() => {
-    refreshContent();
+    refreshContent()
   }, [params.id]);
 
   return (
