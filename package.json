@@ -95,7 +95,7 @@
     "dotenv": "^8.2.0",
     "eslint": "7.4.0",
     "eslint-plugin-react-hooks": "4.0.8",
-    "expo-cli": "3.22.1",
+    "expo-cli": "3.22.3",
     "expo-detox-cli": "^1.0.10",
     "expo-detox-hook": "^1.0.10",
     "husky": "4.2.5",
