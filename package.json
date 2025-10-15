@@ -37,7 +37,7 @@
     "@react-navigation/stack": "5.3.7",
     "contentful": "7.14.4",
     "dayjs": "1.8.27",
-    "expo": "37.0.11",
+    "expo": "48.0.0",
     "expo-analytics-amplitude": "~8.1.0",
     "expo-asset": "~8.1.4",
     "expo-blur": "~8.1.0",
